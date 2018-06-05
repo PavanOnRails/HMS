@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :doctors, path: 'doctors'
-  devise_for :patients, path: 'patients'
-  devise_for :users, path: 'users'
+  devise_for :doctors, path: 'doctors', controllers: {sessions: 'doctors/sessions', registrations: 'doctors/registrations'}
+  devise_for :patients, path: 'patients', controllers: {sessions: 'patients/sessions', registrations: 'patients/registrations'}
+  devise_for :users, path: 'users', controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
