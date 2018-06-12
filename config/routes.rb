@@ -1,13 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :doctors, path: 'doctors', controllers: {sessions: 'doctors/sessions', registrations: 'doctors/registrations'}
-  devise_for :patients, path: 'patients', controllers: {sessions: 'patients/sessions', registrations: 'patients/registrations'}
+  resources :appointments
+  resources :staffs
+  resources :patients
+  resources :doctors
   devise_for :users, path: 'users', controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-
+  root 'static_pages#home'
+  
+  get '/doctors/:id/dashboard', to: 'users#doctor_dashboard', as: 'doctors_dashboard'
+  get '/patients/:id/dashboard', to: 'users#patient_dashboard', as: 'patients_dashboard'
+  get '/staff/:id/dashboard', to: 'users#staff_dashboard', as: 'staff_dashboard'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

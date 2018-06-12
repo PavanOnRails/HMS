@@ -1,24 +1,20 @@
 module Accessible
   extend ActiveSupport::Concern
   included do
-    before_action :check_user
+    before_action :user_redirection_url
   end
 
   protected
-  def check_user
-    if current_user
-      flash.clear
-      # if you have rails_admin. You can redirect anywhere really
-      redirect_to(rails_admin.dashboard_path) && return
-    elsif current_doctor
-      flash.clear
-      # The authenticated root path can be defined in your routes.rb in: devise_scope :user do...
-      redirect_to(authenticated_user_root_path) && return
-    end
-  elsif current_patient
-      flash.clear
-      # The authenticated root path can be defined in your routes.rb in: devise_scope :user do...
-      redirect_to(authenticated_user_root_path) && return
+  def user_redirection_url
+    return new_user_session_url unless user_signed_in?
+    if current_user.staff?
+    	staff_dashboard_url(current_user)
+    elsif current_user.doctor?
+    	doctors_dashboard_url(current_user)
+    elsif current_user.patient?
+    	patients_dashboard_url(current_user)
+    else 
+    	root_url
     end
   end
 end

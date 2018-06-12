@@ -3,15 +3,11 @@
 one:
   first_name: MyString
   last_name: MyString
-  gender: MyString
-  age: 1
-  date_of_birth: MyString
-  phone_number: MyString
+  email: MyString
+  password: MyString
 
 two:
   first_name: MyString
   last_name: MyString
-  gender: MyString
-  age: 1
-  date_of_birth: MyString
-  phone_number: MyString
+  email: MyString
+  password: MyString

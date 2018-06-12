@@ -10,51 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180605084508) do
+ActiveRecord::Schema.define(version: 20180611062301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "appointment_date"
+    t.integer  "status"
+    t.integer  "appointment_type"
+    t.integer  "doctor_id"
+    t.integer  "patient_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "doctors", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.index ["email"], name: "index_doctors_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_doctors_on_reset_password_token", unique: true, using: :btree
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "patients", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "gender"
-    t.integer  "age"
-    t.string   "date_of_birth"
-    t.string   "phone_number"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.index ["email"], name: "index_patients_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_patients_on_reset_password_token", unique: true, using: :btree
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "staffs", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,6 +69,8 @@ ActiveRecord::Schema.define(version: 20180605084508) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.integer  "role",                   default: 0
+    t.string   "type"
+    t.integer  "user_type"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
