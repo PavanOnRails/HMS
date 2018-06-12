@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointment, only: [:show, :edit, :update, :destroy, :update_status]
 
   # GET /appointments
   # GET /appointments.json
@@ -59,6 +59,16 @@ class AppointmentsController < ApplicationController
       format.html { redirect_to appointments_url, notice: 'Appointment was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def update_status
+    if params[:status] == "confirm"
+      @appointment.confirmed!
+    elsif params[:status] == "decline"
+      @appointment.declined!
+    elsif params[:status] == "cancel"
+      @appointment.canceled!
+    end 
   end
 
   private

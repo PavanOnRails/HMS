@@ -31,7 +31,27 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
     <%= f.hidden_field :user_type, value: :patient %>
-    
+
+    <div class="form-check form-check-inline">
+    <%= f.label :appointment_type %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <%= f.radio_button :appointment_type, :new_appointment, checked: true, class: 'form-check-input' %>
+    <%= f.label :new_appointment, class: "form-check-label" %>&nbsp;&nbsp;&nbsp;
+    <%= f.radio_button :appointment_type, :follow_through, class: 'form-check-input' %>
+    <%= f.label :follow_through, class: "form-check-label" %>&nbsp;&nbsp;&nbsp;
+    <%= f.radio_button :appointment_type, :re_visit, class: 'form-check-input' %>
+    <%= f.label :re_visit, class: "form-check-label" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :select_doctor %><br />
+    <%= f.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.label :appointment_date %><br />
+    <%= f.date_select :appointment_date, include_blank: true, class: 'form-control' %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>

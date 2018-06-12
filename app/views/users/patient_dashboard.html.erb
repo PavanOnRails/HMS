@@ -1,3 +1,32 @@
 <h1>This is patient dashboard</h1>
 
+<h1>Appointments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Doctor</th>
+      <th>Appointment Date</th>
+      <th>Status</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.try(:doctor).try(:full_name) %></td>
+        <td><%= appointment.try(:appointment_date).strftime("%B %d, %Y") %></td>
+        <td><%= appointment.status %></td>
+        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
+        <td><%= link_to 'Cancel', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New appointment', new_appointment_path %>
+
 <%= link_to('Logout', destroy_user_session_path, method: :delete) %>

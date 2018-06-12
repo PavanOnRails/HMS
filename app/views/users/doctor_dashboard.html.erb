@@ -1,3 +1,24 @@
 <h1>This is doctor dashboard</h1>
 
+<h1>Appointments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Patient name</th>
+      <th>Appointment Date</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @confirmed_appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.try(:patient).try(:full_name) %></td>
+        <td><%= appointment.appointment_date.strftime("%B %d, %Y") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
 <%= link_to('Logout', destroy_user_session_path, method: :delete) %>

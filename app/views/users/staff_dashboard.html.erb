@@ -1,3 +1,29 @@
 <h1>This is staff dashboard</h1>
 
+<h1>Appointment Requests</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Doctor</th>
+      <th>Appointment Date</th>
+      <th>Requested by</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.try(:doctor).try(:full_name) %></td>
+        <td><%= appointment.appointment_date.strftime("%B %d, %Y") if appointment.appointment_date.present? %></td>
+        <td><%= appointment.try(:patient).try(:full_name) %></td>
+        <td><%= link_to 'Confirm', update_status_path(appointment, {status: :confirm}), method: :patch %></td>
+        <td><%= link_to 'Decline', update_status_path(appointment, {status: :decline}), method: :patch, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
 <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
