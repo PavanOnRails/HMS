@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180612105533) do
+ActiveRecord::Schema.define(version: 20180614112518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,8 +21,36 @@ ActiveRecord::Schema.define(version: 20180612105533) do
     t.integer  "appointment_type"
     t.integer  "doctor_id"
     t.integer  "patient_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.text     "reason_for_decline"
+  end
+
+  create_table "bill_types", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bill_types_bills", id: false, force: :cascade do |t|
+    t.integer "bill_id",      null: false
+    t.integer "bill_type_id", null: false
+    t.index ["bill_id", "bill_type_id"], name: "index_bill_types_bills_on_bill_id_and_bill_type_id", using: :btree
+    t.index ["bill_type_id", "bill_id"], name: "index_bill_types_bills_on_bill_type_id_and_bill_id", using: :btree
+  end
+
+  create_table "bills", force: :cascade do |t|
+    t.decimal  "registration_fee", precision: 10, scale: 2
+    t.decimal  "doctor_fee",       precision: 10, scale: 2
+    t.decimal  "pharmacy_bill",    precision: 10, scale: 2
+    t.decimal  "maintenance_fee",  precision: 10, scale: 2
+    t.decimal  "tax",              precision: 10, scale: 2
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "patient_id"
+    t.integer  "paid_with"
+    t.integer  "bill_type"
+    t.decimal  "aggregated_total", precision: 10, scale: 2
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -39,8 +67,10 @@ ActiveRecord::Schema.define(version: 20180612105533) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "age"
+    t.string   "phone_number"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -48,8 +78,10 @@ ActiveRecord::Schema.define(version: 20180612105533) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "age"
+    t.string   "phone_number"
   end
 
   create_table "users", force: :cascade do |t|
@@ -74,6 +106,8 @@ ActiveRecord::Schema.define(version: 20180612105533) do
     t.integer  "doctor_id"
     t.integer  "appointment_type"
     t.datetime "appointment_date"
+    t.integer  "age"
+    t.string   "phone_number"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

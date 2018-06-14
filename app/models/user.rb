@@ -11,7 +11,7 @@ class User < ApplicationRecord
   after_create :create_doctor_record, if: Proc.new { |user| user.doctor? }
 
   def create_patient_and_appointmet_records
-  	patient = Patient.create(first_name: self.first_name, last_name: self.last_name, email: self.email)
+  	patient = Patient.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)
   	appointment = Appointment.new
   	appointment.appointment_date = self.appointment_date
     appointment.doctor_id = self.doctor_id
@@ -22,10 +22,10 @@ class User < ApplicationRecord
   end
 
   def create_staff_record
-  	Staff.create(first_name: self.first_name, last_name: self.last_name, email: self.email)
+  	Staff.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)
   end
 
   def create_doctor_record
-  	Doctor.create(first_name: self.first_name, last_name: self.last_name, email: self.email)
+  	Doctor.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)
   end
 end

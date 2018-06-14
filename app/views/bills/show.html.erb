@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Registration fee:</strong>
+  <%= @bill.registration_fee %>
+</p>
+
+<p>
+  <strong>Doctor fee:</strong>
+  <%= @bill.doctor_fee %>
+</p>
+
+<p>
+  <strong>Pharmacy bill:</strong>
+  <%= @bill.pharmacy_bill %>
+</p>
+
+<p>
+  <strong>Maintenance fee:</strong>
+  <%= @bill.maintenance_fee %>
+</p>
+
+<p>
+  <strong>Tax:</strong>
+  <%= @bill.tax %>
+</p>
+
+<%= link_to 'Edit', edit_bill_path(@bill) %> |
+<%= link_to 'Back', bills_path %>

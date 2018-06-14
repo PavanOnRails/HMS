@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
 	def staff_dashboard
 		@appointments = Appointment.where(status: :pending)
+		@confirmed_appointments = Appointment.where(status: :confirmed)
 	end
 
 	def doctor_dashboard

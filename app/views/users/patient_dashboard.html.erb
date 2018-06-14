@@ -19,7 +19,7 @@
         <td><%= appointment.try(:appointment_date).strftime("%B %d, %Y") %></td>
         <td><%= appointment.status %></td>
         <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
-        <td><%= link_to 'Cancel', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Cancel', update_status_path(appointment, {status: :cancel}), method: :patch, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>

@@ -1,0 +1,58 @@
+<%= form_for(bill) do |f| %>
+  <% if bill.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(bill.errors.count, "error") %> prohibited this bill from being saved:</h2>
+
+      <ul>
+      <% bill.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <h3>Patient name: <%= @patient.full_name %></h3>
+  <div class="field">
+    <%= f.label :select_bill_type %><br/>
+      <%= f.collection_check_boxes :bill_type_ids, BillType.all, :id, :name do |b| %>
+    <div class="collection-check-box">
+      <%= b.check_box %>
+      <%= b.label %>
+    </div>
+  <% end %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :registration_fee %>
+    <%= f.number_field :registration_fee, step: :any %>
+  </div>
+
+  <div class="field">
+    <%= f.label :doctor_fee %>
+    <%= f.number_field :doctor_fee, step: :any %>
+  </div>
+
+  <div class="field">
+    <%= f.label :pharmacy_bill %>
+    <%= f.number_field :pharmacy_bill, step: :any %>
+  </div>
+
+  <div class="field">
+    <%= f.label :maintenance_fee %>
+    <%= f.number_field :maintenance_fee, step: :any %>
+  </div>
+
+  <div class="field">
+    <%#= f.label :tax %>
+    <%#= f.number_field :tax, step: :any %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :paid_with %>
+    <%= f.select :paid_with, Bill.payment_types.map { |key, value| [key.humanize, key] } %>
+  </div>
+  <%= f.hidden_field :patient_id, value: @patient.id %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

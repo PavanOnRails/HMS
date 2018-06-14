@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  registration_fee: 9.99
+  doctor_fee: 9.99
+  pharmacy_bill: 9.99
+  maintenance_fee: 9.99
+  tax: 9.99
+
+two:
+  registration_fee: 9.99
+  doctor_fee: 9.99
+  pharmacy_bill: 9.99
+  maintenance_fee: 9.99
+  tax: 9.99

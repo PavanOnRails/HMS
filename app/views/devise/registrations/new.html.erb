@@ -31,8 +31,18 @@
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
     <%= f.hidden_field :user_type, value: :patient %>
+  
+  <div class="form-group">
+    <%= f.label :age %><br />
+    <%= f.number_field :age, autocomplete: "off", class: 'form-control' %>
+  </div>
 
-    <div class="form-check form-check-inline">
+  <div class="form-group">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number, autocomplete: "off", class: 'form-control' %>
+  </div>
+
+  <div class="form-check form-check-inline">
     <%= f.label :appointment_type %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <%= f.radio_button :appointment_type, :new_appointment, checked: true, class: 'form-check-input' %>
     <%= f.label :new_appointment, class: "form-check-label" %>&nbsp;&nbsp;&nbsp;
