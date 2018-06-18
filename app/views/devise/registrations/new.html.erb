@@ -17,8 +17,12 @@
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
   </div>
+  
+  <%= f.hidden_field :user_type, value: :patient %>
+  <%= f.hidden_field :registration_status, value: :registration_not_done %>
 
-  <div class="form-group">
+
+ <!--  <div class="form-group">
     <%= f.label :password %>
     <% if @minimum_password_length %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
@@ -30,15 +34,14 @@
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
   </div>
-    <%= f.hidden_field :user_type, value: :patient %>
   
   <div class="form-group">
     <%= f.label :age %><br />
     <%= f.number_field :age, autocomplete: "off", class: 'form-control' %>
-  </div>
+  </div> -->
 
   <div class="form-group">
-    <%= f.label :phone_number %><br />
+    <%= f.label :contact_number %><br />
     <%= f.text_field :phone_number, autocomplete: "off", class: 'form-control' %>
   </div>
 

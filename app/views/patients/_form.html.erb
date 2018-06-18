@@ -10,26 +10,111 @@
       </ul>
     </div>
   <% end %>
+  
+  <% if f.object.new_record? %>
+    <div class="field">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+    </div>
+
+    <div class="field">
+      <%= f.label :contact_number %>
+      <%= f.text_field :phone_number %>
+    </div>
+  <% else %>
+    <div class="field">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, disabled: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, disabled: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email, disabled: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :contact_number %>
+      <%= f.text_field :phone_number, disabled: true %>
+    </div>
+  <% end %>
 
   <div class="field">
-    <%= f.label :first_name %>
-    <%= f.text_field :first_name %>
+    <%= f.label :address_line1 %>
+    <%= f.text_field :address_line1 %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :address_line2 %>
+    <%= f.text_field :address_line2 %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :country %>
+    <%= f.select :country, CS.get.values, {}, { class: 'select2_dropdown' } %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :state %>
+    <%= f.text_field :state %>
   </div>
 
   <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
   </div>
 
   <div class="field">
-    <%= f.label :email %>
-    <%= f.text_field :email %>
+    <%= f.label :pincode %>
+    <%= f.text_field :pincode %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <%= f.text_field :password %>
+    <%= f.label :age %>
+    <%= f.text_field :age %>
   </div>
+  
+  <div class="field">
+    <%= f.label :gender %>
+    <%= f.text_field :gender %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :blood_group %>
+    <%= f.text_field :blood_group %>
+  </div>
+  
+  <%= f.hidden_field :registration_status, value: :registration_done %>
+
+  <% if f.object.new_record? %>
+    <%= f.fields_for :appointments do |appointment| %>
+      <div class="form-group">
+        <%= appointment.label :select_doctor %><br />
+        <%= appointment.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'select2_dropdown' %>
+      </div>
+      
+      <div class="form-group">
+        <%= appointment.label :appointment_date %><br />
+        <%= appointment.date_select :appointment_date, include_blank: true, class: '' %>
+      </div>
+      <%= appointment.hidden_field :appointment_type, value: :new_appointment %>
+      <%= appointment.hidden_field :appointment_status, value: :confirmed %>
+    <% end %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit %>

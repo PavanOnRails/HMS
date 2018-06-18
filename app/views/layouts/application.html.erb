@@ -14,6 +14,10 @@
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
 <%= yield %>
-
+<script type="text/javascript">
+  $( ".select2_dropdown" ).select2({
+    theme: "bootstrap"
+});
+</script>
 </body>
 </html>
