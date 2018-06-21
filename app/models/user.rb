@@ -1,28 +1,17 @@
 class User < ApplicationRecord
+	has_secure_password
 	enum user_type: [ :staff, :doctor, :patient ]
 	enum registration_status: [ :registration_done, :registration_not_done]
 	attr_accessor :password_confirmation
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  # # Include default devise modules. Others available are:
+  # # :confirmable, :lockable, :timeoutable and :omniauthable
+  # devise :database_authenticatable, :registerable,
+  #        :recoverable, :rememberable, :trackable, :validatable
   
-  after_create :generate_password_for_user
-  #after_create :generate_uhid_for_patient, if: Proc.new { |user| user.patient? }
+  after_create :generate_uhid_for_patient, if: Proc.new { |user| user.patient? }
   after_create :create_patient_and_appointmet_records, if: Proc.new { |user| user.patient? && user.registration_not_done?}
   after_create :create_staff_record, if: Proc.new { |user| user.staff? }
   after_create :create_doctor_record, if: Proc.new { |user| user.doctor? }
-  
-  def password_required?
-    false if self.new_record?
-  end
-
-  def generate_password_for_user
-  	generated_password = Devise.friendly_token.first(8)
-  	self.encrypted_password = generated_password
-  	self.password_confirmation = generated_password
-  	self.save
-  end
 
   def create_patient_and_appointmet_records
   	patient = Patient.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)

@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
+  resources :lab_tests
   resources :bills
   resources :appointments
   resources :staffs
   resources :patients
   resources :doctors
-  devise_for :users, path: 'users', controllers: {sessions: 'users/sessions', registrations: 'users/registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
