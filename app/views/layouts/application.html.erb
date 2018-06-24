@@ -4,6 +4,7 @@
   <title>HMS</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag "fullcalendar.print.min", :media => "print", 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -15,9 +16,47 @@
 <% end %>
 <%= yield %>
 <script type="text/javascript">
-  $( ".select2_dropdown" ).select2({
+$( ".select2_dropdown" ).select2({
     theme: "bootstrap"
 });
+ $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+    	themeSystem: 'bootstrap4',
+    	defaultView: 'agendaWeek',
+      header: {
+        left: 'prev,next',
+        center: 'title',
+        right: ''
+      },
+      agendaEventMinHeight: 30,
+      allDaySlot: false,
+      hiddenDays: [0], // hide Sundays
+      minTime: "09:00:00",
+      maxTime: "19:00:00",
+      navLinks: true, // can click day/week names to navigate views
+      selectable: true,
+      selectHelper: true,
+      select: function(start, end) {
+        var title = prompt('Event Title:');
+        var eventData;
+        if (title) {
+          eventData = {
+            title: title,
+            start: start,
+            end: end
+          };
+          $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+        }
+        $('#calendar').fullCalendar('unselect');
+      },
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+    });
+
+  });
+
+</script>
 </script>
 </body>
 </html>

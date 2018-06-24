@@ -112,7 +112,7 @@
         <%= appointment.date_select :appointment_date, include_blank: true, class: '' %>
       </div>
       <%= appointment.hidden_field :appointment_type, value: :new_appointment %>
-      <%= appointment.hidden_field :appointment_status, value: :confirmed %>
+      <%= appointment.hidden_field :status, value: :confirmed %>
     <% end %>
   <% end %>
 
