@@ -19,7 +19,7 @@
     <% @appointments.each do |appointment| %>
       <tr>
         <td><%= appointment.try(:doctor).try(:full_name) %></td>
-        <td><%= appointment.appointment_date.strftime("%B %d, %Y") if appointment.appointment_date.present? %></td>
+        <td><%= appointment.start_time.strftime("%B %d, %Y") if appointment.start_time.present? %></td>
         <td><%= appointment.try(:patient).try(:full_name) %></td>
         <td><%= appointment.status %></td>
         <% if appointment.pending? %>
@@ -76,7 +76,7 @@
 	      <% unless appointment.patient.registration_done? %>
 		      <tr>
 		        <td><%= appointment.try(:doctor).try(:full_name) %></td>
-		        <td><%= appointment.appointment_date.strftime("%B %d, %Y") if appointment.appointment_date.present? %></td>
+		        <td><%= appointment.start_time.strftime("%B %d, %Y") if appointment.start_time.present? %>
 		        <td><%= appointment.try(:patient).try(:full_name) %></td>
 		        <td><%= appointment.status %></td>
 			      <td><%= link_to 'Register Patient', edit_patient_path(appointment.patient.id) %></td>

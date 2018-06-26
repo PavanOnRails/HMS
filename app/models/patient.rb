@@ -6,7 +6,8 @@ class Patient < ApplicationRecord
   accepts_nested_attributes_for :appointments
   enum registration_status: [ :registration_done, :registration_not_done]
   
-  after_create :create_user_record
+  after_create :create_user_record, if: Proc.new { |p| p.registration_done? }
+  after_save :generate_uhid_for_patient, if: Proc.new { |p| p.registration_done? }
 
 	def full_name
 		[first_name,last_name].select(&:present?).join(' ').titleize
@@ -25,4 +26,8 @@ class Patient < ApplicationRecord
     user.registration_status = 'registration_done'
     user.save
 	end
+  
+  def generate_uhid_for_patient
+  	self.update_column(:uhid, "P#{self.id}")
+  end
 end

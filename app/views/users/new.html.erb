@@ -77,22 +77,10 @@
 		    </div>
 		  </div>
 		</div>
-  <div class="form-group">
-    <%= f.label :appointment_date %><br />
-    <%= f.date_select :appointment_date, include_blank: true, class: 'form-control' %>
-  </div>
+		<%= f.hidden_field :start_time %>
+		<%= f.hidden_field :end_time %>
 
   <div class="actions">
     <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>
 <% end %>
-
-<style type="text/css">
-	#slot-booking-modal .modal-content {
-  width: 680px;
-  margin-left: -90px;
-}
-.fc-axis{
-	width: 45px !important;
-}
-</style>

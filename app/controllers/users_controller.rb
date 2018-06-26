@@ -21,7 +21,6 @@ class UsersController < ApplicationController
 
   def create
   	user = User.new(user_params)
-  	user.appointment_date = DateTime.new(params[:user]["appointment_date(1i)"].to_i,params[:user]["appointment_date(2i)"].to_i,params[:user]["appointment_date(3i)"].to_i)
 	  if user.save
 	    session[:user_id] = user.id
 	    redirect_to user_redirection_url
@@ -33,7 +32,7 @@ class UsersController < ApplicationController
 	private
     
     def user_params
-    	params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :user_type, :appointment_type, :appointment_date, :doctor_id, :phone_number, :registration_status)
+    	params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :user_type, :appointment_type, :start_time, :end_time, :doctor_id, :phone_number, :registration_status)
     end
 
 	  def set_patient

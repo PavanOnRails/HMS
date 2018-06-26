@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180621074127) do
+ActiveRecord::Schema.define(version: 20180626070755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.datetime "appointment_date"
     t.integer  "status"
     t.integer  "appointment_type"
     t.integer  "doctor_id"
@@ -24,6 +23,8 @@ ActiveRecord::Schema.define(version: 20180621074127) do
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.text     "reason_for_decline"
+    t.datetime "start_time"
+    t.datetime "end_time"
   end
 
   create_table "bill_types", force: :cascade do |t|
@@ -140,12 +141,13 @@ ActiveRecord::Schema.define(version: 20180621074127) do
     t.integer  "user_type"
     t.integer  "doctor_id"
     t.integer  "appointment_type"
-    t.datetime "appointment_date"
     t.integer  "age"
     t.string   "phone_number"
     t.string   "uhid"
     t.integer  "registration_status"
     t.string   "password_digest"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

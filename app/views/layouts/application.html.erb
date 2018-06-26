@@ -15,10 +15,56 @@
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
 <%= yield %>
+<style type="text/css">
+	#slot-booking-modal .modal-content {
+  width: 680px;
+  margin-left: -90px;
+}
+.fc-axis{
+	width: 45px !important;
+}
+</style>
 <script type="text/javascript">
 $( ".select2_dropdown" ).select2({
     theme: "bootstrap"
 });
+
+//generate states based on country selection
+$(".country_dropdown").change(function(){
+	var selected_country = $(this).val();
+	$.ajax({
+    url: "<%= get_states_url %>",
+    type: "POST",
+    dataType: "json",
+    data: {country: selected_country},
+    success: function (data) {
+    	$("#patient_state").empty();
+    	$.each( data, function( key, val ) {
+        $('<option value="'+ key +'">' + val + '</option>').appendTo('.state_dropdown');
+      });
+    },
+  });
+})
+
+//generate cities based on state selection
+$(".state_dropdown").change(function(){
+	var selected_state = $(this).val();
+	var selected_country = $(".country_dropdown").val();
+	$.ajax({
+    url: "<%= get_cities_url %>",
+    type: "POST",
+    dataType: "json",
+    data: {country: selected_country, state: selected_state},
+    success: function (data) {
+    	console.log(data)
+    	$(".city_dropdown").empty();
+    	$.each( data, function( index, val ) {
+        $('<option value="'+ index +'">' + val + '</option>').appendTo('.city_dropdown');
+      });
+    },
+  });
+})
+
  $(document).ready(function() {
 
     $('#calendar').fullCalendar({
@@ -38,17 +84,34 @@ $( ".select2_dropdown" ).select2({
       selectable: true,
       selectHelper: true,
       select: function(start, end) {
-        var title = prompt('Event Title:');
-        var eventData;
-        if (title) {
-          eventData = {
-            title: title,
-            start: start,
-            end: end
-          };
-          $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+      	var selected_val = $('#user_doctor_id').val() || $('#patient_appointments_attributes_0_doctor_id').val();
+        //var title = "Doctor appointment";
+        if (selected_val == ''){
+          alert("Please select a doctor");
+          $('#calendar').fullCalendar('unselect');
         }
-        $('#calendar').fullCalendar('unselect');
+        else{
+          var confirm_msg = confirm("Are you sure you want to book the appointment?");
+	        var eventData;
+	        if (confirm_msg) {
+	          eventData = {
+	            //title: title,
+	            start: start,
+	            end: end
+	          };
+	          console.log(eventData)
+	          $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+	          start_time = moment(start).format('YYYY-MM-DD hh:mm:ss');
+	          end_time = moment(end).format('YYYY-MM-DD hh:mm:ss');
+	          console.log(start_time)
+	          console.log(end_time)
+	          $("#user_start_time").val(start_time);
+	          $("#user_end_time").val(end_time);
+	          $("#patient_appointments_attributes_0_start_time").val(start_time);
+	          $("#patient_appointments_attributes_0_end_time").val(end_time);
+	        }
+	        $('#calendar').fullCalendar('unselect');
+        }
       },
       editable: true,
       eventLimit: true, // allow "more" link when too many events

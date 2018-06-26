@@ -65,17 +65,17 @@
   
   <div class="field">
     <%= f.label :country %>
-    <%= f.select :country, CS.get.values, {}, { class: 'select2_dropdown' } %>
+    <%= f.select :country, CS.get.collect {|key,value| [ value, key ] }, {}, { class: 'select2_dropdown country_dropdown' } %>
   </div>
   
   <div class="field">
     <%= f.label :state %>
-    <%= f.text_field :state %>
+    <%= f.select :state, CS.states(:us).values, {}, { class: 'select2_dropdown state_dropdown' } %>
   </div>
 
   <div class="field">
     <%= f.label :city %>
-    <%= f.text_field :city %>
+    <%= f.select :city, CS.cities(:ak, :us), {}, { class: 'select2_dropdown city_dropdown' } %>
   </div>
 
   <div class="field">
@@ -102,15 +102,31 @@
 
   <% if f.object.new_record? %>
     <%= f.fields_for :appointments do |appointment| %>
-      <div class="form-group">
-        <%= appointment.label :select_doctor %><br />
-        <%= appointment.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'select2_dropdown' %>
-      </div>
       
-      <div class="form-group">
-        <%= appointment.label :appointment_date %><br />
-        <%= appointment.date_select :appointment_date, include_blank: true, class: '' %>
+      <br>
+  <%= link_to 'Book a slot', '#', class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#slot-booking-modal" } %>
+  
+  <!-- Modal -->
+    <div class="modal fade" id="slot-booking-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <%= appointment.label :select_doctor %>&nbsp;&nbsp;<%= appointment.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown' %>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="calendar"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
       </div>
+    </div>
+    <%= appointment.hidden_field :start_time %>
+    <%= appointment.hidden_field :end_time %>
       <%= appointment.hidden_field :appointment_type, value: :new_appointment %>
       <%= appointment.hidden_field :status, value: :confirmed %>
     <% end %>

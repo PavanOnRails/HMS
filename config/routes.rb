@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   get '/patients/:id/dashboard', to: 'users#patient_dashboard', as: 'patients_dashboard'
   get '/staff/:id/dashboard', to: 'users#staff_dashboard', as: 'staff_dashboard'
   patch '/appointments/:id/update_status', to: 'appointments#update_status', as: 'update_status'
+  post '/get_states', to: 'static_pages#get_states', as: 'get_states'
+  post '/get_cities', to: 'static_pages#get_cities', as: 'get_cities'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

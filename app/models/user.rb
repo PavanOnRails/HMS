@@ -8,7 +8,6 @@ class User < ApplicationRecord
   # devise :database_authenticatable, :registerable,
   #        :recoverable, :rememberable, :trackable, :validatable
   
-  after_create :generate_uhid_for_patient, if: Proc.new { |user| user.patient? }
   after_create :create_patient_and_appointmet_records, if: Proc.new { |user| user.patient? && user.registration_not_done?}
   after_create :create_staff_record, if: Proc.new { |user| user.staff? }
   after_create :create_doctor_record, if: Proc.new { |user| user.doctor? }
@@ -16,7 +15,8 @@ class User < ApplicationRecord
   def create_patient_and_appointmet_records
   	patient = Patient.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)
   	appointment = Appointment.new
-  	appointment.appointment_date = self.appointment_date
+  	appointment.start_time = self.start_time
+    appointment.end_time = self.end_time
     appointment.doctor_id = self.doctor_id
     appointment.appointment_type = self.appointment_type
     appointment.patient_id = patient.id
@@ -30,11 +30,5 @@ class User < ApplicationRecord
 
   def create_doctor_record
   	Doctor.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)
-  end
-
-  def generate_uhid_for_patient
-  	max_value = 100000
-  	if self.registration_done?
-    end
   end
 end

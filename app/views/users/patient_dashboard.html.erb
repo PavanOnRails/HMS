@@ -7,6 +7,8 @@
     <tr>
       <th>Doctor</th>
       <th>Appointment Date</th>
+      <th>Starts at</th>
+      <th>Ends at</th>
       <th>Status</th>
       <th colspan="2"></th>
     </tr>
@@ -16,7 +18,9 @@
     <% @appointments.each do |appointment| %>
       <tr>
         <td><%= appointment.try(:doctor).try(:full_name) %></td>
-        <td><%= appointment.try(:appointment_date).strftime("%B %d, %Y") %></td>
+        <td><%= appointment.try(:start_time).strftime("%B %d, %Y") %></td>
+        <td><%= appointment.try(:start_time).strftime("%I:%M %p") %></td>
+        <td><%= appointment.try(:end_time).strftime("%I:%M %p") %></td>
         <td><%= appointment.status %></td>
         <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
         <td><%= link_to 'Cancel', update_status_path(appointment, {status: :cancel}), method: :patch, data: { confirm: 'Are you sure?' } %></td>
