@@ -63,7 +63,7 @@
 		  <div class="modal-dialog" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
-					    <%= f.label :select_doctor %>&nbsp;&nbsp;<%= f.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown' %>
+					    <%= f.label :select_doctor %>&nbsp;&nbsp;<%= f.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown doctor_dropdown' %>
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
 		        </button>

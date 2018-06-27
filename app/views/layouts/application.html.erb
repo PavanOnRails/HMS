@@ -29,6 +29,21 @@ $( ".select2_dropdown" ).select2({
     theme: "bootstrap"
 });
 
+$( ".country_dropdown" ).select2({
+    placeholder: "Select a country",
+    allowClear: true
+});
+
+$( ".state_dropdown" ).select2({
+    placeholder: "Select a state",
+    allowClear: true
+});
+
+$( ".city_dropdown" ).select2({
+    placeholder: "Select a city",
+    allowClear: true
+});
+
 //generate states based on country selection
 $(".country_dropdown").change(function(){
 	var selected_country = $(this).val();
@@ -39,6 +54,7 @@ $(".country_dropdown").change(function(){
     data: {country: selected_country},
     success: function (data) {
     	$("#patient_state").empty();
+    	$('<option value>' + '</option>').appendTo('.state_dropdown');
     	$.each( data, function( key, val ) {
         $('<option value="'+ key +'">' + val + '</option>').appendTo('.state_dropdown');
       });
@@ -58,6 +74,7 @@ $(".state_dropdown").change(function(){
     success: function (data) {
     	console.log(data)
     	$(".city_dropdown").empty();
+    	$('<option value>' + '</option>').appendTo('.city_dropdown');
     	$.each( data, function( index, val ) {
         $('<option value="'+ index +'">' + val + '</option>').appendTo('.city_dropdown');
       });
@@ -84,7 +101,7 @@ $(".state_dropdown").change(function(){
       selectable: true,
       selectHelper: true,
       select: function(start, end) {
-      	var selected_val = $('#user_doctor_id').val() || $('#patient_appointments_attributes_0_doctor_id').val();
+      	var selected_val = $('.doctor_dropdown').val();
         //var title = "Doctor appointment";
         if (selected_val == ''){
           alert("Please select a doctor");

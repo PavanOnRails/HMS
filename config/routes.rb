@@ -23,6 +23,8 @@ Rails.application.routes.draw do
   patch '/appointments/:id/update_status', to: 'appointments#update_status', as: 'update_status'
   post '/get_states', to: 'static_pages#get_states', as: 'get_states'
   post '/get_cities', to: 'static_pages#get_cities', as: 'get_cities'
+  post '/start_session', to: 'doctor_sessions#start_session', as: 'start_session'
+  post '/end_session', to: 'doctor_sessions#end_session', as: 'end_session'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

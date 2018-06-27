@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180626070755) do
+ActiveRecord::Schema.define(version: 20180627123612) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,15 +59,20 @@ ActiveRecord::Schema.define(version: 20180626070755) do
     t.datetime "updated_at", null: false
     t.time     "start_time"
     t.time     "end_time"
+    t.integer  "doctor_id"
+    t.integer  "patient_id"
   end
 
   create_table "doctors", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "age"
+    t.string   "phone_number"
+    t.string   "designation"
+    t.string   "highest_education"
   end
 
   create_table "lab_test_types", force: :cascade do |t|
@@ -113,11 +118,12 @@ ActiveRecord::Schema.define(version: 20180626070755) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "password"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
     t.integer  "age"
     t.string   "phone_number"
+    t.string   "designation"
+    t.string   "highest_education"
   end
 
   create_table "users", force: :cascade do |t|
@@ -136,8 +142,6 @@ ActiveRecord::Schema.define(version: 20180626070755) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.integer  "role",                   default: 0
-    t.string   "type"
     t.integer  "user_type"
     t.integer  "doctor_id"
     t.integer  "appointment_type"

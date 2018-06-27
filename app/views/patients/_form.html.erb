@@ -65,17 +65,17 @@
   
   <div class="field">
     <%= f.label :country %>
-    <%= f.select :country, CS.get.collect {|key,value| [ value, key ] }, {}, { class: 'select2_dropdown country_dropdown' } %>
+    <%= f.select :country, CS.get.collect {|key,value| [ value, key ] }, {include_blank: true}, { class: 'select2_dropdown country_dropdown' } %>
   </div>
   
   <div class="field">
     <%= f.label :state %>
-    <%= f.select :state, CS.states(:us).values, {}, { class: 'select2_dropdown state_dropdown' } %>
+    <%= f.select :state, CS.states(:us).values, {include_blank: true}, { class: 'select2_dropdown state_dropdown' } %>
   </div>
 
   <div class="field">
     <%= f.label :city %>
-    <%= f.select :city, CS.cities(:ak, :us), {}, { class: 'select2_dropdown city_dropdown' } %>
+    <%= f.select :city, CS.cities(:ak, :us), {include_blank: true}, { class: 'select2_dropdown city_dropdown' } %>
   </div>
 
   <div class="field">
@@ -111,7 +111,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-              <%= appointment.label :select_doctor %>&nbsp;&nbsp;<%= appointment.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown' %>
+              <%= appointment.label :select_doctor %>&nbsp;&nbsp;<%= appointment.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown doctor_dropdown' %>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>

@@ -1,7 +1,8 @@
 class Patient < ApplicationRecord
 	has_many :appointments
 	has_many :doctors, through: :appointments
-	has_one :bill
+	has_many :bills
+	has_many :doctor_sessions
   
   accepts_nested_attributes_for :appointments
   enum registration_status: [ :registration_done, :registration_not_done]
