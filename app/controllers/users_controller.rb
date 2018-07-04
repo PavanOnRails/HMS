@@ -9,6 +9,7 @@ class UsersController < ApplicationController
 	end
 
 	def doctor_dashboard
+		@lab_test_types = LabTestType.all
     @confirmed_appointments = @doctor.appointments.where(status: :confirmed)
 	end
 

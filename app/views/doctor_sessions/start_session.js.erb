@@ -1,0 +1,5 @@
+$("#show-message-modal .modal-body").html("Your session with <%= @patient.full_name %> has started");
+$("#show-message-modal").modal('show');
+$("#doctor-session").html("<%= @doctor_session.id %>");
+$("#start-session-btn-<%= @appointment.id %>").hide();
+$("#end-session-btn-<%= @appointment.id %>").removeClass("invisible");

@@ -19,12 +19,79 @@
         <td><%= appointment.start_time.strftime("%B %d, %Y") %></td>
         <td><%= appointment.start_time.strftime("%I:%M %p") %></td>
         <td><%= appointment.end_time.strftime("%I:%M %p") %></td>
-        <td><%= link_to 'Start Session', start_session_url(doctor_id: appointment.doctor_id, patient_id: appointment.patient_id), class: "btn btn-primary", remote: true %></td>
-        <td><%= link_to 'End Session', "#", class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#end-session-#{appointment.id}" } %></td>
+        <td><%= link_to 'Start Session', start_session_url(appointment_id: appointment.id, doctor_id: appointment.doctor_id, patient_id: appointment.patient_id), class: "btn btn-primary", id: "start-session-btn-#{ appointment.id}", remote: true %></td>
+        <td><%= link_to 'End Session', "#", class: "btn btn-primary invisible", id: "end-session-btn-#{ appointment.id}", data: { "toggle" => "modal", 'target' => "#end-session-#{appointment.id}" } %></td>
       </tr>
+      <div class="modal fade" id="end-session-<%= appointment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <h3>Do you want to suggest lab tests?</h3>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="lab-test-yes">
+                <label class="form-check-label" for="inlineRadio1">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="lab-test-no" checked/>
+                <label class="form-check-label" for="inlineRadio2">No</label>
+              </div>
+              <br><br>
+              <div style="display: none;" id="lab-test-types-div">
+                <h4>Select lab tests</h4><br>
+                <% @lab_test_types.each do |lab_test_type| %>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="<%= lab_test_type.id %>" value="<%= lab_test_type.id %>">
+                    <label class="form-check-label" for="inlineCheckbox1"><%= lab_test_type.name %></label>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+            <div class="text-center" style="padding: 1rem;border-top: 1px solid #e9ecef;">
+              <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   </tbody>
 </table>
-
+<div class="invisible" id="doctor-session"></div>
+<div class="modal fade" id="show-message-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <br>
 <%= link_to('Logout', "/logout") %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("[name=lab-test-yes]").prop('checked', false);
+  });
+
+  $("[name=lab-test-yes]").click(function(){
+      $("[name=lab-test-no]").prop('checked', false);
+      $('#lab-test-types-div').show();
+    });
+
+  $("[name=lab-test-no]").click(function(){
+      $("[name=lab-test-yes]").prop('checked', false);
+      $('#lab-test-types-div').hide();
+    });
+</script>
