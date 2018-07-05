@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627123612) do
+ActiveRecord::Schema.define(version: 20180705055651) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(version: 20180627123612) do
     t.text     "reason_for_decline"
     t.datetime "start_time"
     t.datetime "end_time"
+  end
+
+  create_table "beds", force: :cascade do |t|
+    t.string   "bed_no"
+    t.integer  "ward_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "bill_types", force: :cascade do |t|
@@ -54,6 +61,14 @@ ActiveRecord::Schema.define(version: 20180627123612) do
     t.decimal  "aggregated_total", precision: 10, scale: 2
   end
 
+  create_table "departments", force: :cascade do |t|
+    t.string   "name"
+    t.string   "HOD"
+    t.integer  "hospital_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "doctor_sessions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -73,6 +88,23 @@ ActiveRecord::Schema.define(version: 20180627123612) do
     t.string   "phone_number"
     t.string   "designation"
     t.string   "highest_education"
+  end
+
+  create_table "floors", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hospitals", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "state"
+    t.string   "city"
+    t.string   "country"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "lab_test_types", force: :cascade do |t|
@@ -112,6 +144,8 @@ ActiveRecord::Schema.define(version: 20180627123612) do
     t.string   "city"
     t.string   "gender"
     t.string   "blood_group"
+    t.integer  "patient_type"
+    t.integer  "bed_id"
   end
 
   create_table "staffs", force: :cascade do |t|
@@ -154,6 +188,13 @@ ActiveRecord::Schema.define(version: 20180627123612) do
     t.datetime "end_time"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  end
+
+  create_table "wards", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "no_of_beds"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

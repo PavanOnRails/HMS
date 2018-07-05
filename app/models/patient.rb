@@ -5,7 +5,9 @@ class Patient < ApplicationRecord
 	has_many :doctor_sessions
   
   accepts_nested_attributes_for :appointments
+  accepts_nested_attributes_for :bills
   enum registration_status: [ :registration_done, :registration_not_done]
+  enum patient_type: [:inpatient, :outpatient]
   
   after_create :create_user_record, if: Proc.new { |p| p.registration_done? }
   after_save :generate_uhid_for_patient, if: Proc.new { |p| p.registration_done? }
