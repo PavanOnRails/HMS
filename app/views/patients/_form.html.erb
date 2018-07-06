@@ -127,21 +127,38 @@
     </div>
     <%= appointment.hidden_field :start_time %>
     <%= appointment.hidden_field :end_time %>
-      <%= appointment.hidden_field :appointment_type, value: :new_appointment %>
-      <%= appointment.hidden_field :status, value: :confirmed %>
+    <%= appointment.hidden_field :appointment_type, value: :new_appointment %>
+    <%= appointment.hidden_field :status, value: :confirmed %>
     <% end %>
   <% end %>
   
+  <div class="field">
+    <%= f.label :select_patient_type %>
+    <%= f.select :patient_type, Patient.patient_types.map { |key, value| [key.humanize, key] },{},{ class: 'select2_dropdown patient_type_dropdown' } %>
+  </div>
+  
+  <div class="inpatient-fields" style="display: none;">
+    <div class="field">
+      <%= label_tag :select_ward %><br/>
+      <%= select_tag :ward_id, options_for_select(Ward.all.collect {|w| [ w.name, w.id ] }), { class: 'select2_dropdown ward_dropdown' } %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :select_bed %><br/>
+      <%= select_tag :bed_id, options_for_select(@general_ward.beds.where(status: :vacant).collect {|b| [ b.bed_no, b.id ] }), { class: 'select2_dropdown bed_dropdown' } %>
+    </div>
+  </div>
+
   <%= f.fields_for :bills do |bill| %>
     <div class="field">
-    <%= bill.label :select_bill_types %><br/>
+      <%= bill.label :select_bill_types %><br/>
       <%= bill.collection_check_boxes :bill_type_ids, BillType.all, :id, :name do |b| %>
-    <div class="collection-check-box">
-      <%= b.check_box %>
-      <%= b.label %>
+        <div class="collection-check-box">
+          <%= b.check_box %>
+          <%= b.label %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
-  </div>
   
   <div class="field">
     <%= bill.label :registration_fee %>

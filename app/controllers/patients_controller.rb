@@ -17,6 +17,7 @@ class PatientsController < ApplicationController
     @patient = Patient.new
     @patient.appointments.build
     @patient.bills.build
+    @general_ward = Ward.find(1)
   end
 
   # GET /patients/1/edit
@@ -30,6 +31,9 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
+        if @patient.inpatient?
+          @patient.map_bed_to_patient(@patient, params[:bed_id])
+        end
         format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
         format.json { render :show, status: :created, location: @patient }
       else
@@ -71,7 +75,7 @@ class PatientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_params
-      params.require(:patient).permit(:first_name, :last_name, :email, :registration_status, :address_line1, :address_line2, :phone_number, :country, :state, :city, :pincode, :gender, :age, :blood_group,
+      params.require(:patient).permit(:first_name, :last_name, :email, :registration_status, :address_line1, :address_line2, :phone_number, :country, :state, :city, :pincode, :gender, :age, :blood_group, :patient_type,
         appointments_attributes: [:doctor_id, :start_time, :end_time, :appointment_type, :status, :patient_id], bills_attributes: [:registration_fee, :doctor_fee, :pharmacy_bill, :maintenance_fee, :patient_id, :paid_with, :tax, bill_type_ids: []])
     end
 end

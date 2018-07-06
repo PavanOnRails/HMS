@@ -76,11 +76,39 @@ $(".state_dropdown").change(function(){
     	$(".city_dropdown").empty();
     	$('<option value>' + '</option>').appendTo('.city_dropdown');
     	$.each( data, function( index, val ) {
-        $('<option value="'+ index +'">' + val + '</option>').appendTo('.city_dropdown');
+        $('<option value="'+ val +'">' + val + '</option>').appendTo('.city_dropdown');
       });
     },
   });
 })
+
+//generate beds based on ward selection
+$(".ward_dropdown").change(function(){
+	var selected_ward = $(this).val();
+	$.ajax({
+    url: "<%= get_beds_url %>",
+    type: "POST",
+    dataType: "json",
+    data: {ward: selected_ward},
+    success: function (data) {
+    	$(".bed_dropdown").empty();
+    	$.each( data, function( index, value ) {
+        $('<option value="'+ value.id +'">' + value.bed_no + '</option>').appendTo('.bed_dropdown');
+      });
+    },
+  });
+})
+
+//show ward&bed selection based on patient type selection
+$(".patient_type_dropdown").change(function(){
+	var selected_type = $(this).val();
+	if (selected_type == 'inpatient') {
+		$(".inpatient-fields").show();
+	}
+	else{
+    $(".inpatient-fields").hide();
+	}
+});
 
  $(document).ready(function() {
 

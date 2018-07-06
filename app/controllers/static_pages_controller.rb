@@ -13,4 +13,10 @@ class StaticPagesController < ApplicationController
 		@cities = CS.cities(params[:state], params[:country])
 		render json: @cities
 	end
+
+	def get_beds
+		@ward = Ward.find(params[:ward])
+		@beds = @ward.beds.where(status: :vacant)
+		render json: @beds
+	end
 end
