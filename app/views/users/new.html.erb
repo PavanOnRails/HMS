@@ -1,86 +1,190 @@
-<h1>Signup!</h1> <%= link_to 'Login', '/login' %>
+<style type="text/css">
+  body {
+    background: #19aa8d;
+  }
+  /*.form-control, .form-control:focus, .input-group-addon {
+    border-color: #e1e1e1;
+  }*/
+    .form-control, .btn {        
+        border-radius: 3px;
+    }
+  .signup-form {
+    width: 450px;
+    margin: 0 auto;
+    padding: 30px 0;
+  }
+    .signup-form form {
+    color: #999;
+    border-radius: 3px;
+      margin-bottom: 15px;
+        background: #fff;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+  .signup-form h2 {
+    color: #333;
+    font-weight: bold;
+        margin-top: 0;
+    }
+    .signup-form hr {
+        margin: 0 -30px 20px;
+    }
+  .signup-form .form-group {
+    margin-bottom: 20px;
+  }
+  .signup-form label {
+    font-weight: normal;
+    font-size: 13px;
+  }
+  .signup-form .form-control {
+    min-height: 38px;
+    box-shadow: none !important;
+  } 
+  .signup-form input[type="checkbox"] {
+    margin-top: 2px;
+  }   
+    .signup-form .submit-btn{        
+        font-size: 16px;
+        font-weight: bold;
+    background: #19aa8d;
+    border: none;
+    min-width: 140px;
+    }
+  /*.signup-form .btn:hover, .signup-form .btn:focus {
+    background: #179b81;
+        outline: none;
+  }*/
+  /*.signup-form a {
+    color: #fff;  
+    text-decoration: underline;
+  }
+  .signup-form a:hover {
+    text-decoration: none;
+  }
+  .signup-form form a {
+    color: #19aa8d;
+    text-decoration: none;
+  } 
+  .signup-form form a:hover {
+    text-decoration: underline;
+  }*/
+  .signup-form .fa {
+    font-size: 21px;
+  }
+  .signup-form .fa-paper-plane {
+    font-size: 18px;
+  }
+  .signup-form .fa-check {
+    color: #fff;
+    left: 17px;
+    top: 18px;
+    font-size: 7px;
+    position: absolute;
+  }
+  .seperator {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    margin-bottom: 10px;
+    }
+  .seperator i {
+    padding: 0 10px;
+    background: #f7f7f7;
+    position: relative;
+    top: -11px;
+    z-index: 1;
+  }   
+</style>
 
-<%= form_for :user, url: '/users' do |f| %>
-
-  <div class="form-group">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, autofocus: true, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-  </div>
-  
-  <%= f.hidden_field :user_type, value: :patient %>
-  <%= f.hidden_field :registration_status, value: :registration_not_done %>
-
-
- <div class="form-group">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off", class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :confirm_password %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control' %>
-  </div>
-  
-  <!--
-  <div class="form-group">
-    <%= f.label :age %><br />
-    <%= f.number_field :age, autocomplete: "off", class: 'form-control' %>
-  </div> -->
-
-  <div class="form-group">
-    <%= f.label :contact_number %><br />
-    <%= f.text_field :phone_number, autocomplete: "off", class: 'form-control' %>
-  </div>
-
-  <div class="form-check form-check-inline">
-    <%= f.label :appointment_type %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <%= f.radio_button :appointment_type, :new_appointment, checked: true, class: 'form-check-input' %>
-    <%= f.label :new_appointment, class: "form-check-label" %>&nbsp;&nbsp;&nbsp;
-    <%= f.radio_button :appointment_type, :follow_through, class: 'form-check-input' %>
-    <%= f.label :follow_through, class: "form-check-label" %>&nbsp;&nbsp;&nbsp;
-    <%= f.radio_button :appointment_type, :re_visit, class: 'form-check-input' %>
-    <%= f.label :re_visit, class: "form-check-label" %>
-  </div>
-  
-  <br>
-  <%= link_to 'Book a slot', '#', class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#slot-booking-modal" } %>
-  
+<div class="signup-form">
+    <%= form_for :user, url: '/users' do |f| %>
+    <p class="text-center"><strong>Register & Book an appointment</strong></p>
+    <hr>
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: "First Name" %>
+        </div>
+        <div class="col">
+          <%= f.text_field :last_name, autofocus: true, class: 'form-control', placeholder: "Last Name" %>
+        </div>
+      </div>          
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-paper-plane"></i></div>
+        </div>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "Email Address" %>
+      </div>
+    </div>
+    <%= f.hidden_field :user_type, value: :patient %>
+    <%= f.hidden_field :registration_status, value: :registration_not_done %>
+    <div class="form-group">
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-lock"></i></div>
+        </div>
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: "Password" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-lock"></i><i class="fa fa-check"></i></div>
+        </div>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: "Confirm Password" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-2 mr-sm-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text"><i class="fa fa-phone"></i></div>
+        </div>
+        <%= f.text_field :phone_number, autocomplete: "off", class: 'form-control', placeholder: "Contact Number" %>
+      </div>
+    </div>
+    <div class="seperator"><i>Appointment details</i></div>
+    <div class="form-check form-check-inline">
+      <%= f.radio_button :appointment_type, :new_appointment, checked: true, class: 'form-check-input' %>
+      <%= f.label :new_appointment, class: "form-check-label" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= f.radio_button :appointment_type, :follow_through, class: 'form-check-input' %>
+      <%= f.label :follow_through, class: "form-check-label" %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <%= f.radio_button :appointment_type, :re_visit, class: 'form-check-input' %>
+      <%= f.label :re_visit, class: "form-check-label" %>
+    </div>
+    <br><br>
+    <div class="text-center"><%= link_to 'Select a slot', '#', class: "btn btn-primary btn-sm", data: { "toggle" => "modal", 'target' => "#slot-booking-modal" } %>
+    </div>
+    
   <!-- Modal -->
-		<div class="modal fade" id="slot-booking-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-					    <%= f.label :select_doctor %>&nbsp;&nbsp;<%= f.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown doctor_dropdown' %>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button>
-		      </div>
-		      <div class="modal-body">
-		        <div id="calendar"></div>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-		      </div>
-		    </div>
-		  </div>
-		</div>
-		<%= f.hidden_field :start_time %>
-		<%= f.hidden_field :end_time %>
-
-  <div class="actions">
-    <%= f.submit "Sign up", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="modal fade" id="slot-booking-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              <%= f.label :select_doctor %>&nbsp;&nbsp;<%= f.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown doctor_dropdown' %>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="calendar"></div>
+          </div>
+          <div class="text-center" style="padding: 1rem;border-top: 1px solid #e9ecef;">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%= f.hidden_field :start_time %>
+    <%= f.hidden_field :end_time %>
+    <br>
+    <!-- <div class="form-group">
+      <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
+    </div> -->
+    <div class="form-group text-center">
+      <button type="submit" class="btn btn-primary btn-lg submit-btn">Book an appointment</button>
+    </div>
+    <% end %>
+  <div class="text-center">Already have an account? <a href="/login" class="btn btn-primary btn-sm">Login here</a></div>
+</div>
