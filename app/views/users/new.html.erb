@@ -154,7 +154,11 @@
       <%= f.label :re_visit, class: "form-check-label" %>
     </div>
     <br><br>
-    <div class="text-center"><%= link_to 'Select a slot', '#', class: "btn btn-primary btn-sm", data: { "toggle" => "modal", 'target' => "#slot-booking-modal" } %>
+  
+    <div class="text-center">
+      <%= link_to '#',  data: { "toggle" => "modal", 'target' => "#slot-booking-modal" } do %>
+        <i class="fa fa-calendar"></i>
+      <% end %>
     </div>
     
   <!-- Modal -->
@@ -183,7 +187,7 @@
       <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
     </div> -->
     <div class="form-group text-center">
-      <button type="submit" class="btn btn-primary btn-lg submit-btn">Book an appointment</button>
+      <button type="submit" class="btn btn-primary btn-lg submit-btn">Submit</button>
     </div>
     <% end %>
   <div class="text-center">Already have an account? <a href="/login" class="btn btn-primary btn-sm">Login here</a></div>
