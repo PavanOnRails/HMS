@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+	layout 'gentellela_theme', only: [:staff_dashboard, :patient_dashboard, :doctor_dashboard]
 	before_action :set_patient, only: [:patient_dashboard]
   before_action :set_doctor, only: [:doctor_dashboard]
   skip_before_action :authorize, only: [:new, :create]
