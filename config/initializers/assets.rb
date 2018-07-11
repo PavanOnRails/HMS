@@ -10,5 +10,6 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( fullcalendar.print.min.css )
-Rails.application.config.assets.precompile += %w( footermanifest.js )
+Rails.application.config.assets.precompile += %w( dataTables.bootstrap4.min.css)
+Rails.application.config.assets.precompile += %w( gentellela_theme.js )
 Rails.application.config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets\/components\/gentelella\/production/ }

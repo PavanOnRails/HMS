@@ -1,10 +1,13 @@
 class PatientsController < ApplicationController
+  layout 'gentellela_theme', only: [:index]
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   # GET /patients
   # GET /patients.json
   def index
     @patients = Patient.all
+    @appointments = Appointment.where(status: :pending)
+    @confirmed_appointments = Appointment.where(status: :confirmed)
   end
 
   # GET /patients/1

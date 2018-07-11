@@ -1,29 +1,58 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Appointments</h1>
+<div class="pull-left">
+  <%= link_to 'Register a new patient', new_patient_path, class: "btn btn-primary" %>
+</div>
+<h1>Appointment Requests</h1>
 
-<table>
+<table id="appointments-data-table" class="table table-striped table-bordered data-table" style="width:100%">
   <thead>
     <tr>
-      <th>Appointment date</th>
-      <th>Status</th>
       <th>Doctor</th>
-      <th>Patient</th>
-      <th colspan="3"></th>
+      <th>Appointment Date</th>
+      <th>Requested by</th>
+      <th>Status</th>
+      <th>Action</th>
+      <th>Action</th>
     </tr>
   </thead>
 
   <tbody>
     <% @appointments.each do |appointment| %>
       <tr>
-        <td><%= appointment.appointment_date %></td>
+        <td><%= appointment.try(:doctor).try(:full_name) %></td>
+        <td><%= appointment.start_time.strftime("%B %d, %Y") if appointment.start_time.present? %></td>
+        <td><%= appointment.try(:patient).try(:full_name) %></td>
         <td><%= appointment.status %></td>
-        <td><%= appointment.doctor_id %></td>
-        <td><%= appointment.patient_id %></td>
-        <td><%= link_to 'Show', appointment %></td>
-        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
-        <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if appointment.pending? %>
+          <td><%= link_to 'Confirm', update_status_path(appointment, {status: :confirm}), method: :patch, class: "btn btn-primary", data: {confirm: "Are you Sure?"} %></td>
+          <td><%= link_to 'Decline', '#', class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#declineModal-#{appointment.id}" } %></td>
+        <% end %>
       </tr>
+      <!-- Modal -->
+      <div class="modal fade" id="declineModal-<%= appointment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <%= form_for appointment, url: appointment_path(appointment), method: :patch do |f| %>
+                <%= f.text_area :reason_for_decline, class: "form-control", placeholder: "Enter your reason for decline" %><br>
+                <div class="text-center">
+                <%= f.hidden_field :status, value: :declined %>
+                  <%= f.submit "Save", class: "btn btn-primary" %>
+                </div>
+              <% end %>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     <% end %>
   </tbody>
 </table>
