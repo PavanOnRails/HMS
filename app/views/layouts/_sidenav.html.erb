@@ -29,12 +29,18 @@
 
         <div class="menu_section">
           <h3>General</h3>
-          <ul class="nav side-menu nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
+          <ul class="nav side-menu">
+            <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
             </li>
-            <li><a data-toggle="tab" href="#patients"><i class="fa fa-bed"></i>Patients</a>
+            <li>
+              <%= link_to patients_path, data: { turbolinks: false} do %>
+               <i class="fa fa-bed" aria-hidden="true"></i>Patients
+              <% end %>
             </li>
-            <li><a data-toggle="tab" href="#appointments"><i class="fa fa-calendar"></i>Appointment requests</span></a>
+            <li>
+              <%= link_to appointments_path, data: { turbolinks: false} do %>
+               <i class="fa fa-calendar" aria-hidden="true"></i>Appointment requests
+              <% end %>
             </li>
           </ul>
         </div>

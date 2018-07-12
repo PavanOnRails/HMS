@@ -1,4 +1,5 @@
 class AppointmentsController < ApplicationController
+  layout 'gentellela_theme', only: [:index]
   before_action :set_appointment, only: [:show, :edit, :update, :destroy, :update_status]
 
   # GET /appointments
