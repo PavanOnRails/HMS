@@ -2,10 +2,12 @@
 <html>
 	<head>
 	  <title>HMS</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag "css/custom", media: "all", "data-turbolinks-track" => true %>
+    <%= stylesheet_link_tag "fullcalendar.print.min", :media => "print", 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag "dataTables.bootstrap4.min", media: "all", "data-turbolinks-track" => true %>
 	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	  <%= javascript_include_tag "gentellela_theme", "data-turbolinks-track" => true %>
@@ -27,6 +29,156 @@
 
   <%= render "layouts/footer" %>
   <%= javascript_include_tag 'js/custom', 'data-turbolinks-track' => true %>
+  <style type="text/css">
+  #slot-booking-modal .modal-content {
+  width: 680px;
+  margin-left: -90px;
+}
+.fc-axis{
+  width: 45px !important;
+}
+</style>
+<script type="text/javascript">
+$( ".select2_dropdown" ).select2({
+    theme: "bootstrap"
+});
+
+$( ".country_dropdown" ).select2({
+    placeholder: "Select a country",
+    allowClear: true
+});
+
+$( ".state_dropdown" ).select2({
+    placeholder: "Select a state",
+    allowClear: true
+});
+
+$( ".city_dropdown" ).select2({
+    placeholder: "Select a city",
+    allowClear: true
+});
+
+//generate states based on country selection
+$(".country_dropdown").change(function(){
+  var selected_country = $(this).val();
+  $.ajax({
+    url: "<%= get_states_url %>",
+    type: "POST",
+    dataType: "json",
+    data: {country: selected_country},
+    success: function (data) {
+      $("#patient_state").empty();
+      $('<option value>' + '</option>').appendTo('.state_dropdown');
+      $.each( data, function( key, val ) {
+        $('<option value="'+ key +'">' + val + '</option>').appendTo('.state_dropdown');
+      });
+    },
+  });
+})
+
+//generate cities based on state selection
+$(".state_dropdown").change(function(){
+  var selected_state = $(this).val();
+  var selected_country = $(".country_dropdown").val();
+  $.ajax({
+    url: "<%= get_cities_url %>",
+    type: "POST",
+    dataType: "json",
+    data: {country: selected_country, state: selected_state},
+    success: function (data) {
+      console.log(data)
+      $(".city_dropdown").empty();
+      $('<option value>' + '</option>').appendTo('.city_dropdown');
+      $.each( data, function( index, val ) {
+        $('<option value="'+ val +'">' + val + '</option>').appendTo('.city_dropdown');
+      });
+    },
+  });
+})
+
+//generate beds based on ward selection
+$(".ward_dropdown").change(function(){
+  var selected_ward = $(this).val();
+  $.ajax({
+    url: "<%= get_beds_url %>",
+    type: "POST",
+    dataType: "json",
+    data: {ward: selected_ward},
+    success: function (data) {
+      $(".bed_dropdown").empty();
+      $.each( data, function( index, value ) {
+        $('<option value="'+ value.id +'">' + value.bed_no + '</option>').appendTo('.bed_dropdown');
+      });
+    },
+  });
+})
+
+//show ward&bed selection based on patient type selection
+$(".patient_type_dropdown").change(function(){
+  var selected_type = $(this).val();
+  if (selected_type == 'inpatient') {
+    $(".inpatient-fields").show();
+  }
+  else{
+    $(".inpatient-fields").hide();
+  }
+});
+
+ $(document).ready(function() {
+
+    $('#calendar').fullCalendar({
+      themeSystem: 'bootstrap4',
+      defaultView: 'agendaWeek',
+      header: {
+        left: 'prev,next',
+        center: 'title',
+        right: ''
+      },
+      agendaEventMinHeight: 30,
+      allDaySlot: false,
+      hiddenDays: [0], // hide Sundays
+      minTime: "09:00:00",
+      maxTime: "19:00:00",
+      navLinks: true, // can click day/week names to navigate views
+      selectable: true,
+      selectHelper: true,
+      select: function(start, end) {
+        var selected_val = $('.doctor_dropdown').val();
+        //var title = "Doctor appointment";
+        if (selected_val == ''){
+          alert("Please select a doctor");
+          $('#calendar').fullCalendar('unselect');
+        }
+        else{
+          var confirm_msg = confirm("Are you sure you want to book the appointment?");
+          var eventData;
+          if (confirm_msg) {
+            eventData = {
+              //title: title,
+              start: start,
+              end: end
+            };
+            console.log(eventData)
+            $('#calendar').fullCalendar('renderEvent', eventData, true); // stick? = true
+            start_time = moment(start).format('YYYY-MM-DD hh:mm:ss');
+            end_time = moment(end).format('YYYY-MM-DD hh:mm:ss');
+            console.log(start_time)
+            console.log(end_time)
+            $("#user_start_time").val(start_time);
+            $("#user_end_time").val(end_time);
+            $("#patient_appointments_attributes_0_start_time").val(start_time);
+            $("#patient_appointments_attributes_0_end_time").val(end_time);
+          }
+          $('#calendar').fullCalendar('unselect');
+        }
+      },
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+    });
+
+  });
+
+</script>
   <script type="text/javascript">
   	$(document).ready(function() {
       $('table.data-table').DataTable();

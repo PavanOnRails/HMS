@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  layout 'gentellela_theme', only: [:index]
+  layout 'gentellela_theme', only: [:index, :new]
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   # GET /patients

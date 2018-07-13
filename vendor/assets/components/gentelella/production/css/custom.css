@@ -1,3 +1,24 @@
+::-webkit-input-placeholder {
+   text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   text-align: center;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   text-align: center;  
+}
+
+:-ms-input-placeholder {  
+   text-align: center; 
+}
+.container{
+  max-width: none !important;
+}
+.nav.side-menu, .nav.toggle{
+  display: block !important;
+}
 .nav-tabs{
   border-bottom: none !important;
 }
@@ -445,6 +466,7 @@ table.no-margin .progress {
 .row {
   margin-right: -10px;
   margin-left: -10px;
+  display: block !important;
 }
 .grid_slider .col-md-6 {
   padding: 0 40px;
@@ -475,7 +497,26 @@ a:hover, a:focus {
 .top_nav .navbar-right {
   margin: 0;
   width: 70%;
-  float: right;
+  float: right !important;
+}
+.navbar-nav{
+  display: block !important;
+}
+.navbar.nav_title{
+  padding: 0rem;
+  display: block;
+}
+.sidebar-footer.hidden-small > a > i.fa {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    font-size: 20px;
+}
+.dropdown-toggle::after{
+  content: none !important;
 }
 .top_nav .navbar-right li {
   display: inline-block;
@@ -851,6 +892,7 @@ h2 {
   -webkit-transition: all .2s ease;
   -ms-transition: all .2s ease;
   transition: all .2s ease;
+  margin-top: 15px;
 }
 .x_title {
   border-bottom: 2px solid #E6E9ED;
