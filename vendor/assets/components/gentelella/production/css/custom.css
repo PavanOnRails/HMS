@@ -133,7 +133,7 @@
   width: 35%;
   float: left;
 }
-.img-circle.profile_img {
+.rounded-circle.profile_img {
   width: 70%;
   background: #fff;
   margin-left: 15%;
@@ -142,6 +142,20 @@
   margin-top: 20px;
   border: 1px solid rgba(52, 73, 94, 0.44);
   padding: 4px;
+}
+#menu1{
+  transform: none !important;
+  top: 58px !important;
+  left: -255px !important;
+  width: 300px !important;
+}
+.navbar-nav .open .dropdown-menu.msg_list {
+  width: 300px;
+}
+.nav.side-menu > li.current-page > a {
+    text-shadow: rgba(0,0,0,.25) 0 -1px 0;
+    background: linear-gradient(#334556,#2C4257),#2A3F54;
+    box-shadow: rgba(0,0,0,.25) 0 1px 0,inset rgba(255,255,255,.16) 0 1px 0;
 }
 .profile_info {
   padding: 25px 10px 10px;
@@ -518,6 +532,39 @@ a:hover, a:focus {
 .dropdown-toggle::after{
   content: none !important;
 }
+.nav::before{
+  content: " ";
+  display: table;
+}
+.nav.navbar-nav > li > a {
+    color: #515356 !important;
+}
+.navbar-brand, .navbar-nav > li > a {
+    font-weight: 500;
+    line-height: 32px;
+}
+.navbar-brand, .navbar-nav > li > a, .site_title {
+    color: #ECF0F1 !important;
+    margin-left: 0 !important;
+}
+.nav > li > a {
+    padding: 13px 15px 12px;
+}
+.nav.top_menu > li > a, .nav > li > a {
+    position: relative;
+    display: block;
+}
+.navbar-nav .show .dropdown-menu {
+    position: absolute;
+    background: #fff;
+    margin-top: 0;
+    border: 1px solid #D9DEE4;
+    -webkit-box-shadow: none;
+    right: 0;
+    left: auto;
+    width: 220px;
+    left: 5px !important;
+}
 .top_nav .navbar-right li {
   display: inline-block;
   float: right;
@@ -571,6 +618,39 @@ a:hover, a:focus {
 }
 .nav.child_menu li {
   padding-left: 36px;
+}
+a, a:focus, a:hover{
+  text-decoration: none !important;
+}
+.dropdown-menu > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+.badge {
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+}
+.container::before{
+  content: " ";
+  display: table;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
 }
 .nav-md ul.nav.child_menu li:before {
   background: #425668;

@@ -1,0 +1,2 @@
+class BloodBank < ApplicationRecord
+end

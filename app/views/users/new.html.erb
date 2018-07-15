@@ -100,12 +100,12 @@
     <%= form_for :user, url: '/users' do |f| %>
     <p class="text-center"><strong>Register & Book an appointment</strong></p>
     <hr>
-    <div class="form-group">
+    <div class="form-group" style="margin-bottom: 80px !important;">
       <div class="row">
-        <div class="col">
+        <div class="col-md-6">
           <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: "First Name" %>
         </div>
-        <div class="col">
+        <div class="col-md-6">
           <%= f.text_field :last_name, autofocus: true, class: 'form-control', placeholder: "Last Name" %>
         </div>
       </div>          
