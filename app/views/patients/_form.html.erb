@@ -11,92 +11,62 @@
     </div>
   <% end %>
   
-  <% if f.object.new_record? %>
   <div class="form-group">
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: "First Name" %>
-        </div>
-        <div class="col-md-6">
-          <%= f.text_field :last_name, autofocus: true, class: 'form-control', placeholder: "Last Name" %>
-        </div>
-      </div>          
-    </div>
-    <div class="form-group">
-      <div class="row">
-        <div class="col-md-6">
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: "Email Address" %>
-        </div>
-        <div class="col-md-6">
-          <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder: "Contact Number" %>
-        </div>
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :first_name, autofocus: true, class: 'form-control', placeholder: "First Name", disabled: f.object.new_record? ? false : true %>
+      </div>
+      <div class="col">
+        <%= f.text_field :last_name, autofocus: true, class: 'form-control', placeholder: "Last Name", disabled: f.object.new_record? ? false : true %>
+      </div>
+      <div class="col">
+        <%= f.email_field :email, autofocus: true, class: 'form-control', placeholder: "Email Address", disabled: f.object.new_record? ? false : true %>
+      </div>
+    </div>          
+  </div>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder: "Contact Number", disabled: f.object.new_record? ? false : true %>
+      </div>
+      <div class="col">
+        <%= f.text_field :address_line1, autofocus: true, class: 'form-control', placeholder: "Address Line 1" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :address_line2, autofocus: true, class: 'form-control', placeholder: "Address Line 2" %>
       </div>
     </div>
-  <% else %>
-    <div class="field">
-      <%= f.label :first_name %>
-      <%= f.text_field :first_name, disabled: true %>
+  </div>
+  
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.select :country, CS.get.collect {|key,value| [ value, key ] }, {include_blank: true}, { class: 'select2_dropdown country_dropdown form-control' } %>
+      </div>
+      <div class="col">
+        <%= f.select :state, CS.states(:us).values, {include_blank: true}, { class: 'select2_dropdown state_dropdown form-control' } %>
+      </div>
+      <div class="col">
+        <%= f.select :city, CS.cities(:ak, :us), {include_blank: true}, { class: 'select2_dropdown city_dropdown form-control' } %>
+      </div>
+      <div class="col">
+        <%= f.text_field :pincode, autofocus: true, class: 'form-control', placeholder: "Pincode" %>
+      </div>
     </div>
-
-    <div class="field">
-      <%= f.label :last_name %>
-      <%= f.text_field :last_name, disabled: true %>
+  </div>
+  
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :age, autofocus: true, class: 'form-control', placeholder: "Age" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :gender, autofocus: true, class: 'form-control', placeholder: "Gender" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :blood_group, autofocus: true, class: 'form-control', placeholder: "Blood Group" %>
+      </div>
     </div>
-
-    <div class="field">
-      <%= f.label :email %>
-      <%= f.text_field :email, disabled: true %>
-    </div>
-
-    <div class="field">
-      <%= f.label :contact_number %>
-      <%= f.text_field :phone_number, disabled: true %>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :address_line1 %>
-    <%= f.text_field :address_line1 %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :address_line2 %>
-    <%= f.text_field :address_line2 %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :country %>
-    <%= f.select :country, CS.get.collect {|key,value| [ value, key ] }, {include_blank: true}, { class: 'select2_dropdown country_dropdown' } %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :state %>
-    <%= f.select :state, CS.states(:us).values, {include_blank: true}, { class: 'select2_dropdown state_dropdown' } %>
-  </div>
-
-  <div class="field">
-    <%= f.label :city %>
-    <%= f.select :city, CS.cities(:ak, :us), {include_blank: true}, { class: 'select2_dropdown city_dropdown' } %>
-  </div>
-
-  <div class="field">
-    <%= f.label :pincode %>
-    <%= f.text_field :pincode %>
-  </div>
-
-  <div class="field">
-    <%= f.label :age %>
-    <%= f.text_field :age %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :gender %>
-    <%= f.text_field :gender %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :blood_group %>
-    <%= f.text_field :blood_group %>
   </div>
   
   <%= f.hidden_field :registration_status, value: :registration_done %>
@@ -105,14 +75,18 @@
     <%= f.fields_for :appointments do |appointment| %>
       
       <br>
-  <%= link_to 'Book a slot', '#', class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#slot-booking-modal" } %>
+  <div class="text-center">
+    <%= link_to '#',  title: "Select a slot", data: { "toggle" => "modal", 'target' => "#slot-booking-modal" } do %>
+        <i class="fa fa-calendar" style="font-size: 25px;"></i>
+    <% end %>
+  </div><br>
   
   <!-- Modal -->
     <div class="modal fade" id="slot-booking-modal" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-              <%= appointment.label :select_doctor %>&nbsp;&nbsp;<%= appointment.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown doctor_dropdown' %>
+              <%= appointment.select :doctor_id, Doctor.all.collect {|d| [ d.full_name, d.id ] }, { include_blank: true }, class: 'form-control select2_dropdown doctor_dropdown', style:"width:50%;" %>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -133,65 +107,55 @@
     <% end %>
   <% end %>
   
-  <div class="field">
-    <%= f.label :select_patient_type %>
-    <%= f.select :patient_type, Patient.patient_types.map { |key, value| [key.humanize, key] },{},{ class: 'select2_dropdown patient_type_dropdown' } %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.select :patient_type, Patient.patient_types.map { |key, value| [key.humanize, key] },{},{ class: 'select2_dropdown patient_type_dropdown', style:"width:100%;" } %>
+      </div>
+      <div class="col">
+        <%= select_tag :ward_id, options_for_select(Ward.all.collect {|w| [ w.name, w.id ] }), { class: 'select2_dropdown ward_dropdown', style:"width:100%;", disabled: true } %>
+      </div>
+
+      <div class="col">
+        <%= select_tag :bed_id, options_for_select(@general_ward.beds.where(status: :vacant).collect {|b| [ b.bed_no, b.id ] }), { class: 'select2_dropdown bed_dropdown', style:"width:100%;", disabled: true } %>
+      </div>
+    </div>
   </div>
   
-  <div class="inpatient-fields" style="display: none;">
-    <div class="field">
-      <%= label_tag :select_ward %><br/>
-      <%= select_tag :ward_id, options_for_select(Ward.all.collect {|w| [ w.name, w.id ] }), { class: 'select2_dropdown ward_dropdown' } %>
-    </div>
-
-    <div class="field">
-      <%= label_tag :select_bed %><br/>
-      <%= select_tag :bed_id, options_for_select(@general_ward.beds.where(status: :vacant).collect {|b| [ b.bed_no, b.id ] }), { class: 'select2_dropdown bed_dropdown' } %>
-    </div>
-  </div>
-
   <%= f.fields_for :bills do |bill| %>
-    <div class="field">
+    <div class="form-group">
       <%= bill.label :select_bill_types %><br/>
-      <%= bill.collection_check_boxes :bill_type_ids, BillType.all, :id, :name do |b| %>
-        <div class="collection-check-box">
-          <%= b.check_box %>
-          <%= b.label %>
-        </div>
-      <% end %>
+      <div class="row">
+        <%= bill.collection_check_boxes :bill_type_ids, BillType.all, :id, :name do |b| %>
+          <div class="col">
+            <%= b.check_box class: 'form-check-input' %>
+            <%= b.label class: "form-check-label" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   
-  <div class="field">
-    <%= bill.label :registration_fee %>
-    <%= bill.number_field :registration_fee, step: :any %>
-  </div>
-
-  <div class="field">
-    <%= bill.label :doctor_fee %>
-    <%= bill.number_field :doctor_fee, step: :any %>
-  </div>
-
-  <div class="field">
-    <%= bill.label :pharmacy_bill %>
-    <%= bill.number_field :pharmacy_bill, step: :any %>
-  </div>
-
-  <div class="field">
-    <%= bill.label :maintenance_fee %>
-    <%= bill.number_field :maintenance_fee, step: :any %>
-  </div>
-
-  <div class="field">
-    <%#= f.label :tax %>
-    <%#= f.number_field :tax, step: :any %>
-  </div>
-  
-  <div class="field">
-    <%= bill.label :paid_with %>
-    <%= bill.select :paid_with, Bill.payment_types.map { |key, value| [key.humanize, key] } %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= bill.text_field :registration_fee, autofocus: true, class: 'form-control', placeholder: "Registration Fee" %>
+      </div>
+      <div class="col">
+        <%= bill.text_field :doctor_fee, autofocus: true, class: 'form-control', placeholder: "Doctor Fee" %>
+      </div>
+      <div class="col">
+        <%= bill.text_field :pharmacy_bill, autofocus: true, class: 'form-control', placeholder: "Pharmacy Bill" %>
+      </div>
+      <div class="col">
+        <%= bill.text_field :maintenance_fee, autofocus: true, class: 'form-control', placeholder: "Maintenance Fee" %>
+      </div>
+      <div class="col">
+        <%= bill.select :paid_with, Bill.payment_types.map { |key, value| [key.humanize, key] }, {}, { class: 'select2_dropdown payment_type_dropdown',style:"width:100%;" } %>
+      </div>
+    </div>
   </div>
   <% end %>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="text-center">
+    <%= f.submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

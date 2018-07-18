@@ -38,6 +38,10 @@
   z-index: 9999;
   position: absolute;
 }
+.form-check-input{
+  margin-top: 0px !important;
+  margin-left: -1.5rem !important;
+}
 .nav-sm .hidden-small {
   visibility: hidden;
 }
@@ -480,7 +484,7 @@ table.no-margin .progress {
 .row {
   margin-right: -10px;
   margin-left: -10px;
-  display: block !important;
+  /*display: block !important;*/
 }
 .grid_slider .col-md-6 {
   padding: 0 40px;

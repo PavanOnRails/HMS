@@ -58,6 +58,35 @@ $( ".city_dropdown" ).select2({
     allowClear: true
 });
 
+$( ".patient_type_dropdown" ).select2({
+    placeholder: "Select patient type",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".ward_dropdown" ).select2({
+    placeholder: "Select ward",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".bed_dropdown" ).select2({
+    placeholder: "Select bed",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".payment_type_dropdown" ).select2({
+    placeholder: "Paid with",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".doctor_dropdown" ).select2({
+    placeholder: "Select Doctor",
+    width: 'resolve',
+    allowClear: true
+});
 //generate states based on country selection
 $(".country_dropdown").change(function(){
   var selected_country = $(this).val();
@@ -117,10 +146,12 @@ $(".ward_dropdown").change(function(){
 $(".patient_type_dropdown").change(function(){
   var selected_type = $(this).val();
   if (selected_type == 'inpatient') {
-    $(".inpatient-fields").show();
+    $(".ward_dropdown").prop("disabled", false);
+    $(".bed_dropdown").prop("disabled", false);
   }
   else{
-    $(".inpatient-fields").hide();
+    $(".ward_dropdown").prop("disabled", true);
+    $(".bed_dropdown").prop("disabled", true);
   }
 });
 
