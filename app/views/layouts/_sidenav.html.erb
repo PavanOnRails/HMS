@@ -17,7 +17,7 @@
         </div>
         <div class="profile_info">
           <span>Welcome,</span>
-          <h2>John Doe</h2>
+          <h2><%= current_user.full_name %></h2>
         </div>
       </div>
       <!-- /menu profile quick info -->
@@ -28,21 +28,13 @@
       <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
 
         <div class="menu_section active">
-          <h3>General</h3>
-          <ul class="nav side-menu">
-            <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
-            </li>
-            <li>
-              <%= link_to patients_path, data: { turbolinks: false} do %>
-               <i class="fa fa-bed" aria-hidden="true"></i>Patients
-              <% end %>
-            </li>
-            <li>
-              <%= link_to appointments_path, data: { turbolinks: false} do %>
-               <i class="fa fa-calendar" aria-hidden="true"></i>Appointment requests
-              <% end %>
-            </li>
-          </ul>
+          <% if current_user.staff? %>
+            <%= render partial: "layouts/staff_menu" %>
+          <% elsif current_user.doctor? %>
+            <%= render partial: "layouts/doctor_menu" %>
+          <% elsif current_user.patient? %>
+            <%= render partial: "layouts/patient_menu" %>
+          <% end %>
         </div>
         
 

@@ -40,7 +40,7 @@
 }
 .form-check-input{
   margin-top: 0px !important;
-  margin-left: -1.5rem !important;
+  /*margin-left: -1.5rem !important;*/
 }
 .nav-sm .hidden-small {
   visibility: hidden;
@@ -485,6 +485,9 @@ table.no-margin .progress {
   margin-right: -10px;
   margin-left: -10px;
   /*display: block !important;*/
+}
+.row.tile_count, .row.patients-row, .row.appointments-row {
+  display: block !important;
 }
 .grid_slider .col-md-6 {
   padding: 0 40px;

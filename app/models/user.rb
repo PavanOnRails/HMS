@@ -11,7 +11,11 @@ class User < ApplicationRecord
   after_create :create_patient_and_appointmet_records, if: Proc.new { |user| user.patient? && user.registration_not_done?}
   after_create :create_staff_record, if: Proc.new { |user| user.staff? }
   after_create :create_doctor_record, if: Proc.new { |user| user.doctor? }
-
+ 
+  def full_name
+    [first_name,last_name].select(&:present?).join(' ').titleize
+  end
+  
   def create_patient_and_appointmet_records
   	patient = Patient.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)
   	appointment = Appointment.new

@@ -1,0 +1,14 @@
+<ul class="nav side-menu">
+  <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
+  </li>
+  <li>
+    <%= link_to patients_path, data: { turbolinks: false} do %>
+     <i class="fa fa-bed" aria-hidden="true"></i>Patients
+    <% end %>
+  </li>
+  <li>
+    <%= link_to appointments_path, data: { turbolinks: false} do %>
+     <i class="fa fa-calendar" aria-hidden="true"></i>Appointment requests
+    <% end %>
+  </li>
+</ul>
