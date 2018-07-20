@@ -29,21 +29,11 @@ $( ".select2_dropdown" ).select2({
     theme: "bootstrap"
 });
 
-$( ".country_dropdown" ).select2({
-    placeholder: "Select a country",
+$( ".doctor_dropdown" ).select2({
+    placeholder: "Select Doctor",
+    width: 'resolve',
     allowClear: true
 });
-
-$( ".state_dropdown" ).select2({
-    placeholder: "Select a state",
-    allowClear: true
-});
-
-$( ".city_dropdown" ).select2({
-    placeholder: "Select a city",
-    allowClear: true
-});
-
 //generate states based on country selection
 $(".country_dropdown").change(function(){
 	var selected_country = $(this).val();

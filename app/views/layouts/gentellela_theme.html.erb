@@ -2,9 +2,6 @@
 <html>
 	<head>
 	  <title>HMS</title>
-    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
-    <!-- Latest compiled and minified CSS -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"> -->
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag "css/custom", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag "fullcalendar.print.min", :media => "print", 'data-turbolinks-track' => true %>
@@ -18,10 +15,6 @@
 
 <body class="nav-md">
 <div class="container body">
-  <% flash.each do |key, value| %>
-    <div align="center" id="flash" class="alert alert-<%= key %>"><%= value %></div>
-  <% end %>
-
 <%= render "layouts/sidenav" %>
 <%= render "layouts/topnav" %>
 

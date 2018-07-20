@@ -50,21 +50,34 @@
                   <th>Appointment Date</th>
                   <th>From</th>
                   <th>To</th>
-                  <th>Action</th>
-                  <th>Action</th>
+                  <th>Session status</th>
                 </tr>
               </thead>
 
               <tbody>
                 <% @confirmed_appointments.each do |appointment| %>
+                  <%# if appointment.patient.outpatient? %>
                   <tr>
                     <td><%= appointment.try(:patient).try(:full_name) %></td>
                     <td><%= appointment.start_time.strftime("%B %d, %Y") %></td>
                     <td><%= appointment.start_time.strftime("%I:%M %p") %></td>
                     <td><%= appointment.end_time.strftime("%I:%M %p") %></td>
-                    <td><%= link_to 'Start Session', start_session_url(appointment_id: appointment.id, doctor_id: appointment.doctor_id, patient_id: appointment.patient_id), class: "btn btn-primary", id: "start-session-btn-#{ appointment.id}", remote: true %></td>
-                    <td><%= link_to 'End Session', "#", class: "btn btn-primary invisible", id: "end-session-btn-#{ appointment.id}", data: { "toggle" => "modal", 'target' => "#end-session-#{appointment.id}" } %></td>
+                    <td>
+                    <div class="start-session-div">
+                      Session has not started yet &nbsp;&nbsp;
+                      <%= link_to start_session_url(appointment_id: appointment.id, doctor_id: appointment.doctor_id, patient_id: appointment.patient_id), id: "start-session-btn-#{ appointment.id}", remote: true, title: "Start Session", data: { "toggle" => "tooltip", 'placement' => "top", turbolinks: false} do %>
+                        <i class="fa fa-clock-o" aria-hidden="true" style="font-size: 20px;"></i>
+                      <% end %>
+                    </div>
+                    <div class="end-session-div invisible">
+                      Session has started
+                      <%= link_to "#", class: "btn btn-primary", id: "end-session-btn-#{ appointment.id}", data: { "toggle" => "modal", 'target' => "#end-session-#{appointment.id}" }, title: "End Session" do %>
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      <% end %>
+                    </div>
+                    </td>
                   </tr>
+                  <%# end %>
                   <div class="modal fade" id="end-session-<%= appointment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                       <div class="modal-content">
@@ -84,7 +97,7 @@
                             <label class="form-check-label" for="inlineRadio2">No</label>
                           </div>
                           <br><br>
-                          <div style="display: none;" id="lab-test-types-div">
+                          <div style="display: none;" class="lab-test-types-div">
                             <h4>Select lab tests</h4><br>
                             <% @lab_test_types.each do |lab_test_type| %>
                               <div class="form-check form-check-inline">
@@ -138,11 +151,11 @@
 
   $("[name=lab-test-yes]").click(function(){
       $("[name=lab-test-no]").prop('checked', false);
-      $('#lab-test-types-div').show();
+      $('.lab-test-types-div').show();
     });
 
   $("[name=lab-test-no]").click(function(){
       $("[name=lab-test-yes]").prop('checked', false);
-      $('#lab-test-types-div').hide();
+      $('.lab-test-types-div').hide();
     });
 </script>
