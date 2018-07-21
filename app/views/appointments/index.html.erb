@@ -34,7 +34,7 @@
                   <% end %>
                 </tr>
                 <!-- Modal -->
-                <div class="modal fade" id="declineModal-<%= appointment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade decline-modal" id="declineModal-<%= appointment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -43,16 +43,13 @@
                         </button>
                       </div>
                       <div class="modal-body">
-                        <%= form_for appointment, url: appointment_path(appointment), method: :patch do |f| %>
+                        <%= form_for appointment, url: appointment_path(appointment), method: :patch, remote: true do |f| %>
                           <%= f.text_area :reason_for_decline, class: "form-control", placeholder: "Enter your reason for decline" %><br>
                           <div class="text-center">
-                          <%= f.hidden_field :status, value: :declined %>
-                            <%= f.submit "Save", class: "btn btn-primary" %>
+                            <%= f.hidden_field :status, value: :declined %>
+                            <%= f.submit "Save", class: "btn btn-primary decline-btn" %>
                           </div>
                         <% end %>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                       </div>
                     </div>
                   </div>
@@ -75,3 +72,12 @@
 
 <!--Test Page specific JS -->
 <script> //alert ('Test Page specific JS')</script>
+<style type="text/css">
+  .decline-modal .modal-dialog{
+    margin-top: 60px !important;
+    width: 30% !important;
+  }
+  .decline-btn{
+    width: 40% !important;
+  }
+</style>

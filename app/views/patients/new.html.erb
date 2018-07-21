@@ -6,18 +6,13 @@
 	    <div class="col-md-12 col-sm-12 col-xs-12">
 	      <div class="x_panel" style="height:600px;">
 	        <div class="x_title">
-	          
-							<h1>New Patient</h1>
-
+	        	  <div class="pull-left">
+	        	  	<%= link_to patients_path, title: "Back", data: { "toggle" => "tooltip", 'placement' => "top", turbolinks: false} do %>
+					        <i class="fa fa-chevron-left" aria-hidden="true" style="font-size: 20px;"></i>
+					      <% end %>
+					    </div>            
+							<h1 class="text-center">Patient Registration</h1><br>
 							<%= render 'form', patient: @patient %>
-
-							<%= link_to 'Back', patients_path %>
-
-	          <!-- <div class="tab-content">
-	            <div class="tab-pane fade in active" id="dashboard"><h3>HOME</h3></div>
-	            <div class="tab-pane fade in" id="patients"><%#= render file: "patients/index" %></div>
-	            <div class="tab-pane fade in" id="appointments"><%#= render file: "appointments/index" %></div>
-	          </div> -->
 	          <div class="clearfix"></div>
 	        </div>
 	      </div>

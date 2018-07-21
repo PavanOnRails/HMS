@@ -26,6 +26,9 @@
   float: none !important;
   margin-bottom: 0px !important;
 }
+.submit-btn{
+  width: 30% !important;
+}
 .nav-tabs > li > a{
   margin-right: 0px !important;
   line-height: 0 !important;
@@ -985,6 +988,9 @@ h2 {
 .accordion .panel:hover {
   background: #F2F5F7;
 }
+#patients-data-table_wrapper{
+  margin-top: 30px;
+}
 .x_panel {
   position: relative;
   width: 100%;
@@ -1005,7 +1011,7 @@ h2 {
   margin-top: 15px;
 }
 .x_title {
-  border-bottom: 2px solid #E6E9ED;
+  /*border-bottom: 2px solid #E6E9ED;*/
   padding: 1px 5px 6px;
   margin-bottom: 10px;
 }

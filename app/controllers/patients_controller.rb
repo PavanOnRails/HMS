@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  layout 'gentellela_theme', only: [:index, :new]
+  layout 'gentellela_theme', only: [:index, :new, :edit]
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   # GET /patients
@@ -19,12 +19,12 @@ class PatientsController < ApplicationController
   def new
     @patient = Patient.new
     @patient.appointments.build
-    @patient.bills.build
     @general_ward = Ward.find(1)
   end
 
   # GET /patients/1/edit
   def edit
+    @general_ward = Ward.find(1)
   end
 
   # POST /patients
@@ -37,7 +37,7 @@ class PatientsController < ApplicationController
         if @patient.inpatient?
           @patient.map_bed_to_patient(@patient, params[:bed_id])
         end
-        format.html { redirect_to @patient, notice: 'Patient was successfully created.' }
+        format.html { redirect_to patients_path, notice: 'Patient was successfully created.' }
         format.json { render :show, status: :created, location: @patient }
       else
         format.html { render :new }
@@ -51,7 +51,10 @@ class PatientsController < ApplicationController
   def update
     respond_to do |format|
       if @patient.update(patient_params)
-        format.html { redirect_to @patient, notice: 'Patient was successfully updated.' }
+        if @patient.inpatient?
+          @patient.map_bed_to_patient(@patient, params[:bed_id])
+        end
+        format.html { redirect_to patients_path, notice: 'Patient was successfully updated.' }
         format.json { render :show, status: :ok, location: @patient }
       else
         format.html { render :edit }

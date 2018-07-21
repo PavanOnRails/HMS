@@ -1,6 +1,7 @@
 <% if @appointment.confirmed? %>
   $(".flash-message").text("Appointment successfully confirmed");
 <% elsif @appointment.declined? %>
+  $("#declineModal-<%= @appointment.id %>").modal('hide');
   $(".flash-message").text("Appointment successfully declined");
 <% end %>
 $('.flash-message').delay(500).fadeIn('normal', function() {
