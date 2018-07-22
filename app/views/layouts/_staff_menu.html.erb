@@ -3,7 +3,17 @@
   </li>
   <li>
     <%= link_to patients_path, data: { turbolinks: false} do %>
-     <i class="fa fa-bed" aria-hidden="true"></i>Patients
+     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Patient Registration
+    <% end %>
+  </li>
+  <li>
+    <%= link_to outpatients_path, data: { turbolinks: false} do %>
+     <i class="fa fa-user" aria-hidden="true"></i>Outpatients
+    <% end %>
+  </li>
+  <li>
+    <%= link_to inpatients_path, data: { turbolinks: false} do %>
+     <i class="fa fa-bed" aria-hidden="true"></i>Inpatients
     <% end %>
   </li>
   <li>

@@ -42,7 +42,7 @@
         <div class="x_panel" style="height:700px;">
           <div class="pull-left">
             <%= link_to new_patient_path, class: "btn btn-primary" do %>
-              <i class="fa fa-plus-circle" aria-hidden="true" style="font-size: 20px;"></i> Register new patient
+              <i class="fa fa-user-plus" aria-hidden="true" style="font-size: 20px;"></i> Register new patient
             <% end %>
           </div>
           <div class="x_title">
@@ -52,27 +52,23 @@
                 <tr>
                   <th>Name</th>
                   <th>Registration status</th>
-                  <th>UHID</th>
-                  <th>Patient type</th>
                   <th>Assigned doctor</th>
-                  <th>Action</th>
+                  <th>Register</th>
                 </tr>
               </thead>
               <tbody>
                 <% @confirmed_appointments.each do |appointment| %>
-                  <%# if appointment.patient.registration_not_done? %>
+                  <% if !appointment.patient.registration_done? %>
                     <tr>
                       <td><%= appointment.patient.full_name %></td>
                       <td><%= appointment.patient.registration_done? ? 'Done' : 'Not done' %></td>
-                      <td><%= appointment.patient.uhid %></td>
-                      <td><%= appointment.patient.patient_type %></td>
                       <td><%#= appointment.doctor.full_name %></td>
                       <td><%= link_to edit_patient_path(appointment.patient), title: "Register", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
                         <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 20px;"></i>
                         <% end %>
                       </td>
                     </tr>
-                  <%# end %>
+                  <% end %>
                 <% end %>
               </tbody>
             </table>
@@ -86,4 +82,4 @@
 <!-- /page content -->
 
 <!--Test Page specific JS -->
-<script> //alert ('Test Page specific JS')</script><p id="notice"><%= notice %></p>
+<script> //alert ('Test Page specific JS')</script>

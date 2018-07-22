@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  layout 'gentellela_theme', only: [:index, :new, :edit]
+  layout 'gentellela_theme', only: [:index, :new, :edit, :inpatients, :outpatients]
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
 
   # GET /patients
@@ -71,6 +71,14 @@ class PatientsController < ApplicationController
       format.html { redirect_to patients_url, notice: 'Patient was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def inpatients
+    @inpatients = Patient.where(patient_type: :inpatient)
+  end
+
+  def outpatients
+    @outpatients = Patient.where(patient_type: :outpatient)
   end
 
   private

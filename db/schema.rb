@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180720052742) do
+ActiveRecord::Schema.define(version: 20180722093828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20180720052742) do
     t.datetime "updated_at", null: false
     t.integer  "patient_id"
     t.integer  "status"
+    t.integer  "room_id"
   end
 
   create_table "bill_types", force: :cascade do |t|
@@ -176,6 +177,15 @@ ActiveRecord::Schema.define(version: 20180720052742) do
     t.integer  "patient_type"
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.string   "room_no"
+    t.integer  "room_type"
+    t.integer  "capacity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "ward_id"
+  end
+
   create_table "staffs", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -221,8 +231,9 @@ ActiveRecord::Schema.define(version: 20180720052742) do
   create_table "wards", force: :cascade do |t|
     t.string   "name"
     t.integer  "no_of_beds"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "no_of_rooms"
   end
 
 end
