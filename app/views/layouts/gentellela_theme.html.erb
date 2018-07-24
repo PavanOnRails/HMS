@@ -80,6 +80,12 @@ $( ".doctor_dropdown" ).select2({
     width: 'resolve',
     allowClear: true
 });
+
+$( ".lab_test_type_dropdown" ).select2({
+    placeholder: "Select Lab tests",
+    width: 'resolve',
+    allowClear: true
+});
 //generate states based on country selection
 $(".country_dropdown").change(function(){
   var selected_country = $(this).val();

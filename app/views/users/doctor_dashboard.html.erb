@@ -57,70 +57,69 @@
 
               <tbody>
                 <% @confirmed_appointments.each do |appointment| %>
-                  <tr id="session-row-<%= appointment.id %>">
-                    <td><%= appointment.try(:patient).try(:full_name) %></td>
-                    <td><%= appointment.start_time.strftime("%B %d, %Y") %></td>
-                    <td><%= appointment.start_time.strftime("%I:%M %p") %></td>
-                    <td><%= appointment.end_time.strftime("%I:%M %p") %></td>
-                    <td>
-                    <% if appointment.patient.doctor_sessions.first.not_started? %>
-                      <div class="start-session-div-<%= appointment.id %>">
-                        Session has not started yet &nbsp;&nbsp;
-                        <%= link_to start_session_url(session_id: appointment.patient.doctor_sessions.where(session_status: :not_started).first.id, appointment_id: appointment.id), id: "start-session-btn-#{ appointment.id}", remote: true, title: "Start Session", data: { "toggle" => "tooltip", 'placement' => "top", turbolinks: false} do %>
-                          <i class="fa fa-hourglass-start" aria-hidden="true" style="font-size: 20px;"></i>
-                        <% end %>
-                      </div>
-                    <% elsif appointment.patient.doctor_sessions.first.started? %>
-                      <div class="end-session-div">
+                  <% appointment.patient.doctor_sessions.each do |ds| %>
+                    <tr id="session-row-<%= appointment.id %>">
+                      <td><%= appointment.try(:patient).try(:full_name) %></td>
+                      <td><%= appointment.start_time.strftime("%B %d, %Y") %></td>
+                      <td><%= appointment.start_time.strftime("%I:%M %p") %></td>
+                      <td><%= appointment.end_time.strftime("%I:%M %p") %></td>
+                      <td>
+                      <% if ds.not_started? %>
+                        <div class="start-session-div-<%= appointment.id %>">
+                          Session has not started yet &nbsp;&nbsp;
+                          <%= link_to start_session_url(session_id: ds.id, appointment_id: appointment.id), id: "start-session-btn-#{ appointment.id}", remote: true, title: "Start Session", data: { "toggle" => "tooltip", 'placement' => "top", turbolinks: false} do %>
+                            <i class="fa fa-hourglass-start" aria-hidden="true" style="font-size: 20px;"></i>
+                          <% end %>
+                        </div>
+                      <% elsif ds.started? %>
+                        <div class="end-session-div">
+                          Session has started &nbsp;&nbsp;
+                          <%= link_to "#", id: "end-session-btn-#{ appointment.id}", data: { "toggle" => "modal", 'target' => "#end-session-#{appointment.id}" }, title: "End Session" do %>
+                            <i class="fa fa-hourglass-end" aria-hidden="true" style="font-size: 20px;"></i>
+                          <% end %>
+                        </div>
+                      <% end %>
+                      <div class="end-session-div-<%= appointment.id %>" style="display: none;">
                         Session has started &nbsp;&nbsp;
                         <%= link_to "#", id: "end-session-btn-#{ appointment.id}", data: { "toggle" => "modal", 'target' => "#end-session-#{appointment.id}" }, title: "End Session" do %>
                           <i class="fa fa-hourglass-end" aria-hidden="true" style="font-size: 20px;"></i>
                         <% end %>
                       </div>
-                    <% end %>
-                    <div class="end-session-div-<%= appointment.id %>" style="display: none;">
-                      Session has started &nbsp;&nbsp;
-                      <%= link_to "#", id: "end-session-btn-#{ appointment.id}", data: { "toggle" => "modal", 'target' => "#end-session-#{appointment.id}" }, title: "End Session" do %>
-                        <i class="fa fa-hourglass-end" aria-hidden="true" style="font-size: 20px;"></i>
-                      <% end %>
-                    </div>
-                    </td>
-                  </tr>
-                  <div class="modal fade" id="end-session-<%= appointment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          <h3>Do you want to suggest lab tests?</h3>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="lab-test-yes">
-                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                      </td>
+                    </tr>
+                    <div class="modal fade" id="end-session-<%= appointment.id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
                           </div>
-                          <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="lab-test-no" checked/>
-                            <label class="form-check-label" for="inlineRadio2">No</label>
-                          </div>
-                          <br><br>
-                          <div style="display: none;" class="lab-test-types-div">
-                            <h4>Select lab tests</h4><br>
-                            <% @lab_test_types.each do |lab_test_type| %>
+                          <div class="modal-body text-center">
+                            <h4>Do you want to suggest lab tests?</h4><br>
+                            <%= form_tag end_session_url(session_id: ds.id), method: :patch, remote: true do %>
+                              <%= hidden_field_tag "appointment_id", appointment.id %>
                               <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="<%= lab_test_type.id %>" value="<%= lab_test_type.id %>">
-                                <label class="form-check-label" for="inlineCheckbox1"><%= lab_test_type.name %></label>
+                                <input class="form-check-input" type="radio" name="lab-test-yes">
+                                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                              </div>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="lab-test-no" checked/>
+                                <label class="form-check-label" for="inlineRadio2">No</label>
+                              </div>
+                              <br><br>
+                              <div style="display: none;" class="lab-test-types-div">
+                                <%= select_tag :lab_test_type_ids, options_for_select(@lab_test_types.collect {|d| [ d.name, d.id ] }), { multiple: true, class: 'form-control select2_dropdown lab_test_type_dropdown', style:"width:75% !important;"} %>
+                              </div>
+                              <div class="text-center" style="padding: 1rem;border-top: 1px solid #e9ecef;margin-top: 15px;">
+                                <%= submit_tag "Confirm", class: "btn btn-primary" %>
                               </div>
                             <% end %>
                           </div>
                         </div>
-                        <div class="text-center" style="padding: 1rem;border-top: 1px solid #e9ecef;">
-                          <button type="button" class="btn btn-primary" data-dismiss="modal">Confirm</button>
-                        </div>
                       </div>
                     </div>
-                  </div>
+                  <% end %>
                 <% end %>
               </tbody>
             </table>

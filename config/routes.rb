@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   post '/get_cities', to: 'static_pages#get_cities', as: 'get_cities'
   post '/get_beds', to: 'static_pages#get_beds', as: 'get_beds'
   get '/start_session', to: 'doctor_sessions#start_session', as: 'start_session'
-  get '/end_session', to: 'doctor_sessions#end_session', as: 'end_session'
+  patch '/end_session', to: 'doctor_sessions#end_session', as: 'end_session'
   get '/inpatients', to: 'patients#inpatients', as: 'inpatients'
   get '/outpatients', to: 'patients#outpatients', as: 'outpatients'
   # Example of regular route:

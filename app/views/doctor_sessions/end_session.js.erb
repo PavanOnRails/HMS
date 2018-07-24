@@ -1,0 +1,6 @@
+$(".flash-message").text("Your session with <%= @patient.full_name %> has ended");
+$('.flash-message').delay(500).fadeIn('normal', function() {
+  $(this).delay(3000).fadeOut();
+});
+$("#session-row-<%= @appointment.id %>").delay(3000).fadeOut();
+$("#end-session-<%= @appointment.id %>").modal("hide");

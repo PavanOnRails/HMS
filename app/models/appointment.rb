@@ -2,7 +2,7 @@ class Appointment < ApplicationRecord
 	belongs_to :patient
 	belongs_to :doctor
 
-	enum status: [ :pending, :confirmed, :declined, :canceled]
+	enum status: [ :pending, :confirmed, :declined, :canceled, :closed]
 	enum appointment_type: [ :new_appointment, :follow_through, :re_visit ]
 
 	after_update :create_doctor_session_for_patient, if: Proc.new { |p| p.confirmed? }

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180722093828) do
+ActiveRecord::Schema.define(version: 20180724072309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,13 +99,14 @@ ActiveRecord::Schema.define(version: 20180722093828) do
   end
 
   create_table "doctor_sessions", force: :cascade do |t|
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.time     "start_time"
     t.time     "end_time"
     t.integer  "doctor_id"
     t.integer  "patient_id"
-    t.integer  "session_status", default: 0
+    t.integer  "session_status",      default: 0
+    t.boolean  "lab_tests_suggested", default: false
   end
 
   create_table "doctors", force: :cascade do |t|
@@ -143,16 +144,11 @@ ActiveRecord::Schema.define(version: 20180722093828) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lab_test_types_tests", id: false, force: :cascade do |t|
-    t.integer "lab_test_id",      null: false
-    t.integer "lab_test_type_id", null: false
-    t.index ["lab_test_id", "lab_test_type_id"], name: "index_lab_test_types_tests_on_lab_test_id_and_lab_test_type_id", using: :btree
-    t.index ["lab_test_type_id", "lab_test_id"], name: "index_lab_test_types_tests_on_lab_test_type_id_and_lab_test_id", using: :btree
-  end
-
   create_table "lab_tests", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "lab_test_type_id"
+    t.integer  "patient_id"
   end
 
   create_table "patients", force: :cascade do |t|

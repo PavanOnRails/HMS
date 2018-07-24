@@ -29,6 +29,9 @@
 .submit-btn{
   width: 30% !important;
 }
+.form-check-inline{
+  margin-right: 1.25rem !important;
+}
 .nav-tabs > li > a{
   margin-right: 0px !important;
   line-height: 0 !important;
