@@ -1,0 +1,18 @@
+<%= form_for(ward) do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Name" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :no_of_rooms, autofocus: true, class: 'form-control', placeholder: "No. of rooms" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :no_of_beds, autofocus: true, class: 'form-control', placeholder: "No. of beds" %>
+      </div>
+    </div>          
+  </div><br>
+  <div class="text-center">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>

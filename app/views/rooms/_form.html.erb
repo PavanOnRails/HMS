@@ -1,0 +1,34 @@
+<%= form_for(room) do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :room_no, autofocus: true, class: 'form-control', placeholder: "Room No." %>
+      </div>
+      <div class="col">
+      	<%= f.select :ward_id,Ward.all.collect {|w| [ w.name, w.id ] }, { include_blank: true }, class: 'form-control select2_dropdown ward_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.select :room_type, Room.room_types.map { |key, value| [key.humanize, key] }, { include_blank: true }, class: 'form-control select2_dropdown room_type_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.select :sharing_type, Room.sharing_types.map { |key, value| [key.humanize, key] }, { include_blank: true, disabled: true }, class: 'form-control select2_dropdown sharing_type_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :capacity, autofocus: true, class: 'form-control', placeholder: "No. of beds(capacity)" %>
+      </div>
+    </div>          
+  </div>
+  <div class="text-center" style="margin-top: 15%;">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>
+
+<script type="text/javascript">
+	
+</script>

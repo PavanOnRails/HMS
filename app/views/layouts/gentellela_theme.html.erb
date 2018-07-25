@@ -86,6 +86,24 @@ $( ".lab_test_type_dropdown" ).select2({
     width: 'resolve',
     allowClear: true
 });
+
+$( ".room_type_dropdown" ).select2({
+    placeholder: "Select Room Type",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".ward_dropdown" ).select2({
+    placeholder: "Select Ward",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".sharing_type_dropdown" ).select2({
+    placeholder: "Select type of sharing",
+    width: 'resolve',
+    allowClear: true
+});
 //generate states based on country selection
 $(".country_dropdown").change(function(){
   var selected_country = $(this).val();
@@ -151,6 +169,17 @@ $(".patient_type_dropdown").change(function(){
   else{
     $(".ward_dropdown").prop("disabled", true);
     $(".bed_dropdown").prop("disabled", true);
+  }
+});
+
+//show sharing type selection based on room type selection
+$(".room_type_dropdown").change(function(){
+  var selected_type = $(this).val();
+  if (selected_type == 'shared') {
+    $(".sharing_type_dropdown").prop("disabled", false);
+  }
+  else{
+    $(".sharing_type_dropdown").prop("disabled", true);
   }
 });
 

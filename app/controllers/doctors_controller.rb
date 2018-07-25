@@ -1,4 +1,5 @@
 class DoctorsController < ApplicationController
+  layout 'gentellela_theme', only: [:index]
   before_action :set_doctor, only: [:show, :edit, :update, :destroy]
 
   # GET /doctors

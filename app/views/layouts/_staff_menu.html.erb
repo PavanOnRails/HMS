@@ -1,24 +1,56 @@
-<ul class="nav side-menu">
-  <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
-  </li>
-  <li>
-    <%= link_to patients_path, data: { turbolinks: false} do %>
-     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Patient Registration
-    <% end %>
-  </li>
-  <li>
-    <%= link_to outpatients_path, data: { turbolinks: false} do %>
-     <i class="fa fa-user" aria-hidden="true"></i>Outpatients
-    <% end %>
-  </li>
-  <li>
-    <%= link_to inpatients_path, data: { turbolinks: false} do %>
-     <i class="fa fa-bed" aria-hidden="true"></i>Inpatients
-    <% end %>
-  </li>
-  <li>
-    <%= link_to appointments_path, data: { turbolinks: false} do %>
-     <i class="fa fa-calendar" aria-hidden="true"></i>Appointment requests
-    <% end %>
-  </li>
-</ul>
+<% if current_staff.super_admin == false %>
+  <ul class="nav side-menu">
+    <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
+    </li>
+    <li>
+      <%= link_to patients_path, data: { turbolinks: false} do %>
+       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Patient Registration
+      <% end %>
+    </li>
+    <li>
+      <%= link_to outpatients_path, data: { turbolinks: false} do %>
+       <i class="fa fa-user" aria-hidden="true"></i>Outpatients
+      <% end %>
+    </li>
+    <li>
+      <%= link_to inpatients_path, data: { turbolinks: false} do %>
+       <i class="fa fa-bed" aria-hidden="true"></i>Inpatients
+      <% end %>
+    </li>
+    <li>
+      <%= link_to appointments_path, data: { turbolinks: false} do %>
+       <i class="fa fa-calendar" aria-hidden="true"></i>Appointment requests
+      <% end %>
+    </li>
+  </ul>
+<% elsif current_staff.super_admin == true %>
+  <ul class="nav side-menu">
+    <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
+    </li>
+    <li>
+      <%= link_to staffs_path, data: { turbolinks: false} do %>
+       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Staff
+      <% end %>
+    </li>
+    <li>
+      <%= link_to doctors_path, data: { turbolinks: false} do %>
+       <i class="fa fa-user" aria-hidden="true"></i>Doctors
+      <% end %>
+    </li>
+    <li>
+      <%= link_to wards_path, data: { turbolinks: false} do %>
+       <i class="fa fa-bed" aria-hidden="true"></i>Wards
+      <% end %>
+    </li>
+    <li>
+      <%= link_to rooms_path, data: { turbolinks: false} do %>
+       <i class="fa fa-calendar" aria-hidden="true"></i>Rooms
+      <% end %>
+    </li>
+    <li>
+      <%= link_to beds_path, data: { turbolinks: false} do %>
+       <i class="fa fa-calendar" aria-hidden="true"></i>Beds
+      <% end %>
+    </li>
+  </ul>
+<% end %>

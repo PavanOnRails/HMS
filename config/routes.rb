@@ -11,15 +11,19 @@ Rails.application.routes.draw do
   resources :staffs
   resources :patients
   resources :doctors
+  resources :wards
+  resources :rooms
+  resources :beds
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'static_pages#home'
   
-  get '/doctors/:id/dashboard', to: 'users#doctor_dashboard', as: 'doctors_dashboard'
-  get '/patients/:id/dashboard', to: 'users#patient_dashboard', as: 'patients_dashboard'
-  get '/staff/:id/dashboard', to: 'users#staff_dashboard', as: 'staff_dashboard'
+  get '/doctors/:id/dashboard', to: 'dashboards#doctor_dashboard', as: 'doctors_dashboard'
+  get '/patients/:id/dashboard', to: 'dashboards#patient_dashboard', as: 'patients_dashboard'
+  get '/staff/:id/dashboard', to: 'dashboards#staff_dashboard', as: 'staff_dashboard'
+  get '/super_admin/:id/dashboard', to: 'dashboards#super_admin_dashboard', as: 'super_admin_dashboard'
   patch '/appointments/:id/update_status', to: 'appointments#update_status', as: 'update_status'
   post '/get_states', to: 'static_pages#get_states', as: 'get_states'
   post '/get_cities', to: 'static_pages#get_cities', as: 'get_cities'

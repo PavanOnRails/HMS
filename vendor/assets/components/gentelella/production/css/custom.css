@@ -515,7 +515,7 @@ table.no-margin .progress {
   margin-left: -10px;
   /*display: block !important;*/
 }
-.row.tile_count, .row.patients-row, .row.appointments-row {
+.row.tile_count, .row.patients-row, .row.appointments-row, .row.index-row {
   display: block !important;
 }
 .grid_slider .col-md-6 {
