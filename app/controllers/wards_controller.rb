@@ -53,6 +53,6 @@ class WardsController < ApplicationController
   end
   
   def ward_params
-    params.require(:ward).permit(:name, :no_of_rooms, :no_of_beds)
+    params.require(:ward).permit(:name, :no_of_rooms)
   end
 end

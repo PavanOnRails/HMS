@@ -63,6 +63,12 @@ $( ".ward_dropdown" ).select2({
     allowClear: true
 });
 
+$( ".room_dropdown" ).select2({
+    placeholder: "Select room",
+    width: 'resolve',
+    allowClear: true
+});
+
 $( ".bed_dropdown" ).select2({
     placeholder: "Select bed",
     width: 'resolve',
@@ -89,12 +95,6 @@ $( ".lab_test_type_dropdown" ).select2({
 
 $( ".room_type_dropdown" ).select2({
     placeholder: "Select Room Type",
-    width: 'resolve',
-    allowClear: true
-});
-
-$( ".ward_dropdown" ).select2({
-    placeholder: "Select Ward",
     width: 'resolve',
     allowClear: true
 });
@@ -142,14 +142,31 @@ $(".state_dropdown").change(function(){
   });
 })
 
-//generate beds based on ward selection
+//generate rooms based on ward selection
 $(".ward_dropdown").change(function(){
   var selected_ward = $(this).val();
+  $.ajax({
+    url: "<%= get_rooms_url %>",
+    type: "POST",
+    dataType: "json",
+    data: {ward: selected_ward},
+    success: function (data) {
+      $(".room_dropdown").empty();
+      $.each( data, function( index, value ) {
+        $('<option value="'+ value.id +'">' + value.room_no + '</option>').appendTo('.room_dropdown');
+      });
+    },
+  });
+})
+
+//generate beds based on room selection
+$(".room_dropdown").change(function(){
+  var selected_room = $(this).val();
   $.ajax({
     url: "<%= get_beds_url %>",
     type: "POST",
     dataType: "json",
-    data: {ward: selected_ward},
+    data: {room: selected_room},
     success: function (data) {
       $(".bed_dropdown").empty();
       $.each( data, function( index, value ) {
@@ -180,6 +197,35 @@ $(".room_type_dropdown").change(function(){
   }
   else{
     $(".sharing_type_dropdown").prop("disabled", true);
+  }
+  if (selected_type == 'single') {
+    $(".bed-capacity").val('1');
+    $(".bed-capacity").prop("readonly", true);
+  }
+  else{
+    $(".bed-capacity").val('');
+    $(".bed-capacity").prop("readonly", false);
+  }
+});
+
+//show capacity value based on sharing type selection
+$(".sharing_type_dropdown").change(function(){
+  var selected_type = $(this).val();
+  if (selected_type == 'two_sharing') {
+    $(".bed-capacity").val('2');
+    $(".bed-capacity").prop("readonly", true);
+  }
+  else if (selected_type == 'three_sharing') {
+    $(".bed-capacity").val('3');
+    $(".bed-capacity").prop("readonly", true);
+  }
+  else if (selected_type == 'four_sharing') {
+    $(".bed-capacity").val('4');
+    $(".bed-capacity").prop("readonly", true);
+  }
+  else{
+    $(".bed-capacity").val('');
+    $(".bed-capacity").prop("readonly", false);
   }
 });
 

@@ -1,0 +1,28 @@
+<%= form_for(bed) do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :bed_no, autofocus: true, class: 'form-control', placeholder: "Bed No." %>
+      </div>
+      <div class="col">
+      	<%= f.select :ward_id,Ward.all.collect {|w| [ w.name, w.id ] }, { include_blank: true }, class: 'form-control select2_dropdown ward_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.select :room_id, Room.all.collect {|r| [ r.room_no, r.id ] }, { include_blank: true }, class: 'form-control select2_dropdown room_dropdown', style:"width:100%;" %>
+      </div>
+    </div>          
+  </div>
+  <div class="text-center" style="margin-top: 15%;">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>
+
+<script type="text/javascript">
+	
+</script>

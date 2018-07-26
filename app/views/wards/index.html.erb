@@ -20,7 +20,6 @@
               <tr>
                 <th>Name</th>
                 <th>No. of rooms</th>
-                <th>No. of beds</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -30,7 +29,6 @@
                 <tr id="ward-row-<%= ward.id %>">
                   <td><%= ward.name %></td>
                   <td><%= ward.no_of_rooms %></td>
-                  <td><%= ward.no_of_beds %></td>
                   <td>
                   	<%= link_to edit_ward_path(ward), title: "Edit", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
                       <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 20px;"></i>

@@ -1,2 +1,22 @@
-<h1>Beds#new</h1>
-<p>Find me in app/views/beds/new.html.erb</p>
+<!-- page content -->
+<div class="right_col" role="main">
+	<div class="clearfix"></div>
+	  <div class="row">
+
+	    <div class="col-md-12 col-sm-12 col-xs-12">
+	      <div class="x_panel" style="height:600px;">
+	        <div class="x_title">
+	        	  <div class="pull-left">
+	        	  	<%= link_to beds_path, title: "Back", data: { "toggle" => "tooltip", 'placement' => "top", turbolinks: false} do %>
+					        <i class="fa fa-chevron-left" aria-hidden="true" style="font-size: 20px;"></i>
+					      <% end %>
+					    </div>            
+							<h1 class="text-center">Create Bed</h1><br>
+							<%= render 'form', bed: @bed %>
+	          <div class="clearfix"></div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+<!-- /page content -->

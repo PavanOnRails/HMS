@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  layout 'gentellela_theme', only: [:index]
+  layout 'gentellela_theme', only: [:index, :new, :edit]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   # GET /staffs
