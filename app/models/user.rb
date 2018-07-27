@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 	has_secure_password
-	enum user_type: [ :staff, :doctor, :patient ]
+	enum user_type: [ :staff, :doctor, :patient, :nurse ]
 	enum registration_status: [ :registration_done, :registration_not_done]
 	attr_accessor :password_confirmation
   # # Include default devise modules. Others available are:

@@ -152,6 +152,7 @@ $(".ward_dropdown").change(function(){
     data: {ward: selected_ward},
     success: function (data) {
       $(".room_dropdown").empty();
+      $('<option value>' + '</option>').appendTo('.room_dropdown');
       $.each( data, function( index, value ) {
         $('<option value="'+ value.id +'">' + value.room_no + '</option>').appendTo('.room_dropdown');
       });
@@ -169,6 +170,7 @@ $(".room_dropdown").change(function(){
     data: {room: selected_room},
     success: function (data) {
       $(".bed_dropdown").empty();
+      $('<option value>' + '</option>').appendTo('.bed_dropdown');
       $.each( data, function( index, value ) {
         $('<option value="'+ value.id +'">' + value.bed_no + '</option>').appendTo('.bed_dropdown');
       });
@@ -176,15 +178,17 @@ $(".room_dropdown").change(function(){
   });
 })
 
-//show ward&bed selection based on patient type selection
+//show ward,room & bed selection based on patient type selection
 $(".patient_type_dropdown").change(function(){
   var selected_type = $(this).val();
   if (selected_type == 'inpatient') {
     $(".ward_dropdown").prop("disabled", false);
+    $(".room_dropdown").prop("disabled", false);
     $(".bed_dropdown").prop("disabled", false);
   }
   else{
     $(".ward_dropdown").prop("disabled", true);
+    $(".room_dropdown").prop("disabled", true);
     $(".bed_dropdown").prop("disabled", true);
   }
 });

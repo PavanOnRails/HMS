@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :nurses
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
   get '/login' => 'sessions#new'

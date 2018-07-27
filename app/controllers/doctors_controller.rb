@@ -1,6 +1,6 @@
 class DoctorsController < ApplicationController
-  layout 'gentellela_theme', only: [:index]
-  before_action :set_doctor, only: [:show, :edit, :update, :destroy]
+  layout 'gentellela_theme', only: [:index, :new, :edit]
+  before_action :set_doctor, only: [:edit, :update, :destroy]
 
   # GET /doctors
   # GET /doctors.json
@@ -29,7 +29,7 @@ class DoctorsController < ApplicationController
 
     respond_to do |format|
       if @doctor.save
-        format.html { redirect_to @doctor, notice: 'Doctor was successfully created.' }
+        format.html { redirect_to doctors_path, notice: 'Doctor was successfully created.' }
         format.json { render :show, status: :created, location: @doctor }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class DoctorsController < ApplicationController
   def update
     respond_to do |format|
       if @doctor.update(doctor_params)
-        format.html { redirect_to @doctor, notice: 'Doctor was successfully updated.' }
+        format.html { redirect_to doctors_path, notice: 'Doctor was successfully updated.' }
         format.json { render :show, status: :ok, location: @doctor }
       else
         format.html { render :edit }
@@ -70,6 +70,6 @@ class DoctorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def doctor_params
-      params.require(:doctor).permit(:first_name, :last_name, :email, :password)
+      params.require(:doctor).permit(:first_name, :last_name, :email, :age, :phone_number, :designation)
     end
 end

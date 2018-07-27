@@ -1,4 +1,4 @@
-<% if current_staff.super_admin == false %>
+<%# if current_staff.super_admin == false %>
   <ul class="nav side-menu">
     <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
     </li>
@@ -23,7 +23,7 @@
       <% end %>
     </li>
   </ul>
-<% elsif current_staff.super_admin == true %>
+<%# elsif current_staff.super_admin == true %>
   <ul class="nav side-menu">
     <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
     </li>
@@ -35,6 +35,11 @@
     <li>
       <%= link_to doctors_path, data: { turbolinks: false} do %>
        <i class="fa fa-user" aria-hidden="true"></i>Doctors
+      <% end %>
+    </li>
+    <li>
+      <%= link_to nurses_path, data: { turbolinks: false} do %>
+       <i class="fa fa-user" aria-hidden="true"></i>Nurses
       <% end %>
     </li>
     <li>
@@ -53,4 +58,4 @@
       <% end %>
     </li>
   </ul>
-<% end %>
+<%# end %>

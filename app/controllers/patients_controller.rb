@@ -35,7 +35,7 @@ class PatientsController < ApplicationController
     respond_to do |format|
       if @patient.save
         if @patient.inpatient?
-          @patient.map_bed_to_patient(@patient, params[:bed_id])
+          @patient.map_room_and_bed_to_patient(@patient, params[:room_id], params[:bed_id])
         end
         format.html { redirect_to patients_path, notice: 'Patient was successfully created.' }
         format.json { render :show, status: :created, location: @patient }
@@ -52,7 +52,7 @@ class PatientsController < ApplicationController
     respond_to do |format|
       if @patient.update(patient_params)
         if @patient.inpatient?
-          @patient.map_bed_to_patient(@patient, params[:bed_id])
+          @patient.map_room_and_bed_to_patient(@patient, params[:room_id], params[:bed_id])
         end
         format.html { redirect_to patients_path, notice: 'Patient was successfully updated.' }
         format.json { render :show, status: :ok, location: @patient }

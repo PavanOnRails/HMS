@@ -38,7 +38,8 @@ class Patient < ApplicationRecord
   	self.update_column(:uhid, "P#{self.id}")
   end
 
-  def map_bed_to_patient(patient,bed_id)
+  def map_room_and_bed_to_patient(patient, room_id, bed_id)
+    Room.find(room_id).update_column(:patient_id, patient.id)
     Bed.find(bed_id).update_columns(patient_id: patient.id, status: :occupied)
   end
 end
