@@ -116,11 +116,11 @@
       </div>
       
       <div class="col">
-        <%= select_tag :room_id, options_for_select(Room.all.collect {|r| [ r.room_no, r.id ] }), { class: 'select2_dropdown room_dropdown', style:"width:100%;", include_blank: true, disabled: true } %>
+        <%= select_tag :room_id, options_for_select(Room.where(status: :vacant).collect {|r| [ r.room_no, r.id ] }), { class: 'select2_dropdown room_dropdown', style:"width:100%;", include_blank: true, disabled: true } %>
       </div>
 
       <div class="col">
-        <%= select_tag :bed_id, options_for_select(@general_ward.beds.where(status: :vacant).collect {|b| [ b.bed_no, b.id ] }), { class: 'select2_dropdown bed_dropdown', style:"width:100%;", include_blank: true, disabled: true } %>
+        <%= select_tag :bed_id, options_for_select(Bed.where(status: :vacant).collect {|b| [ b.bed_no, b.id ] }), { class: 'select2_dropdown bed_dropdown', style:"width:100%;", include_blank: true, disabled: true } %>
       </div>
     </div>
   </div>

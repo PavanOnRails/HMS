@@ -11,9 +11,6 @@
         <%= f.select :room_type, Room.room_types.map { |key, value| [key.humanize, key] }, { include_blank: true }, class: 'form-control select2_dropdown room_type_dropdown', style:"width:100%;" %>
       </div>
       <div class="col">
-        <%= f.select :sharing_type, Room.sharing_types.map { |key, value| [key.humanize, key] }, { include_blank: true}, disabled: true, class: 'form-control select2_dropdown sharing_type_dropdown', style:"width:100%;" %>
-      </div>
-      <div class="col">
         <%= f.text_field :capacity, autofocus: true, class: 'form-control bed-capacity', placeholder: "No. of beds(capacity)" %>
       </div>
     </div>          

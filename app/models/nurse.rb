@@ -1,4 +1,5 @@
 class Nurse < ApplicationRecord
+	has_many :patients
 	after_save :create_user_record_for_nurse
 
 	def full_name

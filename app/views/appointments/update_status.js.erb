@@ -1,10 +1,10 @@
 <% if @appointment.confirmed? %>
-  $(".flash-message").text("Appointment successfully confirmed");
+  $(".custom-flash-message").text("Appointment successfully confirmed");
 <% elsif @appointment.declined? %>
   $("#declineModal-<%= @appointment.id %>").modal('hide');
-  $(".flash-message").text("Appointment successfully declined");
+  $(".custom-flash-message").text("Appointment successfully declined");
 <% end %>
-$('.flash-message').delay(500).fadeIn('normal', function() {
+$('.custom-flash-message').delay(500).fadeIn('normal', function() {
   $(this).delay(3000).fadeOut();
 });
 $("#appointment-row-<%= @appointment.id %>").delay(3000).fadeOut();

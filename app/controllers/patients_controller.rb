@@ -19,12 +19,10 @@ class PatientsController < ApplicationController
   def new
     @patient = Patient.new
     @patient.appointments.build
-    @general_ward = Ward.find_by(name: "General Ward")
   end
 
   # GET /patients/1/edit
   def edit
-    @general_ward = Ward.find_by(name: "General Ward")
   end
 
   # POST /patients

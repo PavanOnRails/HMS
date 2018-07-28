@@ -3,7 +3,6 @@ class Room < ApplicationRecord
 	belongs_to :ward
 	belongs_to :patient
 
-	enum room_type: [:single, :shared]
-	enum sharing_type: [:two_sharing, :three_sharing, :four_sharing]
+	enum room_type: [:single, :two_sharing, :three_sharing, :four_sharing]
 	enum status: [:vacant, :full]
 end

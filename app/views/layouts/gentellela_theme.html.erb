@@ -193,29 +193,14 @@ $(".patient_type_dropdown").change(function(){
   }
 });
 
-//show sharing type selection based on room type selection
+//show capacity value based on room type selection
 $(".room_type_dropdown").change(function(){
   var selected_type = $(this).val();
-  if (selected_type == 'shared') {
-    $(".sharing_type_dropdown").prop("disabled", false);
-  }
-  else{
-    $(".sharing_type_dropdown").prop("disabled", true);
-  }
   if (selected_type == 'single') {
     $(".bed-capacity").val('1');
     $(".bed-capacity").prop("readonly", true);
   }
-  else{
-    $(".bed-capacity").val('');
-    $(".bed-capacity").prop("readonly", false);
-  }
-});
-
-//show capacity value based on sharing type selection
-$(".sharing_type_dropdown").change(function(){
-  var selected_type = $(this).val();
-  if (selected_type == 'two_sharing') {
+  else if (selected_type == 'two_sharing') {
     $(".bed-capacity").val('2');
     $(".bed-capacity").prop("readonly", true);
   }

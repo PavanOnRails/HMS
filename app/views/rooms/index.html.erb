@@ -32,7 +32,7 @@
                 <tr id="room-row-<%= room.id %>">
                   <td><%= room.room_no %></td>
                   <td><%= room.ward.name %></td>
-                  <td><%= room.room_type.capitalize %></td>
+                  <td><%= room.room_type.humanize.capitalize %></td>
                   <td><%= pluralize(room.capacity, 'bed') %></td>
                   <td><%= room.beds.where(status: :vacant).count %></td>
                   <td>
