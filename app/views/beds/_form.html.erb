@@ -8,7 +8,7 @@
       	<%= f.select :ward_id,Ward.all.collect {|w| [ w.name, w.id ] }, { include_blank: true }, class: 'form-control select2_dropdown ward_dropdown', style:"width:100%;" %>
       </div>
       <div class="col">
-        <%= f.select :room_id, Room.all.collect {|r| [ r.room_no, r.id ] }, { include_blank: true }, class: 'form-control select2_dropdown room_dropdown', style:"width:100%;" %>
+        <%= f.select :room_id, Room.where(status: :vacant).collect {|r| [ r.room_with_room_type, r.id ] }, { include_blank: true }, class: 'form-control select2_dropdown room_dropdown', style:"width:100%;" %>
       </div>
     </div>          
   </div>

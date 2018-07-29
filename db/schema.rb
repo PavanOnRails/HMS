@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180728090310) do
+ActiveRecord::Schema.define(version: 20180729085413) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "status"
+    t.integer  "status", default: 0
     t.integer  "appointment_type"
     t.integer  "doctor_id"
     t.integer  "patient_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20180728090310) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "patient_id"
-    t.integer  "status"
+    t.integer  "status", default: 0
     t.integer  "room_id"
   end
 
@@ -168,8 +168,8 @@ ActiveRecord::Schema.define(version: 20180728090310) do
     t.string   "last_name"
     t.string   "email"
     t.string   "password"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
     t.integer  "age"
     t.string   "phone_number"
     t.string   "uhid"
@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20180728090310) do
     t.string   "blood_group"
     t.integer  "patient_type"
     t.integer  "nurse_id"
+    t.integer  "incharge_doctor_ids", default: [],              array: true
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -207,7 +208,7 @@ ActiveRecord::Schema.define(version: 20180728090310) do
     t.string   "phone_number"
     t.string   "designation"
     t.string   "highest_education"
-    t.boolean  "admin",             default: true
+    t.boolean  "admin",             default: false
     t.boolean  "employee",          default: true
     t.boolean  "super_admin",       default: false
   end

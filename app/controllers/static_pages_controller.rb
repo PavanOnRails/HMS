@@ -16,8 +16,8 @@ class StaticPagesController < ApplicationController
   
   def get_rooms
 		@ward = Ward.find(params[:ward])
-		@rooms = @ward.rooms
-		render json: @rooms
+		@rooms = @ward.rooms.where(status: :vacant)
+		render json: @rooms.to_json(:methods => :room_with_room_type)
 	end
 
 	def get_beds

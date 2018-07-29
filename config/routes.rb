@@ -34,6 +34,8 @@ Rails.application.routes.draw do
   patch '/end_session', to: 'doctor_sessions#end_session', as: 'end_session'
   get '/inpatients', to: 'patients#inpatients', as: 'inpatients'
   get '/outpatients', to: 'patients#outpatients', as: 'outpatients'
+  get '/edit_inpatient/:id', to: 'patients#edit_inpatient', as: 'edit_inpatient'
+  put '/update_inpatient/:id', to: 'patients#update_inpatient', as: 'update_inpatient'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

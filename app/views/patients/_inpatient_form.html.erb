@@ -1,0 +1,35 @@
+<%= form_for(patient, url: update_inpatient_path(patient)) do |f| %>
+  
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <%= f.select :incharge_doctor_ids, Doctor.all.collect {|d| [ d.full_name, d.id ] }, {}, { multiple: true, class: 'select2_dropdown multiple_doctor_dropdown', style:"width:100%;"} %>
+        </div>
+        <div class="col">
+          <%= f.select :nurse_id, Nurse.all.collect {|n| [ n.full_name, n.id ] }, {include_blank: true},  {class: 'select2_dropdown nurse_dropdown', style:"width:100%;"} %>
+        </div>
+      </div>
+    </div><br>
+    <div class="form-group">
+      <div class="row">
+        <div class="col">
+          <%= select_tag :ward_id, options_for_select(Ward.all.collect {|w| [ w.name, w.id ] }), { class: 'select2_dropdown ward_dropdown', style:"width:100%;", include_blank: true} %>
+        </div>
+        <div class="col">
+          <%= select_tag :room_id, options_for_select(Room.where(status: :vacant).collect {|r| [ r.room_no, r.id ] }), { class: 'select2_dropdown room_dropdown', style:"width:100%;", include_blank: true, disabled: true } %>
+        </div>
+        <div class="col">
+          <%= select_tag :bed_id, options_for_select(Bed.where(status: :vacant).collect {|b| [ b.bed_no, b.id ] }), { class: 'select2_dropdown bed_dropdown', style:"width:100%;", include_blank: true, disabled: true } %>
+        </div>
+      </div>
+    </div><br>
+  <div class="text-center">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>

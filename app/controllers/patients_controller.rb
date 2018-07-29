@@ -1,6 +1,6 @@
 class PatientsController < ApplicationController
-  layout 'gentellela_theme', only: [:index, :new, :edit, :inpatients, :outpatients]
-  before_action :set_patient, only: [:show, :edit, :update, :destroy]
+  layout 'gentellela_theme', only: [:index, :new, :edit, :inpatients, :outpatients, :edit_inpatient]
+  before_action :set_patient, only: [:show, :edit, :update, :destroy, :edit_inpatient]
 
   # GET /patients
   # GET /patients.json
@@ -78,6 +78,24 @@ class PatientsController < ApplicationController
   def outpatients
     @outpatients = Patient.where(patient_type: :outpatient)
   end
+  
+  def edit_inpatient
+  end
+
+  def update_inpatient
+    respond_to do |format|
+      if @patient.update(inpatient_params)
+        if @patient.inpatient?
+          @patient.map_room_and_bed_to_patient(@patient, params[:room_id], params[:bed_id])
+        end
+        format.html { redirect_to inpatients_path, notice: 'Patient was successfully updated.' }
+        format.json { render :show, status: :ok, location: @patient }
+      else
+        format.html { render :edit }
+        format.json { render json: @patient.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -87,7 +105,13 @@ class PatientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def patient_params
-      params.require(:patient).permit(:first_name, :last_name, :email, :registration_status, :address_line1, :address_line2, :phone_number, :country, :state, :city, :pincode, :gender, :age, :blood_group, :patient_type,
-        appointments_attributes: [:doctor_id, :start_time, :end_time, :appointment_type, :status, :patient_id], bills_attributes: [:registration_fee, :doctor_fee, :pharmacy_bill, :maintenance_fee, :patient_id, :paid_with, :tax, bill_type_ids: []])
+      params.require(:patient).permit(:first_name, :last_name, :email, :registration_status, :address_line1, 
+        :address_line2, :phone_number, :country, :state, :city, :pincode, :gender, :age, :blood_group, 
+        :patient_type, :nurse_id, incharge_doctor_ids: [],
+        appointments_attributes: [:doctor_id, :start_time, :end_time, :appointment_type, :status, :patient_id])
+    end
+
+    def inpatient_params
+      params.require(:patient).permit(:nurse_id, incharge_doctor_ids: [])
     end
 end

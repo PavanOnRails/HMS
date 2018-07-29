@@ -19,10 +19,11 @@
                 <tr>
                   <th>Name</th>
                   <th>UHID</th>
-                  <th>Doctor incharge</th>
-                  <th>Nurse incharge</th>
+                  <th>Doctor(s) incharge</th>
+                  <th>Nurse(s) incharge</th>
                   <th>Allocated Bed</th>
                   <th>Room no.</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,10 +35,10 @@
                     <td></td>
                     <td><%= ip.try(:bed).try(:bed_no) %></td>
                     <td><%= ip.try(:room).try(:room_no) %></td>
-                    <!-- <td><%#= link_to edit_patient_path(appointment.patient), title: "Register", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
+                    <td><%= link_to edit_inpatient_path(ip), title: "Edit", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
                       <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 20px;"></i>
-                      <%# end %>
-                    </td> -->
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>

@@ -87,6 +87,18 @@ $( ".doctor_dropdown" ).select2({
     allowClear: true
 });
 
+$( ".multiple_doctor_dropdown" ).select2({
+    placeholder: "Select Doctors",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".nurse_dropdown" ).select2({
+    placeholder: "Select Nurse",
+    width: 'resolve',
+    allowClear: true
+});
+
 $( ".lab_test_type_dropdown" ).select2({
     placeholder: "Select Lab tests",
     width: 'resolve',
@@ -144,6 +156,8 @@ $(".state_dropdown").change(function(){
 
 //generate rooms based on ward selection
 $(".ward_dropdown").change(function(){
+  $(".room_dropdown").prop("disabled", false);
+  $(".bed_dropdown").prop("disabled", false);
   var selected_ward = $(this).val();
   $.ajax({
     url: "<%= get_rooms_url %>",
@@ -151,10 +165,11 @@ $(".ward_dropdown").change(function(){
     dataType: "json",
     data: {ward: selected_ward},
     success: function (data) {
+      console.log(data)
       $(".room_dropdown").empty();
       $('<option value>' + '</option>').appendTo('.room_dropdown');
       $.each( data, function( index, value ) {
-        $('<option value="'+ value.id +'">' + value.room_no + '</option>').appendTo('.room_dropdown');
+        $('<option value="'+ value.id +'">' + value.room_with_room_type + '</option>').appendTo('.room_dropdown');
       });
     },
   });
