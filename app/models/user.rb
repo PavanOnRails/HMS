@@ -15,14 +15,13 @@ class User < ApplicationRecord
   end
   
   def create_patient_and_appointmet_records
-  	patient = Patient.create(first_name: self.first_name, last_name: self.last_name, email: self.email, age: self.age, phone_number: self.phone_number)
+  	patient = Patient.create(first_name: self.first_name, last_name: self.last_name, email: self.email, phone_number: self.phone_number)
   	appointment = Appointment.new
   	appointment.start_time = self.start_time
     appointment.end_time = self.end_time
     appointment.doctor_id = self.doctor_id
     appointment.appointment_type = self.appointment_type
     appointment.patient_id = patient.id
-    appointment.status = 'pending'
     appointment.save
   end
 end

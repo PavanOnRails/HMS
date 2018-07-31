@@ -1,0 +1,22 @@
+<ul class="nav side-menu">
+  <li class="current-page">
+    <%= link_to department_dashboard_path(current_staff, current_department), data: { turbolinks: false} do %>
+      <i class="fa fa-home" aria-hidden="true"></i>Dashboard
+    <% end %>
+  </li>
+	<li>
+    <%= link_to appointments_path, data: { turbolinks: false} do %>
+      <i class="fa fa-calendar" aria-hidden="true"></i>Appointment requests
+    <% end %>
+  </li>
+  <li>
+    <%= link_to patients_path, data: { turbolinks: false} do %>
+      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Patient Registration
+    <% end %>
+  </li>
+  <li>
+    <%= link_to outpatients_path, data: { turbolinks: false} do %>
+      <i class="fa fa-user" aria-hidden="true"></i>Outpatients
+    <% end %>
+  </li>
+</ul>

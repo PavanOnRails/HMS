@@ -1,0 +1,12 @@
+<ul class="nav side-menu">
+	<li class="current-page">
+    <%= link_to staff_dashboard_path(current_staff), data: { turbolinks: false} do %>
+      <i class="fa fa-home" aria-hidden="true"></i>Dashboard
+    <% end %>
+  </li>
+  <li>
+    <%= link_to patients_path, data: { turbolinks: false} do %>
+     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Patient Registration
+    <% end %>
+  </li>
+</ul>

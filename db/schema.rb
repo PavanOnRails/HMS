@@ -10,18 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180729085413) do
+ActiveRecord::Schema.define(version: 20180731081329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
-    t.integer  "status", default: 0
+    t.integer  "status",             default: 0
     t.integer  "appointment_type"
     t.integer  "doctor_id"
     t.integer  "patient_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.text     "reason_for_decline"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -30,10 +30,10 @@ ActiveRecord::Schema.define(version: 20180729085413) do
   create_table "beds", force: :cascade do |t|
     t.string   "bed_no"
     t.integer  "ward_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
     t.integer  "patient_id"
-    t.integer  "status", default: 0
+    t.integer  "status",     default: 0
     t.integer  "room_id"
   end
 
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20180729085413) do
     t.integer  "hospital_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "short_name"
   end
 
   create_table "doctor_sessions", force: :cascade do |t|
@@ -211,6 +212,7 @@ ActiveRecord::Schema.define(version: 20180729085413) do
     t.boolean  "admin",             default: false
     t.boolean  "employee",          default: true
     t.boolean  "super_admin",       default: false
+    t.integer  "department_ids",    default: [],                 array: true
   end
 
   create_table "users", force: :cascade do |t|

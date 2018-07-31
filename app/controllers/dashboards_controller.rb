@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-	layout 'gentellela_theme', only: [:staff_dashboard, :patient_dashboard, :doctor_dashboard, :super_admin_dashboard]
+	layout 'gentellela_theme'
 	before_action :set_patient, only: [:patient_dashboard]
   before_action :set_doctor, only: [:doctor_dashboard]
 
@@ -18,6 +18,17 @@ class DashboardsController < ApplicationController
 	end
   
   def super_admin_dashboard
+    session[:department_id] = nil
+  end
+  
+  def department_dashboard
+  	session[:department_id] = params[:department_id]
+  	@appointments = Appointment.where(status: :pending)
+		@confirmed_appointments = Appointment.where(status: :confirmed)
+  end
+  
+  def employee_dashboard
+  	session[:department_id] = nil
   end
 
 	private

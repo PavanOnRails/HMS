@@ -24,6 +24,8 @@ Rails.application.routes.draw do
   get '/doctors/:id/dashboard', to: 'dashboards#doctor_dashboard', as: 'doctors_dashboard'
   get '/patients/:id/dashboard', to: 'dashboards#patient_dashboard', as: 'patients_dashboard'
   get '/staff/:id/dashboard', to: 'dashboards#staff_dashboard', as: 'staff_dashboard'
+  get '/employee/:id/dashboard', to: 'dashboards#employee_dashboard', as: 'employee_dashboard'
+  get '/staff/:id/department/:department_id/dashboard', to: 'dashboards#department_dashboard', as: 'department_dashboard'
   get '/super_admin/:id/dashboard', to: 'dashboards#super_admin_dashboard', as: 'super_admin_dashboard'
   patch '/appointments/:id/update_status', to: 'appointments#update_status', as: 'update_status'
   post '/get_states', to: 'static_pages#get_states', as: 'get_states'

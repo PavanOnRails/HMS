@@ -1,61 +1,25 @@
-<%# if current_staff.super_admin == false %>
-  <ul class="nav side-menu">
-    <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
-    </li>
-    <li>
-      <%= link_to patients_path, data: { turbolinks: false} do %>
-       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Patient Registration
-      <% end %>
-    </li>
-    <li>
-      <%= link_to outpatients_path, data: { turbolinks: false} do %>
-       <i class="fa fa-user" aria-hidden="true"></i>Outpatients
-      <% end %>
-    </li>
-    <li>
-      <%= link_to inpatients_path, data: { turbolinks: false} do %>
-       <i class="fa fa-bed" aria-hidden="true"></i>Inpatients
-      <% end %>
-    </li>
-    <li>
-      <%= link_to appointments_path, data: { turbolinks: false} do %>
-       <i class="fa fa-calendar" aria-hidden="true"></i>Appointment requests
-      <% end %>
-    </li>
-  </ul>
-<%# elsif current_staff.super_admin == true %>
-  <ul class="nav side-menu">
-    <li><a data-toggle="tab" href="#dashboard"><i class="fa fa-home"></i>Dashboard</span></a>
-    </li>
-    <li>
-      <%= link_to staffs_path, data: { turbolinks: false} do %>
-       <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Staff
-      <% end %>
-    </li>
-    <li>
-      <%= link_to doctors_path, data: { turbolinks: false} do %>
-       <i class="fa fa-user" aria-hidden="true"></i>Doctors
-      <% end %>
-    </li>
-    <li>
-      <%= link_to nurses_path, data: { turbolinks: false} do %>
-       <i class="fa fa-user" aria-hidden="true"></i>Nurses
-      <% end %>
-    </li>
-    <li>
-      <%= link_to wards_path, data: { turbolinks: false} do %>
-       <i class="fa fa-bed" aria-hidden="true"></i>Wards
-      <% end %>
-    </li>
-    <li>
-      <%= link_to rooms_path, data: { turbolinks: false} do %>
-       <i class="fa fa-calendar" aria-hidden="true"></i>Rooms
-      <% end %>
-    </li>
-    <li>
-      <%= link_to beds_path, data: { turbolinks: false} do %>
-       <i class="fa fa-calendar" aria-hidden="true"></i>Beds
-      <% end %>
-    </li>
-  </ul>
-<%# end %>
+<% if current_staff.admin == true %>
+  <% if current_department && current_department.short_name == 'OPD' %>
+    <%= render 'layouts/opd_menu' %>
+  <% elsif current_department && current_department.short_name == 'IPD' %>
+    <%= render 'layouts/ipd_menu' %>
+  <% elsif current_department && current_department.short_name == 'BB' %>
+    <%= render 'layouts/bb_menu' %>
+  <% elsif current_page?(employee_dashboard_path(current_staff)) %>
+    <%= render 'layouts/employee_menu' %>
+  <% end %>
+<% elsif current_staff.super_admin == true %>
+  <% if current_department && current_page?(department_dashboard_path(current_staff, current_department)) %>
+	  <% if current_department && current_department.short_name == 'OPD' %>
+	    <%= render 'layouts/opd_menu' %>
+	  <% elsif current_department && current_department.short_name == 'IPD' %>
+	    <%= render 'layouts/ipd_menu' %>
+	  <% elsif current_department && current_department.short_name == 'BB' %>
+	    <%= render 'layouts/bb_menu' %>
+	  <% end %>
+	<% elsif current_page?(super_admin_dashboard_path(current_staff))%>
+	  <%= render 'layouts/super_admin_menu' %>
+	<% elsif current_page?(employee_dashboard_path(current_staff)) %>
+	  <%= render 'layouts/employee_menu' %>
+	<% end %>
+<% end %>

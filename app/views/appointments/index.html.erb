@@ -27,7 +27,7 @@
                   <td><%= appointment.try(:doctor).try(:full_name) %></td>
                   <td><%= appointment.start_time.strftime("%B %d, %Y") if appointment.start_time.present? %></td>
                   <td><%= appointment.try(:patient).try(:full_name) %></td>
-                  <td><%= appointment.status %></td>
+                  <td><%= appointment.status.capitalize %></td>
                   <% if appointment.pending? %>
                     <td><%= link_to 'Confirm', update_status_path(appointment, {status: :confirm}), method: :patch, class: "btn btn-primary", data: {confirm: "Are you Sure?"}, remote: true %></td>
                     <td><%= link_to 'Decline', '#', class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#declineModal-#{appointment.id}" } %></td>
@@ -57,7 +57,7 @@
               <% end %>
             </tbody>
           </table>
-            <div class="clearfix"></div>
+          <div class="clearfix"></div>
           </div>
         </div>
       </div>
