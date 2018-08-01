@@ -14,14 +14,12 @@
             <span class="fa fa-angle-down"></span>
           </a>
           <ul class="dropdown-menu dropdown-usermenu pull-right">
-            <% if current_staff && current_staff.super_admin == true && !current_page?(super_admin_dashboard_path(current_staff)) %>
-              <li><%= link_to 'Super Admin Profile', super_admin_dashboard_path(current_staff.id) %></a></li>
+            <% if current_staff && current_staff.super_admin == true %>
+              <li><%= link_to 'Super Admin Profile', super_admin_dashboard_path(current_staff) %></a></li>
             <% end %>
             <li>
-              <% if !current_page?(employee_dashboard_path(current_staff)) %>
-                <%= link_to employee_dashboard_path(current_staff), data: { turbolinks: false} do %>
-                  <i class="fa fa-home" aria-hidden="true"></i> Employee Profile
-                <% end %>
+              <%= link_to employee_dashboard_path(current_staff), data: { turbolinks: false} do %>
+                <i class="fa fa-home" aria-hidden="true"></i> Employee Profile
               <% end %>
             </li>
             <li>

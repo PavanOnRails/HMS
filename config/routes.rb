@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :wards
   resources :rooms
   resources :beds
+  resources :blood_banks
+  resources :blood_groups
+  resources :blood_donors
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -38,6 +41,8 @@ Rails.application.routes.draw do
   get '/outpatients', to: 'patients#outpatients', as: 'outpatients'
   get '/edit_inpatient/:id', to: 'patients#edit_inpatient', as: 'edit_inpatient'
   put '/update_inpatient/:id', to: 'patients#update_inpatient', as: 'update_inpatient'
+  get '/admins', to: 'staffs#admins', as: 'admins'
+  get '/super_admins', to: 'staffs#super_admins', as: 'super_admins'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

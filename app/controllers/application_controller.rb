@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
   
   def current_staff_departments
-    @current_staff_departments ||= Department.where(id: current_staff.department_ids).where.not(id: current_department.try(:id))
+    @current_staff_departments ||= Department.where(id: current_staff.accessible_department_ids).where.not(id: current_department.try(:id))
   end
   
   def current_department

@@ -1,11 +1,11 @@
 class StaffsController < ApplicationController
-  layout 'gentellela_theme', only: [:index, :new, :edit]
+  layout 'gentellela_theme', only: [:index, :new, :edit, :admins, :super_admins]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   # GET /staffs
   # GET /staffs.json
   def index
-    @staffs = Staff.all
+    @staffs = Staff.where(employee: true)
   end
 
   # GET /staffs/1
@@ -60,6 +60,14 @@ class StaffsController < ApplicationController
       format.html { redirect_to staffs_url, notice: 'Staff was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def admins
+    @staffs = Staff.where(admin: true)
+  end
+
+  def super_admins
+    @staffs = Staff.where(super_admin: true)
   end
 
   private

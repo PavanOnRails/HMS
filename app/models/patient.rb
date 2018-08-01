@@ -14,6 +14,7 @@ class Patient < ApplicationRecord
   
   enum registration_status: [ :registration_done, :registration_not_done]
   enum patient_type: [:outpatient, :inpatient]
+  enum inpatient_status: [:not_admitted, :admitted, :discharged]
   
   after_create :create_user_record, if: Proc.new { |p| p.registration_done? }
   after_save :generate_uhid_for_patient, if: Proc.new { |p| p.registration_done? }

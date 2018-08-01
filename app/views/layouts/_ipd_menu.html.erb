@@ -1,9 +1,17 @@
 <ul class="nav side-menu">
-	<li class="current-page">
-    <%= link_to staff_dashboard_path(current_staff), data: { turbolinks: false} do %>
-      <i class="fa fa-home" aria-hidden="true"></i>Dashboard
-    <% end %>
-  </li>
+	<% if current_page?(department_dashboard_path(current_staff, current_department)) %>
+    <li class="current-page">
+      <%= link_to department_dashboard_path(current_staff, current_department), data: { turbolinks: false} do %>
+        <i class="fa fa-home" aria-hidden="true"></i>Dashboard
+      <% end %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to department_dashboard_path(current_staff, current_department), data: { turbolinks: false} do %>
+        <i class="fa fa-home" aria-hidden="true"></i>Dashboard
+      <% end %>
+    </li>
+  <% end %>
   <li>
     <%= link_to inpatients_path, data: { turbolinks: false} do %>
      <i class="fa fa-bed" aria-hidden="true"></i>Inpatients

@@ -1,12 +1,30 @@
 <ul class="nav side-menu">
-  <li class="current-page">
-    <%= link_to staff_dashboard_path(current_staff), data: { turbolinks: false} do %>
-      <i class="fa fa-home" aria-hidden="true"></i>Dashboard
+  <% if current_page?(super_admin_dashboard_path(current_staff)) %>
+    <li class="current-page">
+      <%= link_to super_admin_dashboard_path(current_staff), data: { turbolinks: false} do %>
+        <i class="fa fa-home" aria-hidden="true"></i>Dashboard
+      <% end %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to super_admin_dashboard_path(current_staff), data: { turbolinks: false} do %>
+        <i class="fa fa-home" aria-hidden="true"></i>Dashboard
+      <% end %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to staffs_path, data: { turbolinks: false} do %>
+     <i class="fa fa-user" aria-hidden="true"></i>Staff
     <% end %>
   </li>
   <li>
-    <%= link_to staffs_path, data: { turbolinks: false} do %>
-     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Staff
+    <%= link_to admins_path, data: { turbolinks: false} do %>
+     <i class="fa fa-user" aria-hidden="true"></i>Admins
+    <% end %>
+  </li>
+  <li>
+    <%= link_to super_admins_path, data: { turbolinks: false} do %>
+     <i class="fa fa-user" aria-hidden="true"></i>Super Admins
     <% end %>
   </li>
   <li>
