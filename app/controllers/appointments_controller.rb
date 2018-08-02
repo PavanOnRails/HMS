@@ -78,6 +78,19 @@ class AppointmentsController < ApplicationController
     end
   end
 
+  # def generate_pdf
+  #   @appointments = Appointment.where(status: :pending)
+  #   respond_to do |format|
+  #     format.html
+  #     format.pdf do
+  #       render pdf: "appointments",
+  #       disposition: "attachment",
+  #       template: "appointments/index.html.erb",
+  #       layout: "pdf.html"
+  #     end
+  #   end
+  # end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_appointment

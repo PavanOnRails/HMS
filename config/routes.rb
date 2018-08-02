@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'documents/import'
+
+  get 'documents/export'
+
+  get 'documents/generate_pdf'
+
   resources :nurses
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
@@ -43,6 +49,9 @@ Rails.application.routes.draw do
   put '/update_inpatient/:id', to: 'patients#update_inpatient', as: 'update_inpatient'
   get '/admins', to: 'staffs#admins', as: 'admins'
   get '/super_admins', to: 'staffs#super_admins', as: 'super_admins'
+  get '/generate_pdf', to: 'documents#generate_pdf', as: 'generate_pdf'
+  post '/import', to: 'documents#import', as: 'import'
+  get '/export', to: 'documents#export', as: 'export'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

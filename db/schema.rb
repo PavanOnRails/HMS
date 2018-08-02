@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180801065344) do
+ActiveRecord::Schema.define(version: 20180802140106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20180801065344) do
     t.text     "reason_for_decline"
     t.datetime "start_time"
     t.datetime "end_time"
+  end
+
+  create_table "avatars", force: :cascade do |t|
+    t.string   "image"
+    t.integer  "image_type"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "beds", force: :cascade do |t|
@@ -120,6 +128,15 @@ ActiveRecord::Schema.define(version: 20180801065344) do
     t.string   "phone_number"
     t.string   "designation"
     t.string   "highest_education"
+    t.string   "emp_id"
+  end
+
+  create_table "documents", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "document_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "file"
   end
 
   create_table "floors", force: :cascade do |t|
@@ -162,6 +179,7 @@ ActiveRecord::Schema.define(version: 20180801065344) do
     t.string   "highest_education"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "emp_id"
   end
 
   create_table "patients", force: :cascade do |t|
@@ -216,6 +234,7 @@ ActiveRecord::Schema.define(version: 20180801065344) do
     t.boolean  "super_admin",               default: false
     t.integer  "accessible_department_ids", default: [],                 array: true
     t.integer  "department_id"
+    t.string   "emp_id"
   end
 
   create_table "users", force: :cascade do |t|
