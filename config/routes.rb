@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   get '/admins', to: 'staffs#admins', as: 'admins'
   get '/super_admins', to: 'staffs#super_admins', as: 'super_admins'
   get '/generate_pdf', to: 'documents#generate_pdf', as: 'generate_pdf'
+  get '/download_file', to: 'documents#download_file', as: 'download_file'
   post '/import', to: 'documents#import', as: 'import'
   get '/export', to: 'documents#export', as: 'export'
   # Example of regular route:

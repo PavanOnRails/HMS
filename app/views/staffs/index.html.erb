@@ -14,7 +14,7 @@
           </div>
           <div class="pull-right">
             <%= link_to '#', class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#importModal"} do %>
-              <i class="fa fa-cloud-upload" aria-hidden="true" style="font-size: 20px;"></i>&nbsp;&nbsp;Import
+              <i class="fa fa-cloud-upload" aria-hidden="true" style="font-size: 20px;"></i>&nbsp;&nbsp;Import Staff
             <% end %>
           </div>
           <br>
@@ -25,6 +25,7 @@
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Email</th>
                 <th>Designation</th>
                 <th>Contact Number</th>
                 <th>Actions</th>
@@ -35,6 +36,7 @@
               <% @staffs.each do |staff| %>
                 <tr id="staff-row-<%= staff.id %>">
                   <td><%= staff.full_name %></td>
+                  <td><%= staff.email %></td>
                   <td><%= staff.designation %></td>
                   <td><%= staff.phone_number %></td>
                   <td>
@@ -61,6 +63,9 @@
                 </div>
                 <div class="modal-body">
                   <%= form_tag import_path(class_name: "Staff"), multipart: true, authenticity_token: true do |f| %>
+                  <button type="button" class="btn btn-info btn-sm pull-right import-info" data-toggle="popover" data-html="true" title="<p><i>Read the below instructions:</i></p>" data-content='<ol><li>Headers are must</li><li>No empty data</li><li>No spaces between the rows</li><li>You can download a sample file <%= link_to "here", download_file_path(format: "xlsx", class_name: "staff") %></li></ol>'>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  </button>
                     <%= file_field_tag :file, class: "form-control-file text-center" %><br><br>
                     <div class="text-center">
                       <%= submit_tag "Import", class: "btn btn-primary" %>
