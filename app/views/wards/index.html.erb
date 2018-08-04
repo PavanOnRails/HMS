@@ -11,7 +11,13 @@
             <%= link_to new_ward_path, class: "btn btn-primary" do %>
               <i class="fa fa-plus" aria-hidden="true" style="font-size: 20px;"></i> Add new ward
             <% end %>
-          </div><br>
+          </div>
+          <div class="pull-right">
+            <%= link_to '#', class: "btn btn-primary", data: { "toggle" => "modal", 'target' => "#importModal"} do %>
+              <i class="fa fa-cloud-upload" aria-hidden="true" style="font-size: 20px;"></i>&nbsp;&nbsp;Import Wards
+            <% end %>
+          </div>
+          <br>
           <div class="x_title">
           <h1 style="margin-left: 40%;">Wards</h1>
 
@@ -41,7 +47,30 @@
               <% end %>
             </tbody>
           </table>
-            <div class="clearfix"></div>
+          <!-- Modal -->
+          <div class="modal fade decline-modal" id="importModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <%= form_tag import_path(class_name: "Ward"), multipart: true, authenticity_token: true do |f| %>
+                  <button type="button" class="btn btn-info btn-sm pull-right import-info" data-toggle="popover" data-html="true" title="<p><i>Read the below instructions:</i></p>" data-content='<ol><li>Headers are must</li><li>No empty data</li><li>No spaces between the rows</li><li>You can download a sample file <%= link_to "here", download_file_path(format: "xlsx", class_name: "ward") %></li></ol>'>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                  </button>
+                    <%= file_field_tag :file, class: "form-control-file text-center" %><br><br>
+                    <div class="text-center">
+                      <%= submit_tag "Import", class: "btn btn-primary" %>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
           </div>
         </div>
       </div>

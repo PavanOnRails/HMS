@@ -9,6 +9,12 @@ class DocumentsController < ApplicationController
   		redirect_to doctors_path, notice: "Doctors data imported sucessfully"
   	elsif params[:class_name] == "Nurse"
   		redirect_to nurses_path, notice: "Nurses data imported sucessfully"
+  	elsif params[:class_name] == "Ward"
+  		redirect_to wards_path, notice: "Wards data imported sucessfully"
+  	elsif params[:class_name] == "Room"
+  		redirect_to rooms_path, notice: "Rooms data imported sucessfully"
+  	elsif params[:class_name] == "Bed"
+  		redirect_to beds_path, notice: "Beds data imported sucessfully"
   	end
   end
 
