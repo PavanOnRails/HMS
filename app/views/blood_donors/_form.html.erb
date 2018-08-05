@@ -1,0 +1,29 @@
+<%= form_for(blood_donor) do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Name" %>
+      </div>
+      <div class="col">
+      	<%= f.select :blood_group_id, BloodGroup.all.collect {|bg| [ bg.name, bg.id ] }, { include_blank: true }, class: 'form-control select2_dropdown blood_group_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :phone_number, autofocus: true, class: 'form-control', placeholder: "Contact Number" %>
+      </div>
+    </div><br><br>
+    <div class="row">
+      <div class="col">
+        <%= f.text_area :address, autofocus: true, class: 'form-control', placeholder: "Full Address", style: "width: 50%;margin-left:25%;" %>
+      </div>
+    </div>        
+  </div>
+  <div class="text-center" style="margin-top: 15%;">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>

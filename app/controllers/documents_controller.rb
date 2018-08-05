@@ -15,6 +15,8 @@ class DocumentsController < ApplicationController
   		redirect_to rooms_path, notice: "Rooms data imported sucessfully"
   	elsif params[:class_name] == "Bed"
   		redirect_to beds_path, notice: "Beds data imported sucessfully"
+  	elsif params[:class_name] == "BloodDonor"
+  		redirect_to blood_donors_path, notice: "Blood Donors data imported sucessfully"
   	end
   end
 

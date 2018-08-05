@@ -15,6 +15,8 @@ class Document < ApplicationRecord
 	    	model = class_name.constantize.find_or_initialize_by(room_no: row["room_no"])
 	    elsif class_name == 'Bed'
 	    	model = class_name.constantize.find_or_initialize_by(bed_no: row["bed_no"])
+	    elsif class_name == 'BloodDonor'
+	    	model = class_name.constantize.find_or_initialize_by(donor_id: row["donor_id"])
 	    end
 	    model.attributes = row.to_hash
 	    model.save!

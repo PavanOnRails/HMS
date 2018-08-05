@@ -116,6 +116,25 @@ $( ".sharing_type_dropdown" ).select2({
     width: 'resolve',
     allowClear: true
 });
+
+$( ".hospital_dropdown" ).select2({
+    placeholder: "Select hospital",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".incharge_dropdown" ).select2({
+    placeholder: "Select incharge",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".blood_group_dropdown" ).select2({
+    placeholder: "Select Blood Group",
+    width: 'resolve',
+    allowClear: true
+});
+
 //generate states based on country selection
 $(".country_dropdown").change(function(){
   var selected_country = $(this).val();

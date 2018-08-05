@@ -1,0 +1,15 @@
+<%= form_for(blood_group) do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Name" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :rh_factor, autofocus: true, class: 'form-control', placeholder: "RH factor" %>
+      </div>
+    </div>     
+  </div>
+  <div class="text-center" style="margin-top: 15%;">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
