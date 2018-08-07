@@ -24,6 +24,15 @@ class DocumentsController < ApplicationController
   end
 
   def generate_pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "appointments",
+        disposition: "attachment",
+        template: "reports/preview.html.erb",
+        layout: "report.html"
+      end
+    end
   end
 
   def download_file

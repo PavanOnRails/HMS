@@ -1,4 +1,5 @@
 class Staff < ApplicationRecord
+	has_many :reports
 	after_save :create_user_record_for_staff
 
 	def full_name

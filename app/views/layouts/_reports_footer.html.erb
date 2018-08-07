@@ -1,0 +1,6 @@
+<div class="pull-left">
+	Printed on: <%= Time.now.strftime("%m/%d/%Y") %> at <%= Time.now.strftime("%I:%M%p") %>
+</div>
+<div class="pull-right">
+	Printed by: <%= current_staff.try(:full_name) %>
+</div>

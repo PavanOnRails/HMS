@@ -135,6 +135,18 @@ $( ".blood_group_dropdown" ).select2({
     allowClear: true
 });
 
+$( ".report_type_dropdown" ).select2({
+    placeholder: "Select Report Type",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".department_dropdown" ).select2({
+    placeholder: "Select Department",
+    width: 'resolve',
+    allowClear: true
+});
+
 //generate states based on country selection
 $(".country_dropdown").change(function(){
   var selected_country = $(this).val();
@@ -249,6 +261,18 @@ $(".room_type_dropdown").change(function(){
   else{
     $(".bed-capacity").val('');
     $(".bed-capacity").prop("readonly", false);
+  }
+});
+
+//show department selection based on report type selection
+$(".report_type_dropdown").change(function(){
+  var selected_type = $(this).val();
+  if (selected_type == 'department_report') {
+    $(".department_dropdown").prop("disabled", false);
+  }
+  else{
+    $(".department_dropdown").empty();
+    $(".department_dropdown").prop("disabled", true);
   }
 });
 

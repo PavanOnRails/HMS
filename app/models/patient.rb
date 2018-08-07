@@ -7,6 +7,7 @@ class Patient < ApplicationRecord
 	has_one :bed
   has_many :lab_tests
   belongs_to :nurse
+  has_many :reports
   
   accepts_nested_attributes_for :appointments
   accepts_nested_attributes_for :bills

@@ -1,11 +1,5 @@
 Rails.application.routes.draw do
-  get 'documents/import'
 
-  get 'documents/export'
-
-  get 'documents/generate_pdf'
-
-  resources :nurses
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
   get '/login' => 'sessions#new'
@@ -24,6 +18,9 @@ Rails.application.routes.draw do
   resources :blood_banks
   resources :blood_groups
   resources :blood_donors
+  resources :nurses
+  resources :reports
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,6 +50,7 @@ Rails.application.routes.draw do
   get '/download_file', to: 'documents#download_file', as: 'download_file'
   post '/import', to: 'documents#import', as: 'import'
   get '/export', to: 'documents#export', as: 'export'
+  get '/preview', to: 'reports#preview', as: 'preview_report'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

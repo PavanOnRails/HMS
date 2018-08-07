@@ -13,6 +13,11 @@
     </li>
   <% end %>
   <li>
+    <%= link_to reports_path, data: { turbolinks: false} do %>
+     <i class="fa fa-user" aria-hidden="true"></i>Reports
+    <% end %>
+  </li>
+  <li>
     <%= link_to staffs_path, data: { turbolinks: false} do %>
      <i class="fa fa-user" aria-hidden="true"></i>Staff
     <% end %>
