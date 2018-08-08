@@ -1,0 +1,24 @@
+<%= form_for(department) do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Name" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :short_name, autofocus: true, class: 'form-control', placeholder: "Short Name" %>
+      </div>
+      <div class="col">
+        <%= f.select :HOD, Staff.all.collect {|st| [ st.full_name, st.full_name ] }, { include_blank: true }, class: 'form-control select2_dropdown hod_dropdown', style:"width:100%;" %>
+      </div>
+    </div>    
+  </div><br><br>
+  <div class="text-center" style="margin-top: 15%;">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>

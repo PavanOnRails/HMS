@@ -147,6 +147,18 @@ $( ".department_dropdown" ).select2({
     allowClear: true
 });
 
+$( ".multiple_department_dropdown" ).select2({
+    placeholder: "Select Accessible Departments",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".hod_dropdown" ).select2({
+    placeholder: "Select HOD",
+    width: 'resolve',
+    allowClear: true
+});
+
 //generate states based on country selection
 $(".country_dropdown").change(function(){
   var selected_country = $(this).val();
@@ -271,7 +283,6 @@ $(".report_type_dropdown").change(function(){
     $(".department_dropdown").prop("disabled", false);
   }
   else{
-    $(".department_dropdown").empty();
     $(".department_dropdown").prop("disabled", true);
   }
 });

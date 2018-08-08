@@ -24,12 +24,21 @@
       </div>
       <div class="col">
         <%= f.text_field :age, autofocus: true, class: 'form-control', placeholder: "Age" %>
-      </div>
-      <div class="col">
-        <%= f.select :department_id, Department.all.collect {|dep| [ dep.name, dep.id ] }, { include_blank: true}, class: 'form-control select2_dropdown department_dropdown', style:"width:100%;" %>
+        <%= f.hidden_field :super_admin, value: true %>
       </div>
     </div>
   </div><br>
+  <div class="form-group">
+    <div class="row">
+    	<div class="col">
+    		<%= f.select :department_id, Department.all.collect {|dep| [ dep.name, dep.id ] }, { include_blank: true}, class: 'form-control select2_dropdown department_dropdown', style:"width:100%;" %>
+    	</div>
+    	<div class="col">
+    		<%= f.select :accessible_department_ids, Department.all.collect {|dep| [ dep.name, dep.id ] }, {}, multiple: true, class: 'form-control select2_dropdown multiple_department_dropdown', style:"width:100%;" %>
+    	</div>
+    </div>
+  </div>
+  <br>
   <div class="text-center">
     <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
   </div>

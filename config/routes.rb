@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :blood_donors
   resources :nurses
   resources :reports
+  resources :departments
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -51,6 +52,12 @@ Rails.application.routes.draw do
   post '/import', to: 'documents#import', as: 'import'
   get '/export', to: 'documents#export', as: 'export'
   get '/preview', to: 'reports#preview', as: 'preview_report'
+  get '/new_admin', to: 'staffs#new_admin', as: 'new_admin'
+  get '/new_super_admin', to: 'staffs#new_super_admin', as: 'new_super_admin'
+  get '/edit_admin/:id', to: 'staffs#edit_admin', as: 'edit_admin'
+  get '/edit_super_admin/:id', to: 'staffs#edit_super_admin', as: 'edit_super_admin'
+  delete '/admin/:id', to: 'staffs#destroy_admin', as: 'destroy_admin'
+  delete '/super_admin/:id', to: 'staffs#destroy_super_admin', as: 'destroy_super_admin'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

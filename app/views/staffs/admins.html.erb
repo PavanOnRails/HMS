@@ -8,7 +8,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="height:700px;">
           <div class="pull-left">
-            <%= link_to new_staff_path, class: "btn btn-primary" do %>
+            <%= link_to new_admin_path, class: "btn btn-primary" do %>
               <i class="fa fa-plus" aria-hidden="true" style="font-size: 20px;"></i> Add new admin
             <% end %>
           </div><br>
@@ -32,10 +32,10 @@
                   <td><%= staff.designation %></td>
                   <td><%= staff.phone_number %></td>
                   <td>
-                    <%= link_to edit_staff_path(staff), title: "Edit", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
+                    <%= link_to edit_admin_path(staff), title: "Edit", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
                       <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 20px;"></i>
                     <% end %>&nbsp;&nbsp;
-                    <%= link_to staff_path(staff), method: :delete, title: "Delete", data: { confirm: 'Are you sure?', "toggle" => "tooltip", 'placement' => "top"} do %>
+                    <%= link_to destroy_admin_path(staff), method: :delete, title: "Delete", data: { confirm: 'Are you sure?', "toggle" => "tooltip", 'placement' => "top"} do %>
                       <i class="fa fa-trash-o" aria-hidden="true" style="font-size: 20px;"></i>
                     <% end %>
                   </td>
