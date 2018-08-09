@@ -1,6 +1,6 @@
 <ul class="nav side-menu">
   <% if current_page?(super_admin_dashboard_path(current_staff)) %>
-    <li class="current-page">
+    <li class="active">
       <%= link_to super_admin_dashboard_path(current_staff), data: { turbolinks: false} do %>
         <i class="fa fa-home" aria-hidden="true"></i>Dashboard
       <% end %>

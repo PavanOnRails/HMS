@@ -703,13 +703,30 @@ a, a:focus, a:hover{
   -moz-border-radius: 50%;
   border-radius: 50%;
 }
+
+.nav-md ul.nav.child_menu li.active:before {
+  background: #1ABB9C;
+  bottom: auto;
+  content: "";
+  height: 8px;
+  left: 23px;
+  margin-top: 15px;
+  position: absolute;
+  right: auto;
+  width: 8px;
+  z-index: 1;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+}
+
 .nav-md ul.nav.child_menu li:after {
   border-left: 1px solid #425668;
   bottom: 0;
   content: "";
   left: 27px;
   position: absolute;
-  top: 0;
+  top: 50px;
 }
 .nav.side-menu>li>a, .nav.child_menu>li>a {
   color: #E7E7E7;

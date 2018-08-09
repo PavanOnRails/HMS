@@ -1,25 +1,9 @@
-<% if current_staff.admin == true %>
-  <% if current_department && current_department.short_name == 'OPD' %>
-    <%= render 'layouts/opd_menu' %>
-  <% elsif current_department && current_department.short_name == 'IPD' %>
-    <%= render 'layouts/ipd_menu' %>
-  <% elsif current_department && current_department.short_name == 'BB' %>
-    <%= render 'layouts/bb_menu' %>
-  <% elsif current_page?(employee_dashboard_path(current_staff)) %>
+<% if current_staff.admin == true || current_staff.super_admin == true %>
+  <% if session[:department_dashboard] == true %>
+    <%= render 'layouts/departments_menu' %>
+  <% elsif session[:employee_profile] == true %>
     <%= render 'layouts/employee_menu' %>
+  <% elsif session[:super_admin_profile] == true %>
+    <%= render 'layouts/super_admin_menu' %>
   <% end %>
-<% elsif current_staff.super_admin == true %>
-  <% if current_department && current_page?(department_dashboard_path(current_staff, current_department)) %>
-	  <% if current_department && current_department.short_name == 'OPD' %>
-	    <%= render 'layouts/opd_menu' %>
-	  <% elsif current_department && current_department.short_name == 'IPD' %>
-	    <%= render 'layouts/ipd_menu' %>
-	  <% elsif current_department && current_department.short_name == 'BB' %>
-	    <%= render 'layouts/bb_menu' %>
-	  <% end %>
-	<% elsif current_page?(employee_dashboard_path(current_staff)) %>
-	  <%= render 'layouts/employee_menu' %>
-	<% elsif session[:super_admin_profile] == true %>
-	  <%= render 'layouts/super_admin_menu' %>
-	<% end %>
 <% end %>

@@ -76,11 +76,11 @@ $(function () {
     });
 
     // check active menu
-    $SIDEBAR_MENU.find('a[href="' + URL + '"]').parent('li').addClass('current-page');
+    $SIDEBAR_MENU.find('a[href="' + URL + '"]').parent('li').addClass('active');
 
     $SIDEBAR_MENU.find('a').filter(function () {
         return this.href == URL;
-    }).parent('li').addClass('current-page').parents('ul').slideDown(function() {
+    }).parent('li').addClass('active').parents('ul').slideDown(function() {
         setContentHeight();
     }).parent().addClass('active');
 
@@ -119,9 +119,9 @@ $(function () {
 });
 
 // Tooltip
-// $(function () {
-//     $('[data-toggle="tooltip"]').tooltip();
-// });
+$(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+});
 
 // Progressbar
 if ($(".progress .progress-bar")[0]) {

@@ -1,0 +1,9 @@
+<% if current_department.short_name == 'OPD' %>
+  <%= render 'layouts/opd_menu' %>
+<% elsif current_department.short_name == 'IPD' %>
+  <%= render 'layouts/ipd_menu' %>
+<% elsif current_department.short_name == 'BB' %>
+  <%= render 'layouts/bb_menu' %>
+<% elsif current_department.short_name == 'HR' %>
+  <%= render 'layouts/hr_menu' %>
+<% end %>

@@ -20,16 +20,21 @@ class DashboardsController < ApplicationController
   def super_admin_dashboard
     session[:department_id] = nil
     session[:super_admin_profile] = true
+    session[:department_dashboard] = false
+    session[:employee_profile] = false
   end
   
   def department_dashboard
+    session[:department_dashboard] = true
   	session[:department_id] = params[:department_id]
     session[:super_admin_profile] = false
+    session[:employee_profile] = false
   	@appointments = Appointment.where(status: :pending)
 		@confirmed_appointments = Appointment.where(status: :confirmed)
   end
   
   def employee_dashboard
+    session[:department_dashboard] = false
   	session[:department_id] = nil
     session[:super_admin_profile] = false
     session[:employee_profile] = true

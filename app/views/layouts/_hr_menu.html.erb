@@ -13,8 +13,8 @@
     </li>
   <% end %>
   <li>
-    <%= link_to blood_banks_path, data: { turbolinks: false} do %>
-     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Blood Banks
+    <%= link_to staffs_path, data: { turbolinks: false} do %>
+     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Employees
     <% end %>
   </li>
   <li>
@@ -26,5 +26,12 @@
     <%= link_to blood_donors_path, data: { turbolinks: false} do %>
      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Blood Donors
     <% end %>
+  </li>
+  <li><a><i class="fa fa-edit"></i> Reports <span class="fa fa-chevron-down"></span></a>
+    <ul class="nav child_menu" style="display: none">
+    	<% current_department.reports.each do |report| %>
+        <li><%= link_to report.name, "/#{report.name.gsub(/\s+/, "").underscore}" %></li>
+      <% end %>
+    </ul>
   </li>
 </ul>

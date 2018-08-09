@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   get '/edit_super_admin/:id', to: 'staffs#edit_super_admin', as: 'edit_super_admin'
   delete '/admin/:id', to: 'staffs#destroy_admin', as: 'destroy_admin'
   delete '/super_admin/:id', to: 'staffs#destroy_super_admin', as: 'destroy_super_admin'
+  get '/employee_details_report', to: 'reports#employee_details_report', as: 'employee_details_report'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

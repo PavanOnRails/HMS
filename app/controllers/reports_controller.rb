@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  layout 'gentellela_theme', only: [:index, :new, :edit]
+  layout 'gentellela_theme'
   before_action :set_report, only: [:edit, :update, :destroy]
 
   def index
@@ -49,6 +49,12 @@ class ReportsController < ApplicationController
   
   def preview
     @staff = Staff.all
+  end
+  
+  Report.pluck(:name).each do |name|
+    define_method(name.gsub(/\s+/, "").underscore) do
+      #do nothing
+    end
   end
 
   private
