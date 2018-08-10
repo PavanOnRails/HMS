@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-  layout 'gentellela_theme'
+  layout 'gentellela_theme', except: [:preview]
   before_action :set_report, only: [:edit, :update, :destroy]
 
   def index
@@ -53,7 +53,21 @@ class ReportsController < ApplicationController
   
   Report.pluck(:name).each do |name|
     define_method(name.gsub(/\s+/, "").underscore) do
-      #do nothing
+      @edr_rows = Staff.column_names - ["id", "created_at", "updated_at", "admin", "employee", "super_admin", "accessible_department_ids"]
+    end
+  end
+  
+  def report_filters
+    @report_title = params[:report]
+    @headers = params[:report_filters]
+    if params[:report] == "employee_details_report"
+      symbolized_params = params[:report_filters].map(&:to_sym)
+      @data = Staff.select(symbolized_params)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

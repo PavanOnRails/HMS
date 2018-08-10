@@ -24,13 +24,21 @@ class DocumentsController < ApplicationController
   end
 
   def generate_pdf
+    @title = params[:title]
+    @headers = params[:headers]
+    if params[:title] == "employee_details_report"
+      symbolized_params = params[:headers].map(&:to_sym)
+      @data = Staff.select(symbolized_params)
+    end
+    
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "appointments",
         disposition: "attachment",
         template: "reports/preview.html.erb",
-        layout: "report.html"
+        layout: "report.html",
+        locals: {title: @title, headers: @headers, data: @data}
       end
     end
   end

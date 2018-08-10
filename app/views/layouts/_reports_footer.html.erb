@@ -1,6 +1,6 @@
 <div class="pull-left">
-	Printed on: <%= Time.now.strftime("%m/%d/%Y") %> at <%= Time.now.strftime("%I:%M%p") %>
+	<i>Printed on:</i> <strong><%= Time.now.strftime("%m/%d/%Y") %> at <%= Time.now.strftime("%I:%M%p") %></strong>
 </div>
 <div class="pull-right">
-	Printed by: <%= current_staff.try(:full_name) %>
+	<i>Printed by:</i> <strong><%= current_staff.try(:full_name) %></strong>
 </div>

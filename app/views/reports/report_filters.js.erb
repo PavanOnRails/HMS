@@ -1,0 +1,2 @@
+$("#edr-modal").modal("show");
+$("#edr-modal .modal-body").html("<%= escape_javascript (render partial: 'preview_report', locals: {title: @report_title, headers: @headers, data: @data}) %>");

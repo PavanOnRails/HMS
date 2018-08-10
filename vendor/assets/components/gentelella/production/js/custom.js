@@ -139,9 +139,9 @@ if ($(".js-switch")[0]) {
 }
 
 // iCheck
-if ($("input.flat")[0]) {
+if ($(".icheck-flat")[0]) {
     $(document).ready(function () {
-        $('input.flat').iCheck({
+        $('.icheck-flat').iCheck({
             checkboxClass: 'icheckbox_flat-green',
             radioClass: 'iradio_flat-green'
         });

@@ -7,44 +7,29 @@
 
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="height:700px;">
-        	<div class="pull-left">
-            <%#= link_to new_report_path, class: "btn btn-primary" do %>
-              <i class="fa fa-plus" aria-hidden="true" style="font-size: 20px;"></i> Add new report
-            <%# end %>
-          </div>
-          <br>
           <div class="x_title">
-          <h1 style="margin-left: 40%;">Reports</h1>
-
-          <table id="beds-data-table" class="table table-striped table-bordered data-table" style="width:100%">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Report Type</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              <%# @reports.each do |report| %>
-                <tr id="report-row-<%#= report.id %>">
-                  <td><%#= report.name %></td>
-                  <td><%#= report.description %></td>
-                  <td><%#= report.report_type.humanize.capitalize %></td>
-                  <td>
-                  	<%#= link_to edit_report_path(report), title: "Edit", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
-                      <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 20px;"></i>
-                    <%# end %>&nbsp;&nbsp;
-                    <%#= link_to report_path(report), method: :delete, title: "Delete", data: { confirm: 'Are you sure?', "toggle" => "tooltip", 'placement' => "top"} do %>
-                      <i class="fa fa-trash-o" aria-hidden="true" style="font-size: 20px;"></i>
-                    <%# end %>
-                  </td>
-                </tr>
-              <%# end %>
-            </tbody>
-          </table>
-          <div class="clearfix"></div>
+          	<%= form_tag report_filters_path, remote: true %>
+	            <% @edr_rows.each do |row| %>
+	              <%= check_box_tag 'report_filters[]', row,false,class: 'icheck-flat' %>&nbsp;&nbsp;<%= row.humanize.titleize %><br><br>
+	            <% end %>
+	            <%= hidden_field_tag :report, 'employee_details_report' %>
+            <%= submit_tag 'Preview', class: 'btn btn-primary text-center' %>
+          <div class="clearfix"></div><br>
+          <!-- Modal -->
+            <div class="modal fade decline-modal" id="edr-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                  </div>
+                </div>
+              </div>
+            </div>
+          <div class="display-report"></div>
           </div>
         </div>
       </div>
