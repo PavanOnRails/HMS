@@ -148,6 +148,11 @@ if ($(".icheck-flat")[0]) {
     });
 }
 
+//Datepicker
+$('.input-daterange input').each(function() {
+    $(this).datepicker('clearDates');
+});
+
 // Starrr
 var __slice = [].slice;
 

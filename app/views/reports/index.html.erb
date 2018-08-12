@@ -20,6 +20,7 @@
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Short Name</th>
                 <th>Description</th>
                 <th>Report Type</th>
                 <th>Actions</th>
@@ -30,6 +31,7 @@
               <% @reports.each do |report| %>
                 <tr id="report-row-<%= report.id %>">
                   <td><%= report.name %></td>
+                  <td><%= report.short_name %></td>
                   <td><%= report.description %></td>
                   <td><%= report.report_type.humanize.capitalize %></td>
                   <td>

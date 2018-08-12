@@ -57,17 +57,31 @@ class ReportsController < ApplicationController
     end
   end
   
-  def report_filters
-    @report_title = params[:report]
-    @headers = params[:report_filters]
-    if params[:report] == "employee_details_report"
-      symbolized_params = params[:report_filters].map(&:to_sym)
+  def preview_and_export
+    if request.post?
+      @report_title = Report.find_by(short_name: params[:short_name]).name
+      @headers = params[:report_filters]
+      if params[:short_name] == "EDR"
+        symbolized_params = params[:report_filters].map(&:to_sym)
+        @data = Staff.select(symbolized_params)
+      end
+    elsif request.get?
+      @title = params[:title]
+      @headers = params[:headers]
+      symbolized_params = @headers.map(&:to_sym)
       @data = Staff.select(symbolized_params)
     end
 
     respond_to do |format|
       format.html
       format.js
+      format.pdf do
+        render pdf: @title.gsub(/\s+/, "").underscore,
+        disposition: "attachment",
+        template: "reports/preview.html.erb",
+        layout: "report.html",
+        locals: {title: @title, headers: @headers, data: @data}
+      end
     end
   end
 
@@ -77,6 +91,6 @@ class ReportsController < ApplicationController
   end
 
   def report_params
-    params.require(:report).permit(:name, :description, :report_type, :patient_id, :doctor_id, :department_id, :staff_id)
+    params.require(:report).permit(:name, :description, :report_type, :patient_id, :doctor_id, :department_id, :staff_id, :short_name)
   end
 end

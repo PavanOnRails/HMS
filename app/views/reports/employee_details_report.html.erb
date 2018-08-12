@@ -8,11 +8,23 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="height:700px;">
           <div class="x_title">
-          	<%= form_tag report_filters_path, remote: true %>
-	            <% @edr_rows.each do |row| %>
-	              <%= check_box_tag 'report_filters[]', row,false,class: 'icheck-flat' %>&nbsp;&nbsp;<%= row.humanize.titleize %><br><br>
+          	<%= form_tag preview_report_path, remote: true %>
+	            <% @edr_rows.each_slice(3) do |rows| %>
+	              <div class="row">
+	                <% rows.each do |row| %>
+	                  <div class="col">
+	                    <%= check_box_tag 'report_filters[]', row,false,class: 'icheck-flat' %>&nbsp;&nbsp;<%= row.humanize.titleize %><br><br>
+	                  </div>
+	                <% end %>
+	              </div>
 	            <% end %>
-	            <%= hidden_field_tag :report, 'employee_details_report' %>
+	            <%= hidden_field_tag :short_name, 'EDR' %>
+	            <br>
+	            <div class="input-group input-daterange">
+						    <input type="text" class="form-control" value="2012-04-05">
+						    <div class="input-group-addon">to</div>
+						    <input type="text" class="form-control" value="2012-04-19">
+							</div>
             <%= submit_tag 'Preview', class: 'btn btn-primary text-center' %>
           <div class="clearfix"></div><br>
           <!-- Modal -->

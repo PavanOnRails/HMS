@@ -18,7 +18,7 @@
   </tbody>
 </table><br><br>
 <div class="text-center">
-	<%= link_to 'Export', generate_pdf_path(:format => :pdf, title: title, headers: headers, data: data), class: "btn btn-primary" %>
+	<%= link_to 'Export', export_report_path(:format => :pdf, title: title, headers: headers, data: data), class: "btn btn-primary" %>
 </div>
 
 <style type="text/css">

@@ -21,3 +21,4 @@
 //= require flash
 //= require jquery.dataTables.min
 //= require dataTables.bootstrap4.min
+//= require bootstrap-datepicker

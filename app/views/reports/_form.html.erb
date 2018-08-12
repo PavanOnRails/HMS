@@ -5,6 +5,9 @@
         <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Name" %>
       </div>
       <div class="col">
+        <%= f.text_field :short_name, autofocus: true, class: 'form-control', placeholder: "Short Name" %>
+      </div>
+      <div class="col">
         <%= f.select :report_type, Report.report_types.map { |key, value| [key.humanize, key] }, { include_blank: true }, class: 'form-control select2_dropdown report_type_dropdown', style:"width:100%;" %>
       </div>
       <div class="col">

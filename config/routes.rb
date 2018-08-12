@@ -51,7 +51,6 @@ Rails.application.routes.draw do
   get '/download_file', to: 'documents#download_file', as: 'download_file'
   post '/import', to: 'documents#import', as: 'import'
   get '/export', to: 'documents#export', as: 'export'
-  get '/preview', to: 'reports#preview', as: 'preview_report'
   get '/new_admin', to: 'staffs#new_admin', as: 'new_admin'
   get '/new_super_admin', to: 'staffs#new_super_admin', as: 'new_super_admin'
   get '/edit_admin/:id', to: 'staffs#edit_admin', as: 'edit_admin'
@@ -59,7 +58,8 @@ Rails.application.routes.draw do
   delete '/admin/:id', to: 'staffs#destroy_admin', as: 'destroy_admin'
   delete '/super_admin/:id', to: 'staffs#destroy_super_admin', as: 'destroy_super_admin'
   get '/employee_details_report', to: 'reports#employee_details_report', as: 'employee_details_report'
-  post '/report_filters', to: 'reports#report_filters', as: 'report_filters'
+  post '/preview', to: 'reports#preview_and_export', as: 'preview_report'
+  get '/export_report', to: 'reports#preview_and_export', as: 'export_report'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
