@@ -1,25 +1,31 @@
-<h3 class="text-center"><%= title.humanize.titleize %></h3>
-<table>
-	<thead>
-	  <tr>
-	    <% headers.each do |header| %>
-	      <th><%= header.humanize.titleize %></th>
-	    <% end %>
-	  </tr>
-  </thead>
-  <tbody>
-    <% data.each do |d| %>
-      <tr>
-        <% d.attributes.except("id").each do |name, value| %>
-          <td><%= name == "department_id" ? Department.find_by(id: value).try(:name) : value %></td>
-        <% end %>
-      </tr>
+<% unless data.blank? %>
+  <h3 class="text-center"><%= title.humanize.titleize %></h3>
+  <table>
+  	<thead>
+  	  <tr>
+  	    <% headers.each do |header| %>
+  	      <th><%= header.humanize.titleize %></th>
+  	    <% end %>
+  	  </tr>
+    </thead>
+    <tbody>
+      <% data.each do |d| %>
+        <tr>
+          <% d.attributes.except("id").each do |name, value| %>
+            <td><%= name == "department_id" ? Department.find_by(id: value).try(:name) : value %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table><br><br>
+  <div class="text-center">
+  	<%= link_to export_report_path(:format => :pdf, title: title, headers: headers, data: data), class: "btn btn-primary" do %>
+      <i class="fa fa-cloud-download" aria-hidden="true" style="font-size: 20px;"></i> Export
     <% end %>
-  </tbody>
-</table><br><br>
-<div class="text-center">
-	<%= link_to 'Export', export_report_path(:format => :pdf, title: title, headers: headers, data: data), class: "btn btn-primary" %>
-</div>
+  </div>
+<% else %>
+  <h3 class="text-center">No Records Found</h3>
+<% end %>
 
 <style type="text/css">
 table {

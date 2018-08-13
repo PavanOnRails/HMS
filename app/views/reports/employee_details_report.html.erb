@@ -8,6 +8,7 @@
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel" style="height:700px;">
           <div class="x_title">
+          	<h2 style="text-align: center;float: none !important;">Employee Details Report</h2><br><br><br>
           	<%= form_tag preview_report_path, remote: true %>
 	            <% @edr_rows.each_slice(3) do |rows| %>
 	              <div class="row">
@@ -20,12 +21,24 @@
 	            <% end %>
 	            <%= hidden_field_tag :short_name, 'EDR' %>
 	            <br>
-	            <div class="input-group input-daterange">
-						    <input type="text" class="form-control" value="2012-04-05">
-						    <div class="input-group-addon">to</div>
-						    <input type="text" class="form-control" value="2012-04-19">
-							</div>
-            <%= submit_tag 'Preview', class: 'btn btn-primary text-center' %>
+	            
+	            <div class="input-group input-daterange" style="width: 50% !important;">
+						    <div class="input-group-prepend">
+						      <div class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+						    </div>
+						    <input type="text" name="from_date" class="form-control datepicker">
+						    <div class="input-group-prepend">
+						      <div class="input-group-text">To</div>
+						    </div>
+						    <input type="text" name="to_date" class="form-control datepicker" data-date-end-date="0d">
+						    <div class="input-group-prepend">
+						      <div class="input-group-text"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+						    </div>
+						  </div>
+						  <br><br>
+						<div class="text-center">
+	            <%= submit_tag 'Preview', class: 'btn btn-primary submit-btn'%>
+	          </div>
           <div class="clearfix"></div><br>
           <!-- Modal -->
             <div class="modal fade decline-modal" id="edr-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

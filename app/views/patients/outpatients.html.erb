@@ -19,6 +19,7 @@
                 <tr>
                   <th>Name</th>
                   <th>UHID</th>
+                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -26,10 +27,10 @@
                   <tr>
                     <td><%= op.full_name %></td>
                     <td><%= op.uhid %></td>
-                    <!-- <td><%#= link_to edit_patient_path(appointment.patient), title: "Register", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
+                    <td><%= link_to new_patient_invoice_path(op), title: "Create Invoice", data: { "toggle" => "tooltip", 'placement' => "top"} do %>
                       <i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size: 20px;"></i>
-                      <%# end %>
-                    </td> -->
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>

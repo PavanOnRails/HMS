@@ -1,16 +1,18 @@
 class Patient < ApplicationRecord
 	has_many :appointments
 	has_many :doctors, through: :appointments
-	has_many :bills
+	has_one :bill
 	has_many :doctor_sessions
   has_one :room
 	has_one :bed
   has_many :lab_tests
   belongs_to :nurse
   has_many :reports
-  
+  has_many :invoices
+
+  accepts_nested_attributes_for :invoices, reject_if: :all_blank
   accepts_nested_attributes_for :appointments
-  accepts_nested_attributes_for :bills
+  accepts_nested_attributes_for :bill, reject_if: :all_blank
   accepts_nested_attributes_for :bed
   
   enum registration_status: [ :registration_done, :registration_not_done]

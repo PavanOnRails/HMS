@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  item: MyString
+  quantity: 1
+  price: 9.99
+  total: 9.99
+  sub_total: 9.99
+  grand_total: 9.99
+
+two:
+  item: MyString
+  quantity: 1
+  price: 9.99
+  total: 9.99
+  sub_total: 9.99
+  grand_total: 9.99

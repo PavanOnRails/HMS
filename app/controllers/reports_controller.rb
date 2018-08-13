@@ -63,7 +63,11 @@ class ReportsController < ApplicationController
       @headers = params[:report_filters]
       if params[:short_name] == "EDR"
         symbolized_params = params[:report_filters].map(&:to_sym)
-        @data = Staff.select(symbolized_params)
+        if !params[:from_date].blank? && !params[:to_date].blank?
+          @data = Staff.select(symbolized_params).where(date_of_joining: params[:from_date]..params[:to_date])
+        else
+          @data = Staff.select(symbolized_params)
+        end
       end
     elsif request.get?
       @title = params[:title]
@@ -78,7 +82,7 @@ class ReportsController < ApplicationController
       format.pdf do
         render pdf: @title.gsub(/\s+/, "").underscore,
         disposition: "attachment",
-        template: "reports/preview.html.erb",
+        template: "reports/export_report.html.erb",
         layout: "report.html",
         locals: {title: @title, headers: @headers, data: @data}
       end

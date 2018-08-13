@@ -149,8 +149,11 @@ if ($(".icheck-flat")[0]) {
 }
 
 //Datepicker
-$('.input-daterange input').each(function() {
-    $(this).datepicker('clearDates');
+$(document).ready(function(){
+  $('.datepicker').datepicker({
+    format: 'yyyy/mm/dd',
+    autoclose: true
+  });
 });
 
 // Starrr

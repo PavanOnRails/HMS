@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180810122511) do
+ActiveRecord::Schema.define(version: 20180813161359) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,17 +59,16 @@ ActiveRecord::Schema.define(version: 20180810122511) do
   end
 
   create_table "bills", force: :cascade do |t|
-    t.decimal  "registration_fee", precision: 10, scale: 2
-    t.decimal  "doctor_fee",       precision: 10, scale: 2
-    t.decimal  "pharmacy_bill",    precision: 10, scale: 2
-    t.decimal  "maintenance_fee",  precision: 10, scale: 2
-    t.decimal  "tax",              precision: 10, scale: 2
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.decimal  "tax",         precision: 10, scale: 2
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "patient_id"
     t.integer  "paid_with"
-    t.integer  "bill_type"
-    t.decimal  "aggregated_total", precision: 10, scale: 2
+    t.decimal  "grand_total", precision: 10, scale: 2
+    t.decimal  "sub_total",   precision: 10, scale: 2
+    t.decimal  "discount",    precision: 10, scale: 2
+    t.decimal  "amount_paid", precision: 10, scale: 2
+    t.decimal  "amount_due",  precision: 10, scale: 2
   end
 
   create_table "blood_banks", force: :cascade do |t|
@@ -155,6 +154,18 @@ ActiveRecord::Schema.define(version: 20180810122511) do
     t.string   "country"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.string   "item"
+    t.integer  "quantity"
+    t.decimal  "price",      precision: 10, scale: 2
+    t.decimal  "total",      precision: 10, scale: 2
+    t.integer  "patient_id"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.integer  "bill_id"
+    t.string   "invoice_no"
   end
 
   create_table "lab_test_types", force: :cascade do |t|
@@ -249,6 +260,7 @@ ActiveRecord::Schema.define(version: 20180810122511) do
     t.integer  "accessible_department_ids", default: [],                 array: true
     t.integer  "department_id"
     t.string   "emp_id"
+    t.date     "date_of_joining"
   end
 
   create_table "users", force: :cascade do |t|

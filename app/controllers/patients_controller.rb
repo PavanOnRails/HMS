@@ -108,7 +108,8 @@ class PatientsController < ApplicationController
       params.require(:patient).permit(:first_name, :last_name, :email, :registration_status, :address_line1, 
         :address_line2, :phone_number, :country, :state, :city, :pincode, :gender, :age, :blood_group, 
         :patient_type, :nurse_id, incharge_doctor_ids: [],
-        appointments_attributes: [:doctor_id, :start_time, :end_time, :appointment_type, :status, :patient_id])
+        appointments_attributes: [:doctor_id, :start_time, :end_time, :appointment_type, :status, :patient_id],
+        invoices_attributes: [:id, :item, :price, :quantity, :total], bill_attributes: [:id, :sub_total, :tax, :discount, :grand_total, :amount_paid, :amount_due, :paid_with])
     end
 
     def inpatient_params

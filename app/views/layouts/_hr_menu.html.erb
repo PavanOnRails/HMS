@@ -17,16 +17,6 @@
      <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Employees
     <% end %>
   </li>
-  <li>
-    <%= link_to blood_groups_path, data: { turbolinks: false} do %>
-     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Blood Groups
-    <% end %>
-  </li>
-  <li>
-    <%= link_to blood_donors_path, data: { turbolinks: false} do %>
-     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>Blood Donors
-    <% end %>
-  </li>
   <li><a><i class="fa fa-edit"></i> Reports <span class="fa fa-chevron-down"></span></a>
     <ul class="nav child_menu" style="display: none">
     	<% current_department.reports.each do |report| %>

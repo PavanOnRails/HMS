@@ -1,0 +1,51 @@
+<%= form_for patient do |f| %>
+  <table class='table'>
+    <thead>
+      <tr>
+        <th>Item/Service</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <div class="form-actions">
+    	<%= link_to_add_association 'Add Row', f, :invoices, class: 'btn btn-primary', data: { association_insertion_node: '.invoices', association_insertion_method: :append } %>
+    </div>
+    <tbody class='invoices'>
+      <%= f.fields_for :invoices do |builder| %>
+        <%= render 'invoice_fields', f: builder %>
+      <% end %>
+    </tbody>
+
+    <%= f.fields_for :bill, bill do |b| %>
+	    <tr>
+			  <td class="text-right"><strong>Paid With</strong></td>
+			  <td><%= b.select :paid_with, Bill.paid_withs.map { |key, value| [key.humanize.titleize, key] }, {}, class: 'form-control select2_dropdown', style:"width:100%;" %></td>
+			  <td class="text-right"><strong>Sub Total</strong></td>
+			  <td><%= b.text_field :sub_total, class: "form-control", placeholder: "0.00" %></td>
+			</tr>
+			<tr>
+				<td class="text-right"><strong>Discount</strong></td>
+			  <td><%= b.text_field :discount, class: "form-control", placeholder: "0%" %></td>
+			  <td class="text-right"><strong>Tax</strong></td>
+			  <td><%= b.text_field :tax,class: "form-control", placeholder: "0%" %></td>
+			</tr>
+			<tr>
+			  <td class="text-right"><strong>Grand Total</strong></td>
+			  <td><%= b.text_field :grand_total, class: "form-control", placeholder: "0.00" %></td>
+			  <td class="text-right"><strong>Amount Paid</strong></td>
+			  <td><%= b.text_field :amount_paid, class: "form-control", placeholder: "0.00" %></td>
+			</tr>
+			<tr>
+			  <td></td>
+			  <td></td>
+			  <td class="text-right"><strong>Amount Due</strong></td>
+			  <td><%= b.text_field :amount_due, class: "form-control", placeholder: "0.00" %></td>
+			</tr>
+		<% end %>
+  </table>
+
+  <div class="text-center">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
