@@ -8,11 +8,9 @@ class Patient < ApplicationRecord
   has_many :lab_tests
   belongs_to :nurse
   has_many :reports
-  has_many :invoices
+  has_one :invoice
 
-  accepts_nested_attributes_for :invoices, reject_if: :all_blank
   accepts_nested_attributes_for :appointments
-  accepts_nested_attributes_for :bill, reject_if: :all_blank
   accepts_nested_attributes_for :bed
   
   enum registration_status: [ :registration_done, :registration_not_done]

@@ -16,8 +16,9 @@ class InvoicesController < ApplicationController
 
   # GET /invoices/new
   def new
-    @patient.invoices.build
-    @bill = @patient.bill ? @patient.bill : @patient.build_bill
+    @invoice = @patient.invoice ? @patient.invoice : @patient.build_invoice
+    @invoice_items = @invoice.invoice_items ? @invoice.invoice_items : @invoice.invoice_items.build
+    @bill = @invoice.bill ? @invoice.bill : @invoice.build_bill
   end
 
   # GET /invoices/1/edit
@@ -28,10 +29,11 @@ class InvoicesController < ApplicationController
   # POST /invoices.json
   def create
     @invoice = Invoice.new(invoice_params)
+    @patient = Patient.find(params[:invoice][:patient_id])
 
     respond_to do |format|
       if @invoice.save
-        format.html { redirect_to @invoice, notice: 'Invoice was successfully created.' }
+        format.html { redirect_to outpatients_path, notice: 'Invoice was successfully created.' }
         format.json { render :show, status: :created, location: @invoice }
       else
         format.html { render :new }
@@ -45,7 +47,7 @@ class InvoicesController < ApplicationController
   def update
     respond_to do |format|
       if @invoice.update(invoice_params)
-        format.html { redirect_to @invoice, notice: 'invoice was successfully updated.' }
+        format.html { redirect_to outpatients_path, notice: 'invoice was successfully updated.' }
         format.json { render :show, status: :ok, location: @invoice }
       else
         format.html { render :edit }
@@ -76,6 +78,6 @@ class InvoicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def invoice_params
-      params.require(:patient).permit(invoices_attributes: [:item, :price, :quantity, :total, :patient_id]).merge(sub_total: params[:sub_total], tax: params[:tax], discount: params[:discount], grand_total: params[:grand_total])
+      params.require(:invoice).permit(:patient_id, :invoice_no, invoice_items_attributes: [:id, :item_name, :price, :quantity, :total, :invoice_id, :_destroy], bill_attributes: [:id, :sub_total, :tax, :discount, :grand_total, :patient_id, :invoice_id, :paid_with, :amount_paid, :amount_due])
     end
 end

@@ -1,4 +1,5 @@
-<%= form_for patient do |f| %>
+<%= form_for [patient, invoice] do |f| %>
+  <%= f.hidden_field :patient_id, value: patient.id %>
   <table class='table'>
     <thead>
       <tr>
@@ -9,15 +10,16 @@
       </tr>
     </thead>
     <div class="form-actions">
-    	<%= link_to_add_association 'Add Row', f, :invoices, class: 'btn btn-primary', data: { association_insertion_node: '.invoices', association_insertion_method: :append } %>
+    	<%= link_to_add_association 'Add Row', f, :invoice_items, class: 'btn btn-primary', data: { association_insertion_node: '.invoice_items', association_insertion_method: :append } %>
     </div>
-    <tbody class='invoices'>
-      <%= f.fields_for :invoices do |builder| %>
-        <%= render 'invoice_fields', f: builder %>
+    <tbody class='invoice_items'>
+      <%= f.fields_for :invoice_items, invoice_items do |builder| %>
+        <%= render 'invoice_item_fields', f: builder %>
       <% end %>
     </tbody>
-
+    
     <%= f.fields_for :bill, bill do |b| %>
+      <%= b.hidden_field :patient_id, value: patient.id %>
 	    <tr>
 			  <td class="text-right"><strong>Paid With</strong></td>
 			  <td><%= b.select :paid_with, Bill.paid_withs.map { |key, value| [key.humanize.titleize, key] }, {}, class: 'form-control select2_dropdown', style:"width:100%;" %></td>
@@ -49,3 +51,9 @@
     <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
   </div>
 <% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>

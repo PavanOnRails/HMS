@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180813161359) do
+ActiveRecord::Schema.define(version: 20180814044326) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20180813161359) do
     t.decimal  "discount",    precision: 10, scale: 2
     t.decimal  "amount_paid", precision: 10, scale: 2
     t.decimal  "amount_due",  precision: 10, scale: 2
+    t.integer  "invoice_id"
   end
 
   create_table "blood_banks", force: :cascade do |t|
@@ -156,15 +157,20 @@ ActiveRecord::Schema.define(version: 20180813161359) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "invoices", force: :cascade do |t|
-    t.string   "item"
+  create_table "invoice_items", force: :cascade do |t|
+    t.string   "item_name"
     t.integer  "quantity"
     t.decimal  "price",      precision: 10, scale: 2
     t.decimal  "total",      precision: 10, scale: 2
-    t.integer  "patient_id"
+    t.integer  "invoice_id"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "bill_id"
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "patient_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string   "invoice_no"
   end
 

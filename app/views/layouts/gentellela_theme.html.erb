@@ -287,6 +287,18 @@ $(".report_type_dropdown").change(function(){
   }
 });
 
+//auto fill invoice fields based on price,quantity and total
+$(".item-price").each(function(){
+  $(this).change(function(){
+    var price = $(this).val();
+    console.log(price)
+    var quantity = $(".item-quantity").val();
+    var total = price * quantity;
+    console.log(quantity)
+    $(".item-total").val(total)
+  })
+});
+
  $(document).ready(function() {
 
     $('#calendar').fullCalendar({
