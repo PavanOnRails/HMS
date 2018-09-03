@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180814044326) do
+ActiveRecord::Schema.define(version: 20180903045803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,16 @@ ActiveRecord::Schema.define(version: 20180814044326) do
     t.text     "reason_for_decline"
     t.datetime "start_time"
     t.datetime "end_time"
+  end
+
+  create_table "attendance_details", force: :cascade do |t|
+    t.time     "in_time"
+    t.time     "out_time"
+    t.integer  "staff_id"
+    t.date     "attendance_date"
+    t.string   "total_hours_worked"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "avatars", force: :cascade do |t|

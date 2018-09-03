@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  in_time: 2018-09-03 10:28:03
+  out_time: 2018-09-03 10:28:03
+  staff_id: 1
+  attendance_date: 2018-09-03
+  total_hours_worked: MyString
+
+two:
+  in_time: 2018-09-03 10:28:03
+  out_time: 2018-09-03 10:28:03
+  staff_id: 1
+  attendance_date: 2018-09-03
+  total_hours_worked: MyString

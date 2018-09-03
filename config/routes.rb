@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :bills
   resources :appointments
   resources :staffs
+  resources :attendance_details
   resources :patients do 
     resources :invoices
   end
