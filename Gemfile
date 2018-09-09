@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-
+ruby "2.3.7"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0'
 # Use postgresql as the database for Active Record
@@ -39,6 +39,9 @@ gem 'materialize-sass', '~> 1.0.0.rc2'
 
 #to get time difference
 gem 'time_difference'
+
+#figaro for storing env variables
+gem "figaro"
 
 #generate pdf docs
 gem 'wicked_pdf'
