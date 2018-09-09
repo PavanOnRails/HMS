@@ -24,12 +24,12 @@ end
 end
 
 #create departments
-Deparment.create(name: "Outpatient Department", short_name: "OPD")
-Deparment.create(name: "Inpatient Department", short_name: "IPD")
-Deparment.create(name: "Blood Bank", short_name: "BB")
-Deparment.create(name: "Lab", short_name: "Lab")
-Deparment.create(name: "Human Resources", short_name: "HR")
-Deparment.create(name: "Pharmacy", short_name: "Pharmacy")
+Department.create(name: "Outpatient Department", short_name: "OPD")
+Department.create(name: "Inpatient Department", short_name: "IPD")
+Department.create(name: "Blood Bank", short_name: "BB")
+Department.create(name: "Lab", short_name: "Lab")
+Department.create(name: "Human Resources", short_name: "HR")
+Department.create(name: "Pharmacy", short_name: "Pharmacy")
 
 #create reports
 Report.create(name: "Employee Details Report", description: "This report shows the employee details for a given period of time", department_id: 5, report_type: 2, short_name: "EDR")
