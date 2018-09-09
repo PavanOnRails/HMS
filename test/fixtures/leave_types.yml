@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  short_name: MyString
+  description: MyText
+  gender: 1
+  marital_status: 1
+  is_paid_leave: false
+
+two:
+  name: MyString
+  short_name: MyString
+  description: MyText
+  gender: 1
+  marital_status: 1
+  is_paid_leave: false

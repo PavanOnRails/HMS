@@ -1,0 +1,40 @@
+<%= form_for(leave_type) do |f| %>
+  <div class="form-group">
+    <div class="row">
+      <div class="col">
+        <%= f.text_field :name, autofocus: true, class: 'form-control', placeholder: "Name" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :short_name, autofocus: true, class: 'form-control', placeholder: "Short Name" %>
+      </div>
+      <div class="col">
+      	<%= f.select :gender, LeaveType.genders.map { |key, value| [key.humanize, key] }, { include_blank: true }, class: 'form-control select2_dropdown gender_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.select :marital_status, LeaveType.marital_statuses.map { |key, value| [key.humanize, key] }, { include_blank: true }, class: 'form-control select2_dropdown marital_status_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.check_box :is_paid_leave, class: 'icheck-flat' %>&nbsp;&nbsp;<%= f.label :paid_leave %>
+      </div>
+    </div>
+    <br><br>
+    <div class="row">
+      <div class="col">
+        <%= f.text_area :description, autofocus: true, class: 'form-control', placeholder: "Description", style: "width: 50%;margin-left:25%;" %>
+      </div>
+    </div>         
+  </div>
+  <div class="text-center" style="margin-top: 15%;">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>
+
+<script type="text/javascript">
+	
+</script>

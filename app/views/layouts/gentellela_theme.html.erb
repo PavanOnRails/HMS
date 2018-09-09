@@ -159,6 +159,24 @@ $( ".hod_dropdown" ).select2({
     allowClear: true
 });
 
+$( ".staff_dropdown" ).select2({
+    placeholder: "Select Staff",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".gender_dropdown" ).select2({
+    placeholder: "Select Gender",
+    width: 'resolve',
+    allowClear: true
+});
+
+$( ".marital_status_dropdown" ).select2({
+    placeholder: "Select Marital Status",
+    width: 'resolve',
+    allowClear: true
+});
+
 //generate states based on country selection
 $(".country_dropdown").change(function(){
   var selected_country = $(this).val();
@@ -298,6 +316,9 @@ $(".item-price").each(function(){
     $(".item-total").val(total)
   })
 });
+
+// Time Picker Initialization
+$('.materialize-time-picker').pickatime({});
 
  $(document).ready(function() {
 

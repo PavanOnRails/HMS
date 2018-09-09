@@ -34,6 +34,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave'
 gem 'mini_magick'
 
+#materialize-sass
+gem 'materialize-sass', '~> 1.0.0.rc2'
+
+#to get time difference
+gem 'time_difference'
+
 #generate pdf docs
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'

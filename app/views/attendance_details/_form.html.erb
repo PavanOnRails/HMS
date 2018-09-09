@@ -1,1 +1,28 @@
-_form.html.erb
+<%= form_for(atd) do |f| %>
+  <div class="form-group">
+    <div class="row">
+    	<div class="col">
+      	<%= f.select :staff_id,Staff.all.collect {|s| [ s.full_name, s.id ] }, { include_blank: true }, class: 'form-control select2_dropdown staff_dropdown', style:"width:100%;" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :in_time, autofocus: true, class: 'form-control materialize-time-picker', placeholder: "Select In Time" %>
+      </div>
+      <div class="col">
+        <%= f.text_field :out_time, autofocus: true, class: 'form-control materialize-time-picker', placeholder: "Select Out Time" %>
+      </div>
+    </div>          
+  </div>
+  <div class="text-center" style="margin-top: 15%;">
+    <%= f.submit "Submit", class: "btn btn-primary submit-btn" %>
+  </div>
+<% end %>
+
+<style type="text/css">
+  input.form-control{
+    height: 28px !important;
+  }
+</style>
+
+<script type="text/javascript">
+	
+</script>
