@@ -12,4 +12,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w( fullcalendar.print.min.css )
 Rails.application.config.assets.precompile += %w( dataTables.bootstrap4.min.css)
 Rails.application.config.assets.precompile += %w( gentellela_theme.js )
+Rails.application.config.assets.precompile += %w( js/custom.js )
+Rails.application.config.assets.precompile += %w( css/custom.css )
 Rails.application.config.assets.precompile << Proc.new { |path, fn| fn =~ /vendor\/assets\/components\/gentelella\/production/ }
