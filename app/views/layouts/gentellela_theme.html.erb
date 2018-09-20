@@ -3,7 +3,6 @@
 	<head>
 	  <title>HMS</title>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-    <%= stylesheet_link_tag "css/custom", media: "all", "data-turbolinks-track" => true %>
     <%= stylesheet_link_tag "fullcalendar.print.min", :media => "print", 'data-turbolinks-track' => true %>
     <%= stylesheet_link_tag "dataTables.bootstrap4.min", media: "all", "data-turbolinks-track" => true %>
 	  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -21,7 +20,6 @@
 <%= yield %>
 
   <%= render "layouts/footer" %>
-  <%= javascript_include_tag 'js/custom', 'data-turbolinks-track' => true %>
   <style type="text/css">
   #slot-booking-modal .modal-content {
   width: 680px;
