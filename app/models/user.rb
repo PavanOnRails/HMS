@@ -3,10 +3,6 @@ class User < ApplicationRecord
 	enum user_type: [ :staff, :doctor, :patient, :nurse ]
 	enum registration_status: [ :registration_done, :registration_not_done]
 	attr_accessor :password_confirmation
-  # # Include default devise modules. Others available are:
-  # # :confirmable, :lockable, :timeoutable and :omniauthable
-  # devise :database_authenticatable, :registerable,
-  #        :recoverable, :rememberable, :trackable, :validatable
   
   after_create :create_patient_and_appointmet_records, if: Proc.new { |user| user.patient? && user.registration_not_done?}
  

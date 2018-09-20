@@ -23,4 +23,3 @@
 //= require dataTables.bootstrap4.min
 //= require bootstrap-datepicker
 //= require cocoon
-//= require materialize-sprockets
