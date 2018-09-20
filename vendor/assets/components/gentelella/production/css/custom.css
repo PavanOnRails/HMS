@@ -4971,7 +4971,7 @@ a:hover {
   top: 10px;
   width: 27%;
 }
-.login_content h1:after {
+/*.login_content h1:after {
   background: rgb(126, 126, 126);
   background: -moz-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
   background: -webkit-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
@@ -5013,7 +5013,7 @@ a:hover {
   background: -ms-linear-gradient(to left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
   background: linear-gradient(to left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
   left: 0;
-}
+}*/
 .login_content form {
   margin: 20px 0;
   position: relative
