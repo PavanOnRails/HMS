@@ -4978,7 +4978,7 @@ a:hover {
   background: -o-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
   background: -ms-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
   background: linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
-  to left: 0;
+  right: 0;
 }
 .login_content h1:before {
   background: rgb(126, 126, 126);
@@ -5003,7 +5003,7 @@ a:hover {
   background: -o-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
   background: -ms-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
   background: linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
-  to left: 0;
+  right: 0;
 }
 .login_content h1:before {
   background: rgb(126, 126, 126);

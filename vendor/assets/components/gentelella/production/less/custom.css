@@ -3345,10 +3345,10 @@ textarea:focus {
     color: #333333;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     background-color: #f5f5f5;
-    background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -moz-linear-gradient(to bottom, #ffffff, #e6e6e6);
     background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#e6e6e6));
-    background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
-    background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
+    background-image: -webkit-linear-gradient(to bottom, #ffffff, #e6e6e6);
+    background-image: -o-linear-gradient(to bottom, #ffffff, #e6e6e6);
     background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
     background-repeat: repeat-x;
     border-color: #e6e6e6 #e6e6e6 #bfbfbf;
@@ -5767,7 +5767,7 @@ form:after {
     background: -o-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
     background: -ms-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
     background: linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-    to left: 0;
+    right: 0;
 }
 .login_content h1:before {
     background: rgb(126,126,126);
@@ -5793,7 +5793,7 @@ form:after {
     background: -o-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
     background: -ms-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
     background: linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-    to left: 0;
+    right: 0;
 }
 .login_content h1:before {
     background: rgb(126,126,126);
