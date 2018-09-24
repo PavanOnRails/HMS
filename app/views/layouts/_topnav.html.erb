@@ -18,8 +18,10 @@
               <li><%= link_to 'Super Admin Profile', super_admin_dashboard_path(current_staff) %></a></li>
             <% end %>
             <li>
-              <%= link_to employee_dashboard_path(current_staff), data: { turbolinks: false} do %>
-                <i class="fa fa-home" aria-hidden="true"></i> Employee Profile
+              <% if current_user.staff? %>
+                <%= link_to employee_dashboard_path(current_staff), data: { turbolinks: false} do %>
+                  <i class="fa fa-home" aria-hidden="true"></i> Employee Profile
+                <% end %>
               <% end %>
             </li>
             <li>
